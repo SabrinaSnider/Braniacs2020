@@ -1,10 +1,10 @@
 import React from 'react';
-import Map from '../../components/Map/Map'
+import SearchableMap from '../../components/Map/SearchableMap'
 
 function MapView() {
     return (
         <div className="App">
-            <Map/>
+            <SearchableMap/>
         </div>
     );
 }
