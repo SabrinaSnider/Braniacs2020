@@ -7,6 +7,6 @@ const port = process.env.PORT || 5000;
 const app = express.init()
 app.listen(port, () => console.log(`Server now running on port ${port}!`));
 
-app.get('/maps/', mapController.getRoute, (req, res) => {
+app.post('/maps/', mapController.getRoute, (req, res) => {
     res.send(req.results);
 });
