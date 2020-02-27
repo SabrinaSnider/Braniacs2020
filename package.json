@@ -21,6 +21,8 @@
   "author": "Dakota Rennemann",
   "license": "MIT",
   "dependencies": {
+    "@deck.gl/layers": "^8.0.16",
+    "@mapbox/mapbox-gl-directions": "^4.0.3",
     "axios": "^0.19.2",
     "body-parser": "^1.19.0",
     "concurrently": "^4.1.0",
@@ -32,8 +34,10 @@
     "morgan": "^1.9.1",
     "nodemon": "^1.18.10",
     "react-map-gl": "^5.2.3",
+    "react-map-gl-draw": "^0.17.2",
     "react-map-gl-geocoder": "^2.0.11",
     "request": "^2.88.2",
+    "require": "^2.4.20",
     "should": "^13.2.3",
     "supertest": "^4.0.2"
   },

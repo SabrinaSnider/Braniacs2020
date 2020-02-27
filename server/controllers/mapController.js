@@ -10,7 +10,7 @@ exports.getRoute = function(req, res, next) {
     }, async (error, response, body) => {
         if (error) throw error;
         console.log("Response is", JSON.parse(body))
-        req.duration = JSON.parse(body).routes[0].duration // send duration
+        res.send(JSON.parse(body).routes[0].geometry.coordinates) //.routes[0].duration // send duration
         next();
     });
 };
