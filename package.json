@@ -28,6 +28,7 @@
     "concurrently": "^4.1.0",
     "deck.gl": "^8.0.16",
     "express": "^4.17.1",
+    "google-maps-react": "^2.0.2",
     "mapbox-gl": "^0.38.0",
     "mocha": "^6.2.1",
     "mongoose": "^5.7.1",
