@@ -1,5 +1,5 @@
 import React from 'react';
-import SearchableMap from '../../components/Map/SearchableMap'
+import SearchableMap from '../../components/Map/SearchableMap';
 
 function MapView() {
     return (
