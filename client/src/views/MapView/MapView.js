@@ -3,7 +3,6 @@ import SearchableMap from '../../components/Map/SearchableMap';
 import GMaps from '../../components/GoogleMaps/GMaps'
 
 let token = ''
-let directions = []
 
 function MapView() {
     return (

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { withScriptjs, withGoogleMap, GoogleMap, DirectionsRenderer } from "react-google-maps"
+import MapStyles from './MapStyles'
 
 const MyMap = (props) => {
     const google = window.google;
@@ -28,6 +29,7 @@ const MyMap = (props) => {
         <GoogleMap
             defaultZoom={10}
             defaultCenter={{ lat: -34.397, lng: 150.644 }}
+            defaultOptions = {{styles: MapStyles}}
         >
             {directions && <DirectionsRenderer directions={directions} />}
         </GoogleMap>
