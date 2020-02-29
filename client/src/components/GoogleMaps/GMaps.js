@@ -1,24 +1,39 @@
-import React, { Component } from 'react'
-import { Map, GoogleApiWrapper } from 'google-maps-react';
+import React, { useState, useEffect } from 'react'
+import { withScriptjs, withGoogleMap, GoogleMap, DirectionsRenderer } from "react-google-maps"
 
-const mapStyles = {
-    width: '100%',
-    height: '100%',
-};
+const MyMap = (props) => {
+    const google = window.google;
+    const [directions, setDirections] = useState(null);
 
-class GMaps extends Component {
-    render() {
-        return (
-            <Map
-              google={this.props.google}
-              zoom={8}
-              style={mapStyles}
-              initialCenter={{ lat: 47.444, lng: -122.176}}
-            />
-        );
-      }
+    useEffect(() => {
+        // Functions passed to useEffect are executed on every component rendering
+        // If values are passed to the array, useEffect will execute every time those value changes
+        const DirectionsService = new google.maps.DirectionsService();
+
+        DirectionsService.route({
+            origin: new google.maps.LatLng(41.8507300, -87.6512600),
+            destination: new google.maps.LatLng(41.8525800, -87.6514100),
+            travelMode: google.maps.TravelMode.DRIVING,
+        }, (result, status) => {
+            if (status === google.maps.DirectionsStatus.OK) {
+                console.log('Directions are:', result)
+                setDirections(result)
+            } else {
+                console.error(`error fetching directions ${result}`);
+            }
+        });
+    }, [])
+
+    return (
+        <GoogleMap
+            defaultZoom={10}
+            defaultCenter={{ lat: -34.397, lng: 150.644 }}
+        >
+            {directions && <DirectionsRenderer directions={directions} />}
+        </GoogleMap>
+    )
 }
 
-export default GoogleApiWrapper({
-    apiKey: ''
-})(GMaps);
+const GMaps = withScriptjs(withGoogleMap(MyMap))
+
+export default GMaps
