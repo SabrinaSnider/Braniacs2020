@@ -5,8 +5,9 @@ const mapController = require('../controllers/mapController')
 
 const mapsRouter = express.Router();
 
-mapsRouter.get('/', (req, res) => {
-    res.send(config.mapbox.api_key)
+mapsRouter.get('/token', (req, res) => {
+    console.log("Triggered Get response", config.google.api_key)
+    res.send(config.google.api_key)
 });
 
 mapsRouter.post('/', mapController.getRoute, (req, res) => {

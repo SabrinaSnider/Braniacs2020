@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import { withScriptjs, withGoogleMap, GoogleMap, DirectionsRenderer } from "react-google-maps"
 import MapStyles from './MapStyles'
 
@@ -13,7 +13,6 @@ const getDirections = (origin, destination, directions, setDirections) => {
         travelMode: google.maps.TravelMode.DRIVING,
     }, (result, status) => {
         if (status === google.maps.DirectionsStatus.OK) {
-            console.log('Directions are:', result)
             setDirections(result)
         } else {
             console.error(`error fetching directions ${result}`);
@@ -22,15 +21,27 @@ const getDirections = (origin, destination, directions, setDirections) => {
     });
 }
 
+const getLocation = (location, setLocation) => { // TODO: actually make this work
+    let position = async () => {
+        await navigator.geolocation.getCurrentPosition(
+            // position => setLocation({ 
+            //     latitude: position.coords.latitude, 
+            //     longitude: position.coords.longitude
+            // }),
+            position => console.log("Position is", position),
+            err => console.log(err)
+        );
+    }
+}
+
 // maybe add restriction to map to limit panning later
 const MyMap = (props) => {
-    const google = window.google;
-
     useEffect(() => {
         // Functions passed to useEffect are executed on every component rendering
         // If values are passed to the array, useEffect will execute every time those value changes
         getDirections(props.origin, props.destination, props.directions, props.setDirections)
-    }, [props.origin, props.destination])
+        // getLocation(props.currentLocation, props.setCurrentLocation)
+    }, [props.origin, props.destination, props.token])
 
     return (
         <GoogleMap

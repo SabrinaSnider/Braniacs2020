@@ -23,6 +23,7 @@
   "dependencies": {
     "@deck.gl/layers": "^8.0.16",
     "@mapbox/mapbox-gl-directions": "^4.0.3",
+    "@react-native-community/geolocation": "^2.0.2",
     "axios": "^0.19.2",
     "body-parser": "^1.19.0",
     "concurrently": "^4.1.0",
@@ -34,7 +35,10 @@
     "mongoose": "^5.7.1",
     "morgan": "^1.9.1",
     "nodemon": "^1.18.10",
+    "react-geolocated": "^3.0.1",
+    "react-google-location": "^1.2.2",
     "react-google-maps": "^9.4.5",
+    "react-load-script": "0.0.6",
     "react-map-gl": "^5.2.3",
     "react-map-gl-draw": "^0.17.2",
     "react-map-gl-geocoder": "^2.0.11",
