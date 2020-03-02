@@ -4,23 +4,40 @@ import Instructions from '../../components/GoogleMaps/Instructions'
 import '../../components/GoogleMaps/Instructions.css'
 import axios from 'axios';
 
-let origin = [29.66, -82.41]
-let destination = [29.640730, -82.341597]
+let destination = {
+    latitude: 29.640730,
+    longitude: -82.341597
+}
 
 const ParkingDirections = () => {
     const [parkingDirections, setParkingDirections] = useState(null);
-    const [currentLocation, setCurrentLocation] = useState("");
+    const [currentLocation, setCurrentLocation] = useState(null);
     const [token, setToken] = useState(null);
 
-    axios.get('/maps/token')
-    .then(function (response) {
-        setToken(response.data)
-        console.log(token)
-    })
-    .catch(function (error) {
-        console.log(error);
-    })
-    
+    if (token == null) {
+        axios.get('/maps/token')
+        .then(function (response) {
+            setToken(response.data)
+        })
+        .catch(function (error) {
+            console.log(error);
+        })
+    }
+
+    let getPosition = async () => {
+        await navigator.geolocation.getCurrentPosition(
+            function (position) {
+                setCurrentLocation({ 
+                    latitude: position.coords.latitude, 
+                    longitude: position.coords.longitude
+                })  
+                console.log("position", currentLocation)  
+            },
+            error => {if (error) console.log(error)}
+        )
+    }
+
+    getPosition()
 
     return (
         <div className="App" style={{'background-color': 'white'}}>
@@ -28,11 +45,11 @@ const ParkingDirections = () => {
                 <div style = {{float: 'left', padding: '30px', width: '50%'}}>
                     <h2>Parking Lot Navigation</h2>
 
-                    <div style={{width: "45vw%",  overflow: 'auto'}}>
+                    {/* <div style={{width: "45vw%",  overflow: 'auto'}}>
                         <p class="search-box-label"> Coming from </p>
                         <input id="start-location-search" placeholder="Current Location" value={currentLocation}
                             style={{ maxWidth: 800, float: "left"}}/>
-                    </div>
+                    </div> */}
 
                     <Instructions
                         directions = {parkingDirections}
@@ -45,7 +62,7 @@ const ParkingDirections = () => {
                         loadingElement = {<div style = {{height: '100%'}}/>}
                         containerElement = {<div style = {{height: '100%'}}/>}
                         mapElement = {<div style = {{height: '100%'}}/>}
-                        origin = {origin}
+                        origin = {currentLocation}
                         destination = {destination}
                         directions = {parkingDirections}
                         setDirections = {setParkingDirections}

@@ -3,22 +3,41 @@ import GMaps from '../../components/GoogleMaps/GMaps'
 import Instructions from '../../components/GoogleMaps/Instructions'
 import axios from 'axios';
 
-let origin = [29.66, -82.41]
-let destination = [29.639375, -82.340842]
+let destination = {
+    latitude: 29.639375,
+    longitude: -82.340842
+}
 
 function HostpitalDirections() {
     const [hostpitalDirections, setHostpitalDirections] = useState(null);
     const [currentLocation, setCurrentLocation] = useState(null);
     const [token, setToken] = useState(null);
 
-    axios.get('/maps/token')
-    .then(function (response) {
-        setToken(response.data)
-        console.log(token)
-    })
-    .catch(function (error) {
-        console.log(error);
-    })
+    if (token == null) {
+        axios.get('/maps/token')
+        .then(function (response) {
+            setToken(response.data)
+            console.log(token)
+        })
+        .catch(function (error) {
+            console.log(error);
+        })
+    }
+
+    let getPosition = async () => {
+        await navigator.geolocation.getCurrentPosition(
+            function (position) {
+                setCurrentLocation({ 
+                    latitude: position.coords.latitude, 
+                    longitude: position.coords.longitude
+                })  
+                console.log("position", currentLocation)  
+            },
+            error => {if (error) console.log(error)}
+        )
+    }
+
+    getPosition()
 
     return (
         <div className="App">
@@ -36,7 +55,7 @@ function HostpitalDirections() {
                     loadingElement = {<div style = {{height: '100%'}}/>}
                     containerElement = {<div style = {{height: '100%'}}/>}
                     mapElement = {<div style = {{height: '100%'}}/>}
-                    origin = {origin}
+                    origin = {currentLocation}
                     destination = {destination}
                     directions = {hostpitalDirections}
                     setDirections = {setHostpitalDirections}

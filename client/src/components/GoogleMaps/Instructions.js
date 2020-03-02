@@ -2,6 +2,12 @@ import React from 'react'
 
 // maybe add restriction to map to limit panning later
 const Instructions = (props) => {
+    function decodeHtml(html) {
+        var txt = document.createElement("textarea");
+        txt.innerHTML = html;
+        return txt.value;
+    }
+
     if (props.directions == null || props.directions.routes[0].legs[0].steps == null) {
         return (
             <div>
@@ -14,7 +20,8 @@ const Instructions = (props) => {
                     props.directions &&
                     props.directions.routes[0].legs[0].steps.map(element => {
                         let step = element.instructions.replace(/<\/?[^>]+(>|$)/g, " ")
-                        return <li>{step}</li>;
+                        let decodedStep = decodeHtml(step)
+                        return <li>{decodedStep}</li>;
                     })
                 }</p>
             </div>

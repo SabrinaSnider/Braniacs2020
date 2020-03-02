@@ -4,12 +4,14 @@ import MapStyles from './MapStyles'
 
 // method to grab list of directions from google api
 const getDirections = (origin, destination, directions, setDirections) => {
+    if (origin == null || destination == null) return
+    
     const google = window.google;
     const DirectionsService = new google.maps.DirectionsService();
 
     DirectionsService.route({
-        origin: new google.maps.LatLng(origin[0], origin[1]),
-        destination: new google.maps.LatLng(destination[0], destination[1]),
+        origin: new google.maps.LatLng(origin.latitude, origin.longitude),
+        destination: new google.maps.LatLng(destination.latitude, destination.longitude),
         travelMode: google.maps.TravelMode.DRIVING,
     }, (result, status) => {
         if (status === google.maps.DirectionsStatus.OK) {
@@ -19,19 +21,6 @@ const getDirections = (origin, destination, directions, setDirections) => {
             setDirections(null)
         }
     });
-}
-
-const getLocation = (location, setLocation) => { // TODO: actually make this work
-    let position = async () => {
-        await navigator.geolocation.getCurrentPosition(
-            // position => setLocation({ 
-            //     latitude: position.coords.latitude, 
-            //     longitude: position.coords.longitude
-            // }),
-            position => console.log("Position is", position),
-            err => console.log(err)
-        );
-    }
 }
 
 // maybe add restriction to map to limit panning later
@@ -46,7 +35,7 @@ const MyMap = (props) => {
     return (
         <GoogleMap
             defaultZoom={10}
-            defaultCenter={{ lat: -34.397, lng: 150.644 }}
+            defaultCenter={{ lat: 29.639455, lng: -82.340855}}
             defaultOptions = {{
                 styles: MapStyles, 
                 fullscreenControl: false, 
