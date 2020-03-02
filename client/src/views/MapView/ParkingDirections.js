@@ -44,13 +44,6 @@ const ParkingDirections = () => {
             <div id="directions-parking-container">
                 <div style = {{float: 'left', padding: '30px', width: '50%'}}>
                     <h2>Parking Lot Navigation</h2>
-
-                    {/* <div style={{width: "45vw%",  overflow: 'auto'}}>
-                        <p class="search-box-label"> Coming from </p>
-                        <input id="start-location-search" placeholder="Current Location" value={currentLocation}
-                            style={{ maxWidth: 800, float: "left"}}/>
-                    </div> */}
-
                     <Instructions
                         directions = {parkingDirections}
                         key = {token}
