@@ -1,4 +1,5 @@
 import React from 'react'
+import { withGoogleMap } from "react-google-maps"
 
 // maybe add restriction to map to limit panning later
 const Instructions = (props) => {
@@ -18,15 +19,17 @@ const Instructions = (props) => {
             <div>
                 <p style={{textAlign: 'left'}}>{
                     props.directions &&
-                    props.directions.routes[0].legs[0].steps.map(element => {
+                    props.directions.routes[0].legs[0].steps.map((element, index) => {
                         let step = element.instructions.replace(/<\/?[^>]+(>|$)/g, " ")
                         let decodedStep = decodeHtml(step)
-                        return <li>{decodedStep}</li>;
+                        return <li key={index}>{decodedStep}</li>;
                     })
                 }</p>
             </div>
         )
     }
 }
+
+// const Instructions = withGoogleMap(Instructionss)
 
 export default Instructions

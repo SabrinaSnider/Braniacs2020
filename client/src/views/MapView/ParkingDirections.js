@@ -40,7 +40,7 @@ const ParkingDirections = () => {
     getPosition()
 
     return (
-        <div className="App" style={{'background-color': 'white'}}>
+        <div className="App" style={{'backgroundColor': 'white'}}>
             <div id="directions-parking-container">
                 <div style = {{float: 'left', padding: '30px', width: '50%'}}>
                     <h2>Parking Lot Navigation</h2>
@@ -65,7 +65,7 @@ const ParkingDirections = () => {
             </div>
             <div style = {{float: 'left', margin: '30px', width: '45vw'}}>
                 <h2>Parking information</h2>
-                <p style={{'text-align': 'left'}}>
+                <p style={{'textAlign': 'left'}}>
                     <li>
                         Valet parking is available in the front circle of the hospital ($3 with a patient 
                         or patient visitor parking voucher). Patients and visitors must ask for a parking 

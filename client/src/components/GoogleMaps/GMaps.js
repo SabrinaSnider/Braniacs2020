@@ -48,6 +48,6 @@ const MyMap = (props) => {
     )
 }
 
-const GMaps = withScriptjs(withGoogleMap(MyMap))
+const GMaps = withGoogleMap(MyMap)
 
 export default GMaps
