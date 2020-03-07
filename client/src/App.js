@@ -6,7 +6,7 @@ import NavBar from "./components/Header/NavBar";
 
 const App = () => {
   return (
-    <div style={{display: 'flex', 'flex-flow': 'column', 'height': '100vh'}}>
+    <div style={{display: 'flex', 'flexFlow': 'column', 'height': '100vh'}}>
       <NavBar />
       <Switch>
         <Route exact path="/Home" component={Home} />
