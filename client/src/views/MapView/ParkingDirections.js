@@ -41,7 +41,7 @@ const ParkingDirections = () => {
 
     return (
         <div className="App" style={{'backgroundColor': 'white'}}>
-            <div id="directions-parking-container">
+            <div id="directions-parking-container" style={{display:'flex', 'flexDirection': 'row', 'justify-content': 'center'}}>
                 <div style = {{float: 'left', padding: '30px', width: '50%'}}>
                     <h2>Parking Lot Navigation</h2>
                     <Instructions

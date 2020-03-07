@@ -30,6 +30,4 @@ const Instructions = (props) => {
     }
 }
 
-// const Instructions = withGoogleMap(Instructionss)
-
 export default Instructions

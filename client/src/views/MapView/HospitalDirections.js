@@ -40,9 +40,9 @@ function HostpitalDirections() {
     getPosition()
 
     return (
-        <div className="App">
-            <div id="directions-parking-container">
-                <div style = {{float: 'left', margin: '40px', width: '40vw'}}>
+        <div className="App" style={{'backgroundColor': 'white'}}>
+            <div id="directions-parking-container" style={{display:'flex', 'flexDirection': 'row', 'justify-content': 'center'}}>
+                <div style = {{float: 'left', margin: '40px', width: '45vw', 'backgroundColor': '#EAEAEA'}}>
                     <h2>Directions to Hospital</h2>
                     <Instructions
                         directions = {hostpitalDirections}
