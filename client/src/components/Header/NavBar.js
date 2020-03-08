@@ -15,36 +15,36 @@ const NavBar = () => {
                     <span className="navbar-toggler-icon"></span>
                 </button>
                 <div className="collapse navbar-collapse" id="navbarNav" style={{padding: "0px"}}>
-                    <ul className="navbar-nav">
-                    <li className="nav-item active">
-                        <Link className = "nav-link" to='/Home'>Home</Link>
-                    </li>
-                    <li className="nav-item">
-                        <Link className = "nav-link" to='/Register'>Extra Page</Link>
-                    </li>
-                    <li className="nav-item">
-                        <a className = "nav-link" target='_blank' rel="noopener noreferrer" href="https://reactjs.org/docs/getting-started.html">
-                            React Docs
-                        </a>
-                    </li>
-                    <li className="nav-item">
-                        <a className = "nav-link" target="_blank" rel="noopener noreferrer" href="https://reactjs.org/tutorial/tutorial.html">React Tutorial</a>
-                    </li>
-                    <li className="nav-item">
-                        <a className = "nav-link" target="_blank" rel="noopener norefferer" href="https://nodejs.org/en/docs/">Node Docs</a>
-                    </li>
+                    <ul className="navbar-nav ml-auto">
+                        <li className="nav-item active">
+                            <Link className = "nav-link" to='/Home'>Home</Link>
+                        </li>
+                        <li className="nav-item">
+                            <Link className = "nav-link" to='/Register'>Extra Page</Link>
+                        </li>
+                        <li className="nav-item">
+                            <a className = "nav-link" target='_blank' rel="noopener noreferrer" href="https://reactjs.org/docs/getting-started.html">
+                                React Docs
+                            </a>
+                        </li>
+                        <li className="nav-item">
+                            <a className = "nav-link" target="_blank" rel="noopener noreferrer" href="https://reactjs.org/tutorial/tutorial.html">React Tutorial</a>
+                        </li>
+                        <li className="nav-item">
+                            <a className = "nav-link" target="_blank" rel="noopener norefferer" href="https://nodejs.org/en/docs/">Node Docs</a>
+                        </li>
                     </ul>
 
-                    <ul className="navbar-nav ml-auto">
-                    <li className="nav-item">
-                        <Link className = "nav-link" to='/Help'>Help</Link>
-                    </li>
-                    <li className="nav-item">
-                        <Link className = "nav-link" to='/Login'>Login</Link>
-                    </li>
-                    <li className="nav-item">
-                        <Link className = "nav-link" to='/Login'>Sign up</Link>
-                    </li>
+                    <ul className="navbar-nav mr-auto" style={{'float': 'right'}}>
+                        <li className="nav-item">
+                            <Link className = "nav-link" to='/Help'>Help</Link>
+                        </li>
+                        <li className="nav-item">
+                            <Link className = "nav-link" to='/Login'>Login</Link>
+                        </li>
+                        <li className="nav-item">
+                            <Link className = "nav-link" to='/Login'>Sign up</Link>
+                        </li>
                     </ul>
                 </div>
             </nav>
