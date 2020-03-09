@@ -9,7 +9,7 @@ import HospitalDirections from './views/MapView/HospitalDirections'
 
 const App = () => {
   return (
-    <div style={{display: 'flex', 'flexFlow': 'column', 'height': '100vh'}}>
+    <div style={{display: 'flex', 'flexFlow': 'column', 'minHeight': '100vh'}}>
       <NavBar />
       <Switch>
         <Route exact path="/Home" component={Home} />
