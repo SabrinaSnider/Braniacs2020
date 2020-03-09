@@ -23,15 +23,10 @@ const NavBar = () => {
                             <Link className = "nav-link" to='/Register'>Extra Page</Link>
                         </li>
                         <li className="nav-item">
-                            <a className = "nav-link" target='_blank' rel="noopener noreferrer" href="https://reactjs.org/docs/getting-started.html">
-                                React Docs
-                            </a>
+                            <Link className = "nav-link" to='/ParkingDirections'>Parking Directions</Link>
                         </li>
                         <li className="nav-item">
-                            <a className = "nav-link" target="_blank" rel="noopener noreferrer" href="https://reactjs.org/tutorial/tutorial.html">React Tutorial</a>
-                        </li>
-                        <li className="nav-item">
-                            <a className = "nav-link" target="_blank" rel="noopener norefferer" href="https://nodejs.org/en/docs/">Node Docs</a>
+                            <Link className = "nav-link" to='/HospitalDirections'>Hospital Directions</Link>
                         </li>
                     </ul>
 
