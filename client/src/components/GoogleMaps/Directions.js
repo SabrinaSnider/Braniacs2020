@@ -1,8 +1,8 @@
 import React from 'react'
-import { withGoogleMap } from "react-google-maps"
 
 // maybe add restriction to map to limit panning later
-const Instructions = (props) => {
+const Directions = (props) => {
+    // removes html styling from text
     function decodeHtml(html) {
         var txt = document.createElement("textarea");
         txt.innerHTML = html;
@@ -12,6 +12,7 @@ const Instructions = (props) => {
     if (props.directions == null || props.directions.routes[0].legs[0].steps == null) {
         return (
             <div>
+                No instructions found
             </div>
         )
     } else {
@@ -30,4 +31,4 @@ const Instructions = (props) => {
     }
 }
 
-export default Instructions
+export default Directions

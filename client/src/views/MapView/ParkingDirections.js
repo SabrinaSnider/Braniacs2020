@@ -1,8 +1,7 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import GMaps from '../../components/GoogleMaps/GMaps'
-import Instructions from '../../components/GoogleMaps/Instructions'
-import '../../components/GoogleMaps/Instructions.css'
-import axios from 'axios';
+import Directions from '../../components/GoogleMaps/Directions'
+import { updatePosition, getDirections } from '../../components/GoogleMaps/DirectionHandler'
 
 let destination = {
     latitude: 29.640730,
@@ -10,56 +9,30 @@ let destination = {
 }
 
 const ParkingDirections = () => {
-    const [parkingDirections, setParkingDirections] = useState(null);
-    const [currentLocation, setCurrentLocation] = useState(null);
-    const [token, setToken] = useState(null);
+    const [directions, setDirections] = useState(null);
+    const [position, setPosition] = useState(null);
 
-    if (token == null) {
-        axios.get('/maps/token')
-        .then(function (response) {
-            setToken(response.data)
-        })
-        .catch(function (error) {
-            console.log(error);
-        })
-    }
-
-    let getPosition = async () => {
-        await navigator.geolocation.getCurrentPosition(
-            function (position) {
-                setCurrentLocation({ 
-                    latitude: position.coords.latitude, 
-                    longitude: position.coords.longitude
-                })  
-                console.log("position", currentLocation)  
-            },
-            error => {if (error) console.log(error)}
-        )
-    }
-
-    getPosition()
+    // Functions passed to useEffect are executed on every component rendering
+    // If values are passed to the array, useEffect will execute every time those value changes
+    useEffect(() => {
+        updatePosition(setPosition, destination, setDirections)
+    }, [])
 
     return (
         <div className="App" style={{'backgroundColor': 'white'}}>
-            <div id="directions-parking-container" style={{display:'flex', 'flexDirection': 'row', 'justify-content': 'center'}}>
+            <div id="directions-parking-container" style={{display:'flex', 'flexDirection': 'row', 'justifyContent': 'center'}}>
                 <div style = {{float: 'left', padding: '30px', width: '50%'}}>
                     <h2>Parking Lot Navigation</h2>
-                    <Instructions
-                        directions = {parkingDirections}
-                        key = {token}
+                    <Directions
+                        directions = {directions}
                     />
                 </div>
                 <div style = {{width: `40vw`, padding: '30px', height: `60vh`, float: 'right'}}>
                     <GMaps
-                        googleMapURL = {`https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=` + token}
                         loadingElement = {<div style = {{height: '100%'}}/>}
                         containerElement = {<div style = {{height: '100%'}}/>}
                         mapElement = {<div style = {{height: '100%'}}/>}
-                        origin = {currentLocation}
-                        destination = {destination}
-                        directions = {parkingDirections}
-                        setDirections = {setParkingDirections}
-                        key = {token}
+                        directions = {directions}
                     />
                 </div>
             </div>
