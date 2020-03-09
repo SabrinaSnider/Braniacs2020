@@ -8,7 +8,7 @@ import ParkingDirections from './views/MapView/ParkingDirections'
 import HospitalDirections from './views/MapView/HospitalDirections'
 
 
-const App = () => {
+const DefaultContainer = () => {
   return (
     <div style={{display: 'flex', 'flexFlow': 'column', 'minHeight': '100vh'}}>
       <NavBar />
@@ -16,7 +16,6 @@ const App = () => {
         <Route exact path="/Home" component={Home} />
         <Route exact path="/ParkingDirections" component={ParkingDirections} /> 
         <Route exact path="/HospitalDirections" component={HospitalDirections} /> 
-        <Route exact path="/Login" component={Login} /> 
         <Route exact path="/">
           <Redirect to="/Home" />
         </Route>
@@ -26,4 +25,4 @@ const App = () => {
   );
 }
 
-export default App;
+export default DefaultContainer;

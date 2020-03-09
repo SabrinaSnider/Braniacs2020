@@ -19,7 +19,7 @@ function HostpitalDirections() {
     }, [])
 
     return (
-        <div className="App" style={{'backgroundImage': `url(background.png)`, 'flexGrow' : '1'}}>
+        <div className="App" style={{'backgroundColor': `#EAEAEA`, 'flexGrow' : '1'}}>
             <div id="directions-parking-container" style={{display:'flex', 'flexDirection': 'row', 'justifyContent': 'center'}}>
                 <div style = {{float: 'left', margin: '40px', width: '45vw', 'backgroundColor': '#EAEAEA'}}>
                     <h2>Directions to Hospital</h2>
