@@ -2,7 +2,7 @@ import React from 'react';
 import logo from '../../assets/logo.svg';
 import './Home.css';
 import NavBarHome from './NavBarHome'
-import HomeCarousel from './HomeCarousel'
+import HomeCarousel from './Carousel/HomeCarousel'
 
 function Home(props) {
     return (
