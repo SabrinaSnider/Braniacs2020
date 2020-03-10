@@ -2,7 +2,7 @@ import React from 'react';
 import logo from '../../assets/logo.svg';
 import './Home.css';
 
-function Home() {
+function Home(props) {
     return (
         <div className="App" style={{height: '100%', width: '100%', 'backgroundImage': `url(background.png)`, 'flexGrow' : '1'}}>
             <div style={{backgroundColor: 'gray', margin:'20px auto', width: '50vw', height: '50vh'}}>
