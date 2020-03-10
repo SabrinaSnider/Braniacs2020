@@ -3,7 +3,8 @@ import { Route, Switch, Redirect } from 'react-router-dom';
 import Home from "./views/Home/Home";
 import NotFound from "./views/NotFound";
 import NavBar from "./components/Header/NavBar";
-import Login from './views/Login/Login'
+import SignIn from './views/SignIn/SignIn'
+import SignUp from './views/SignIn/SignUp'
 import ParkingDirections from './views/MapView/ParkingDirections'
 import HospitalDirections from './views/MapView/HospitalDirections'
 
@@ -24,7 +25,8 @@ const DefaultContainer = () => (
     <Switch>
       <Route exact path="/ParkingDirections" component={ParkingDirections} /> 
       <Route exact path="/HospitalDirections" component={HospitalDirections} /> 
-      <Route exact path="/Login" component={Login} /> 
+      <Route exact path="/SignIn" component={SignIn} /> 
+      <Route exact path="/SignUp" component={SignUp} />
       <Route exact path="/">
         <Redirect to="/Home" />
       </Route>

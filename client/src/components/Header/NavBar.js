@@ -32,10 +32,10 @@ const NavBar = () => {
                             <Link className = "nav-link" to='/Help'>Help</Link>
                         </li>
                         <li className="nav-item">
-                            <Link className = "nav-link" to='/Login'>Login</Link>
+                            <Link className = "nav-link" to='/SignIn'>Sign In</Link>
                         </li>
                         <li className="nav-item">
-                            <Link className = "nav-link" to='/Login'>Sign up</Link>
+                            <Link className = "nav-link" to='/SignUp'>Sign up</Link>
                         </li>
                     </ul>
                 </div>

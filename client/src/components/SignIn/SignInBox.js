@@ -1,20 +1,21 @@
 import React from 'react';
-import './LoginBox.css'
+import { Link } from 'react-router-dom';
+import './SignInBox.css'
 
-function LoginBox() {
+function SignInBox() {
     return (
         <div>
             <form id="container">
                 <h2 id="title">Sign in to your Account</h2>
 
                 <div class="form-group">
-                    <label for="email" className="form-label">Email address</label>
-                    <input type="email" class="form-control" placeholder="Enter email"></input>
+                    <label for="email" className="form-label">Email</label>
+                    <input type="email" class="form-control" placeholder=""></input>
                 </div>
 
                 <div class="form-group">
                     <label for="password" className="form-label">Password</label>
-                    <input type="password" class="form-control" placeholder="Password"></input>
+                    <input type="password" class="form-control" placeholder=""></input>
                 </div>
 
                 <div class="form-group" id="button-group">
@@ -27,4 +28,4 @@ function LoginBox() {
     );
 }
 
-export default LoginBox;
+export default SignInBox;
