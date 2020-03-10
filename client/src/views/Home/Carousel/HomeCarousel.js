@@ -1,9 +1,9 @@
 import React from 'react';
 import { Carousel } from 'react-bootstrap'
 import './HomeCarousel.css'
-import PatientCare from './PatientCare'
-import NewsVideos from './NewsVideos'
-import ExploreDpt from './ExploreDpt'
+import PatientCare from './CarouselItems/PatientCare'
+import NewsVideos from './CarouselItems/NewsVideos'
+import ExploreDpt from './CarouselItems/ExploreDpt'
 
 const HomeCarousel = (props) => {
     return (
