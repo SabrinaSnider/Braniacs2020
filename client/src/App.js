@@ -7,7 +7,6 @@ import Login from './views/Login/Login'
 import ParkingDirections from './views/MapView/ParkingDirections'
 import HospitalDirections from './views/MapView/HospitalDirections'
 
-
 const App = () => {
   return (
     <div style={{display: 'flex', 'flexFlow': 'column', 'minHeight': '100vh'}}>
