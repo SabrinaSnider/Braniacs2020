@@ -8,7 +8,7 @@ let destination = {
     longitude: -82.340842
 }
 
-function HostpitalDirections() {
+function HostpitalDirections(props) {
     const [directions, setDirections] = useState(null);
     const [position, setPosition] = useState(null);
 

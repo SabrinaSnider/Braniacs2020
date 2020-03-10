@@ -1,0 +1,22 @@
+.carousel-caption {
+    top: 0;
+    bottom: auto;
+}
+
+.carousel-inner {
+    height: 100%;
+    width: 100%;
+}
+
+.carousel-item {
+    height: 100%;
+    width: 100%;
+}
+
+.carousel-control-next, .carousel-control-prev {
+    width: 7%;
+}
+
+.carousel-control-next-icon, .carousel-control-prev-icon {
+    color: black;
+}
