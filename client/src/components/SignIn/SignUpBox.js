@@ -5,7 +5,7 @@ function SignUpBox() {
     return (
         <div>
             <form id="container">
-                <h2 id="title">Create Your Account</h2>
+                <h2 id="title" style={{fontSize: '2em'}}>Create Your Account</h2>
 
                 <div class="form-group">
                     <label for="email" className="form-label">First Name</label>

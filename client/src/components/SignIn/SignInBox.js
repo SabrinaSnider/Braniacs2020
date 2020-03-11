@@ -6,7 +6,7 @@ function SignInBox() {
     return (
         <div>
             <form id="container">
-                <h2 id="title">Sign in to your Account</h2>
+                <h2 id="title" style={{fontSize: '2em'}}>Sign in to your Account</h2>
 
                 <div class="form-group">
                     <label for="email" className="form-label">Email</label>

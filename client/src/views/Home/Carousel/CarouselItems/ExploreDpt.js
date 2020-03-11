@@ -4,7 +4,7 @@ import { CardDeck, Card, Button } from 'react-bootstrap'
 const ExploreDpt = (props) => {
     return (
         <div style={{'backgroundColor': '#EAEAEA', width: '100%', height: '100%', padding: "20px 80px"}}>
-            <CardDeck style={{height: '90%', textAlign: 'left'}}>
+            <CardDeck style={{textAlign: 'left'}}>
                 <Card>
                     <Card.Img variant="top" src="/CarouselHome/ExploreDpt/I1.jpg" />
                     <Card.Body>

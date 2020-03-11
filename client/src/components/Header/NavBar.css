@@ -2,10 +2,6 @@
     font-family: Verdana, Geneva, sans-serif
 }
 
-#department-title {
-    font-size: 3em;
-}
-
 .nav-logo {
     display:flex;
     height: 50px;
@@ -14,7 +10,7 @@
 }
 
 .nav-item {
-    font-size: 1.1em;
+    font-size: 1em;
     margin: auto 10px;
 }
 
