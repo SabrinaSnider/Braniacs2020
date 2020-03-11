@@ -1,8 +1,7 @@
 #container {
     background-color: rgba(207, 207, 207, .5);
     margin: 20px auto;
-    width: 30vw;
-    height: 60vh; 
+    width: 30vw; 
     display: flex; 
     flex-flow: column;
     text-align: center;

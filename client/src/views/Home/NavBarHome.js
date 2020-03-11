@@ -7,15 +7,15 @@ const NavBarHome = () => {
     return (
         <div style={{width: '100%'}}>
             <div style={{padding:"20px 40px", display: 'flex', 'alignItems': 'center', "backgroundColor": "#ffffff"}}>
-                <img src="/UFhealth.png" height="80px" style={{float:'left'}} alt=""></img>
+                <img src="/UFhealth.png" height="60px" style={{float:'left'}} alt=""></img>
                 <h1 id="department-title">UF Department of Neurosurgery</h1>
             </div>
-            <nav className="navbar navbar-expand-lg navbar-light" style={{margin:'0', "backgroundColor": "#ffffff", padding: '0 40px'}}>
+            <nav className="navbar navbar-expand-md navbar-light" style={{margin:'0', "backgroundColor": "#ffffff", height: '100%'}}>
                 <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon"></span>
                 </button>
-                <div className="collapse navbar-collapse" id="navbarNav" style={{padding: "0px"}}>
-                    <ul className="navbar-nav ml-auto">
+                <div className="collapse navbar-collapse w-100 order-1 order-md-0 dual-collapse2" id="navbarNav">
+                    <ul className="navbar-nav mr-auto">
                         <li className="nav-item active">
                             <Link className = "nav-link" to='/Home'>Home</Link>
                         </li>
@@ -29,16 +29,17 @@ const NavBarHome = () => {
                             <Link className = "nav-link" to='/HospitalDirections'>Hospital Directions</Link>
                         </li>
                     </ul>
-
-                    <ul className="navbar-nav mr-auto" style={{'float': 'right'}}>
+                </div>
+                <div className="collapse navbar-collapse w-100 order-1 order-md-0 dual-collapse2">
+                    <ul className="navbar-nav ml-auto">
                         <li className="nav-item">
                             <Link className = "nav-link" to='/Help'>Help</Link>
                         </li>
                         <li className="nav-item">
-                            <Link className = "nav-link" to='/Login'>Login</Link>
+                            <Link className = "nav-link" to='/SignIn'>Sign In</Link>
                         </li>
                         <li className="nav-item">
-                            <Link className = "nav-link" to='/Login'>Sign up</Link>
+                            <Link className = "nav-link" to='/SignUp'>Sign Up</Link>
                         </li>
                     </ul>
                 </div>

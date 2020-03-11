@@ -4,7 +4,7 @@ import { CardDeck, Card } from 'react-bootstrap'
 const PatientCare = (props) => {
     return (
         <div style={{'backgroundColor': '#EAEAEA', width: '100%', height: '100%', padding: "20px 80px"}}>
-            <CardDeck style={{height: '90%', textAlign: 'left'}}>
+            <CardDeck style={{textAlign: 'left'}}>
                 <Card>
                     <Card.Img variant="top" src="/CarouselHome/PatientCare/I1.jpg" />
                     <Card.Body>

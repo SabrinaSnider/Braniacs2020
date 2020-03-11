@@ -1,13 +1,13 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
-import LoginBox from '../../components/Login/LoginBox'
+import SignInBox from '../../components/SignIn/SignInBox'
 
-function Login(props) {
+function SignIn(props) {
     return (
         <div className="App" style={{height: '100%', width: '100%', 'backgroundImage': `url(background.png)`, 'flexGrow' : '1'}}>
-            <LoginBox/>
+            <SignInBox/>
         </div>
     );
 }
 
-export default Login;
+export default SignIn;

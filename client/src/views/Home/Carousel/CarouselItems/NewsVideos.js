@@ -8,7 +8,7 @@ const NewsVideos = (props) => {
                 <h2 style={{fontSize: '2rem', 'float': 'left', margin: '0px'}}>RECENT NEWS &amp; VIDEOS</h2>
                 <Button style={{'float': 'right', margin: '0px'}}>All News &amp; Videos</Button>
             </div>
-            <CardDeck style={{height: '80%', textAlign: 'left'}}>
+            <CardDeck style={{textAlign: 'left'}}>
                 <Card>
                     <Card.Img variant="top" src="/CarouselHome/NewsVideos/I1.jpg" />
                     <Card.Body>
