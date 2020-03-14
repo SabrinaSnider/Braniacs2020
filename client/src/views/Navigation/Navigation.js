@@ -6,7 +6,7 @@ import ParkingDirections from './ParkingDirections'
 
 function NavigationPage(props) {
     return (
-        <div style={{'backgroundColor': 'white', flexGrow: '1', display: 'flex', flexDirection: 'row'}}>
+        <div style={{'padding': '30px 0', 'backgroundColor': 'white', flexGrow: '1', display: 'flex', flexDirection: 'row', width: '80%', margin: 'auto'}}>
             <NavBar/>
             <Switch>
                 <Route exact path="/Navigation/FindUs" component={ParkingDirections}/>

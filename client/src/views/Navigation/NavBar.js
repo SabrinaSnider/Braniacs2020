@@ -12,7 +12,7 @@ const NavBar = () => {
     }
 
     return (
-        <Navbar id="navigation-menu" expand="md" style={{display: 'inline-block'}}>
+        <Navbar id="navigation-menu" expand="md" style={{display: 'inline-block', flexShrink: '0'}}>
             <Nav className="flex-column" activeKey={selected} onSelect={handleSelect}>
                 <Nav.Link href='/Navigation/FindUs' className = "nav-menu-item" eventKey={1}>
                     Contact and Find Us
