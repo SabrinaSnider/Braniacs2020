@@ -23,10 +23,7 @@ const NavBarHome = () => {
                             <Link className = "nav-link" to='/Register'>Extra Page</Link>
                         </li>
                         <li className="nav-item">
-                            <Link className = "nav-link" to='/Navigation/FindUs'>Navigation</Link>
-                        </li>
-                        <li className="nav-item">
-                            <Link className = "nav-link" to='/HospitalDirections'>Hospital Directions</Link>
+                            <Link className = "nav-link" to='/Navigation/GeneralInformaiton'>Navigation</Link>
                         </li>
                     </ul>
                 </div>

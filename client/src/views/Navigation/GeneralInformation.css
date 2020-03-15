@@ -1,0 +1,30 @@
+#navigation-info-header {
+    font-weight: bold;
+    font-size: 2.8rem;
+}
+
+.navigation-section-header {
+    font-weight: bold;
+    font-size: 2rem;
+}
+
+.navigation-section-subheader {
+    font-weight: bold;
+    font-size: 1.5rem;
+}
+
+.navigation-section-sub-subheader {
+    font-size: 1.2rem;
+}
+
+.starter-section {
+    margin: 20px 0px;
+}
+
+.navigation-section:not(.starter-section) {
+    margin: 35px 0px;
+}
+
+.navigation-subsection {
+    margin: 20px 0px;
+}
