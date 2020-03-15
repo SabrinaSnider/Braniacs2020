@@ -16,9 +16,7 @@ const NavBar = (props) => {
                 {!props.home &&
                     <img src="/UFhealth.png" style={{float: 'left', height: '8vh', width: 'auto', 'maxHeight': '100%', 'margin': '0px 0px 0px 20px'}} alt=""></img>
                 }
-                <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span className="navbar-toggler-icon"></span>
-                </button>
+                <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse className="w-100 dual-collapse2">
                     <Nav className="mr-auto">
                         <Nav.Link className = "nav-item" href='/Home'>Home</Nav.Link>
