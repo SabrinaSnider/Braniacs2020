@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
-import GMaps from '../../components/GoogleMaps/GMaps'
-import Directions from '../../components/GoogleMaps/Directions'
-import { updatePosition, getDirections } from '../../components/GoogleMaps/DirectionHandler'
+import GMaps from '../../../components/GoogleMaps/GMaps'
+import Directions from '../../../components/GoogleDirections/Directions'
+import { updatePosition, getDirections } from '../../../components/GoogleDirections/DirectionHandler'
 
 let destination = {
     latitude: 29.639375,

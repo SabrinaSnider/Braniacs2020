@@ -1,9 +1,9 @@
-import React, { useState } from 'react'
-import NavBar from './NavBar'
+import React from 'react'
+import NavBar from '../../components/NavigationNavBar/NavBar'
 import { Route, Switch, useParams } from 'react-router-dom';
-import ParkingDirections from './ParkingDirections'
-import HospitalDirections from './HospitalDirections'
-import GeneralInformaiton from './GeneralInformation'
+import ParkingDirections from './Subpages/ParkingDirections'
+import HospitalDirections from './Subpages/HospitalDirections'
+import GeneralInformaiton from './Subpages/GeneralInformation'
 import './Navigation.css'
 
 function NavigationPage(props) {
