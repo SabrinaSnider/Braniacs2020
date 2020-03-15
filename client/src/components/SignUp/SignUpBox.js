@@ -1,6 +1,9 @@
 import React from 'react';
 import './SignUpBox.css'
 
+/*
+    Sign up box component
+*/
 function SignUpBox() {
     return (
         <div>

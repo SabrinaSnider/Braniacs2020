@@ -8,6 +8,10 @@ let destination = {
     longitude: -82.341597
 }
 
+/*
+    Parking directions section on the navigation page. Uses the user's current geolocation
+    to display auto-generated directions to the parking lot.
+*/
 const ParkingDirections = () => {
     const [directions, setDirections] = useState(null);
     const [position, setPosition] = useState(null);

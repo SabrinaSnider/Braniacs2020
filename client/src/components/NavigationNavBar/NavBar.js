@@ -1,8 +1,12 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Navbar, Nav } from 'react-bootstrap'
 import 'bootstrap/dist/css/bootstrap.css';
 import './NavBar.css'
 
+/*
+    Vertical navbar on the navigation page. This toggles between different navigation features
+    on the navigation page. The eventKey is used to give a right-border to the selected menu item.
+*/
 const NavBar = (props) => {
     return (
         <Navbar id="navigation-menu" expand="md" style={{display: 'inline-block', flexShrink: '0'}}>

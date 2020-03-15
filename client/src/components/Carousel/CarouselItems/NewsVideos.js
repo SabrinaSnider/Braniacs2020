@@ -1,6 +1,9 @@
 import React from 'react';
 import { CardDeck, Card, Button } from 'react-bootstrap'
 
+/*
+    Carousel slide for the "News and Videos" page
+*/
 const NewsVideos = (props) => {
     return (
         <div style={{'backgroundColor': '#EAEAEA', width: '100%', height: '100%', padding: "20px 80px"}}>

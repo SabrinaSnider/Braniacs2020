@@ -3,6 +3,15 @@ import { Navbar, Nav } from 'react-bootstrap'
 import 'bootstrap/dist/css/bootstrap.css';
 import './NavBar.css';
 
+/*
+    Main navigation bar for the website, styled with bootstrap stylesheets. Since
+    bootstrap functionality does not work in react apps, a wrapper npm module called
+    react-bootstrap is used to give bootstrap functionality (like the menu toggle 
+    button in this component).
+
+    The home prop toggles certain aspects of the navbar to make the home page have a 
+    different navbar.
+*/
 const NavBar = (props) => {
     return (
         <div style={{width: '100%'}}>

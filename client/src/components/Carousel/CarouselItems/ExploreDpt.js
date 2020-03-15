@@ -1,6 +1,9 @@
 import React from 'react';
 import { CardDeck, Card, Button } from 'react-bootstrap'
 
+/*
+    Carousel slide for the "Explore Department" page
+*/
 const ExploreDpt = (props) => {
     return (
         <div style={{'backgroundColor': '#EAEAEA', width: '100%', height: '100%', padding: "20px 80px"}}>

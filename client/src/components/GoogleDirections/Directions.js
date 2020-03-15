@@ -2,7 +2,11 @@ import React from 'react'
 import { Table } from 'react-bootstrap'
 import './Directions.css'
 
-// maybe add restriction to map to limit panning later
+/*
+    Parses the directions prop and puts them in a component. The time and
+    distance of the route are displayed at the top, while the directions are 
+    displayed in a table.
+*/
 const Directions = (props) => {
     // removes html styling from text
     function decodeHtml(html) {

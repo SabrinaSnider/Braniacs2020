@@ -7,6 +7,11 @@ import SignIn from './views/SignIn/SignIn'
 import SignUp from './views/SignUp/SignUp'
 import NavigationPage from './views/Navigation/Navigation'
 
+/*
+  Checks for the homepage route first. If not routing to home, sends to DefaultContainer.
+  This is done so the default navbar isn't loaded in the homepage; instead, the navbar is
+  called from the home component with a home prop passed in.
+*/
 const App = () => {
   return (
     <div style={{display: 'flex', 'flexFlow': 'column', 'minHeight': '100vh'}}>
@@ -18,6 +23,10 @@ const App = () => {
   );
 }
 
+
+/*
+  Checks all other routes besides home. Displays the default navbar for these routes.
+*/
 const DefaultContainer = () => (
   <div style={{display: 'flex', 'flexFlow': 'column', 'minHeight': '100vh', 'backgroundImage': 'url(/background.png)'}}>
     <NavBar />

@@ -1,10 +1,13 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
-import SignUpBox from '../../components/SignIn/SignUpBox'
+import SignUpBox from '../../components/SignUp/SignUpBox'
 
+/*
+    Sign up page. Displays the sign up box component.
+*/
 function SignUp(props) {
     return (
-        <div className="App" style={{height: '100%', width: '100%', 'backgroundImage': `url(background.png)`, 'flexGrow' : '1'}}>
+        <div style={{height: '100%', width: '100%', 'flexGrow' : '1'}}>
             <SignUpBox/>
         </div>
     );

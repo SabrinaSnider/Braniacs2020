@@ -1,4 +1,7 @@
-// gets the current geolocation of the user
+/*
+    Gets the current location of the user using the geolocation API, then
+    makes a call to getDirections to update the directions
+*/
 const updatePosition = async (setPosition, destination, setDirections) => {
     await navigator.geolocation.getCurrentPosition(
         position => {
@@ -16,7 +19,10 @@ const updatePosition = async (setPosition, destination, setDirections) => {
     )
 }
 
-// method to grab list of directions from google api
+/*
+    Makes a call to the Google Directions API to auto-generate directions from
+    the origin to the destination
+*/
 const getDirections = (origin, destination, setDirections) => {
     if (origin == null || destination == null) return
     

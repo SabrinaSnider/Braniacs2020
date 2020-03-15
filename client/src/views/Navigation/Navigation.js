@@ -6,6 +6,9 @@ import HospitalDirections from './Subpages/HospitalDirections'
 import GeneralInformaiton from './Subpages/GeneralInformation'
 import './Navigation.css'
 
+/*
+    Navigation page. Reroutes to different components together with the navbar.
+*/
 function NavigationPage(props) {
     const option = useParams().option;
 

@@ -1,9 +1,12 @@
 import React from 'react';
 import { CardDeck, Card } from 'react-bootstrap'
 
+/*
+    Carousel slide for the "Patient Care" page
+*/
 const PatientCare = (props) => {
     return (
-        <div style={{'backgroundColor': '#EAEAEA', width: '100%', height: '100%', padding: "20px 80px"}}>
+        <div style={{'backgroundColor': '#EAEAEA', padding: "20px 80px"}}>
             <CardDeck style={{textAlign: 'left'}}>
                 <Card>
                     <Card.Img variant="top" src="/CarouselHome/PatientCare/I1.jpg" />

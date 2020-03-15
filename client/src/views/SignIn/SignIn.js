@@ -2,9 +2,12 @@ import React from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
 import SignInBox from '../../components/SignIn/SignInBox'
 
+/*
+    Sign in page. Displays the sign in box component.
+*/
 function SignIn(props) {
     return (
-        <div className="App" style={{height: '100%', width: '100%', 'backgroundImage': `url(background.png)`, 'flexGrow' : '1'}}>
+        <div style={{height: '100%', width: '100%', 'flexGrow' : '1'}}>
             <SignInBox/>
         </div>
     );

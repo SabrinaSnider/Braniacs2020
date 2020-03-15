@@ -1,7 +1,9 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import './SignInBox.css'
 
+/*
+    Sign in box component
+*/
 function SignInBox() {
     return (
         <div>

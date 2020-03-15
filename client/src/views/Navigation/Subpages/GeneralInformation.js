@@ -1,10 +1,14 @@
 import React from 'react'
 import './GeneralInformation.css'
 
+/*
+    General information section on the navigation page. Displays static information about
+    getting to and staying at the hospital.
+*/
 function GeneralInformation(props) {
     return (
         <div style={{float: 'right', flexGrow: '1', padding: '0px 40px'}}>
-            <h1 id="navigation-info-header">Contact and Find Us</h1>
+            <h1 id="navigation-info-header">General Information</h1>
 
             <div className="navigation-section starter-section">
                 <h2 className="navigation-section-header">Address</h2>

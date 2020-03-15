@@ -5,6 +5,10 @@ import PatientCare from './CarouselItems/PatientCare'
 import NewsVideos from './CarouselItems/NewsVideos'
 import ExploreDpt from './CarouselItems/ExploreDpt'
 
+/*
+    Carousel component used on the home page; consists of 3 slides filled 
+    with static information from the original neurosurgery website
+*/
 const HomeCarousel = (props) => {
     return (
         <Carousel 

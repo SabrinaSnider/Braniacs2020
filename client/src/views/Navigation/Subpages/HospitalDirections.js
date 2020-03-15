@@ -1,13 +1,17 @@
 import React, { useState, useEffect } from 'react'
 import GMaps from '../../../components/GoogleMaps/GMaps'
 import Directions from '../../../components/GoogleDirections/Directions'
-import { updatePosition, getDirections } from '../../../components/GoogleDirections/DirectionHandler'
+import { updatePosition } from '../../../components/GoogleDirections/DirectionHandler'
 
 let destination = {
     latitude: 29.639375,
     longitude: -82.340842
 }
 
+/*
+    Hospital directions section on the navigation page. Uses the user's current geolocation
+    to display auto-generated directions to the hospital.
+*/
 function HostpitalDirections(props) {
     const [directions, setDirections] = useState(null);
     const [position, setPosition] = useState(null);
