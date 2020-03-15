@@ -19,11 +19,16 @@ const App = () => {
   );
 }
 
+// TODO: set color of background to the background image; for some reason it isn't working
 const DefaultContainer = () => (
-  <div style={{display: 'flex', 'flexFlow': 'column', 'minHeight': '100vh'}}>
+  <div style={{display: 'flex', 'flexFlow': 'column', 'minHeight': '100vh', 'backgroundImage': 'url(background.png)'}}>
     <NavBar />
     <Switch>
-      <Route exact path="/Navigation/FindUs" component={NavigationPage} />
+    <Route exact path="/Navigation/:option" component={NavigationPage} />
+      {/* <Route exact path="/Navigation/FindUs" component={NavigationPage} />
+      <Route exact path="/Navigation/Parking" component={NavigationPage} />
+      <Route exact path="/Navigation/Hospital" component={NavigationPage} /> */}
+      
       <Route exact path="/HospitalDirections" component={HospitalDirections} /> 
       <Route exact path="/SignIn" component={SignIn} /> 
       <Route exact path="/SignUp" component={SignUp} />

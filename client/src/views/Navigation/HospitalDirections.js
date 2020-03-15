@@ -19,15 +19,15 @@ function HostpitalDirections(props) {
     }, [])
 
     return (
-        <div className="App" style={{'backgroundImage': `url(background.png)`, 'flexGrow' : '1'}}>
+        <div style={{float: 'right', flexGrow: '1'}}>
             <div id="directions-parking-container" style={{display:'flex', 'flexDirection': 'row', 'justifyContent': 'center'}}>
-                <div style = {{float: 'left', margin: '40px', width: '45vw', 'backgroundColor': '#EAEAEA'}}>
+                <div style = {{float: 'left', margin: '0px 20px 0px 40px', width: '50%'}}>
                     <h2>Directions to Hospital</h2>
                     <Directions // update instructions whenever the directions change
                         directions = {directions}
                     />
                 </div>
-                <div style = {{width: `45vw`, height: `60vh`, float: 'right', margin: '40px'}}>
+                <div style = {{width: '50%', height: `60vh`, float: 'right', margin: '0px 40px 0px 20px'}}>
                 <GMaps // update Google Maps component whenever the directions change
                     loadingElement = {<div style = {{height: '100%'}}/>}
                     containerElement = {<div style = {{height: '100%'}}/>}
