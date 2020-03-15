@@ -3,13 +3,13 @@ import NavBar from './NavBar'
 import { Route, Switch, useParams } from 'react-router-dom';
 import ParkingDirections from './ParkingDirections'
 import HospitalDirections from './HospitalDirections'
+import './Navigation.css'
 
 function NavigationPage(props) {
     const option = useParams().option;
-    console.log('option is', option)
 
     return (
-        <div style={{'padding': '30px 0', 'backgroundColor': 'white', flexGrow: '1', display: 'flex', flexDirection: 'row', width: '90%', margin: 'auto'}}>
+        <div id="navigation-page-container">
             <NavBar option={option}/>
             <Switch>
                 <Route exact path="/Navigation/FindUs" component={ParkingDirections}/>
