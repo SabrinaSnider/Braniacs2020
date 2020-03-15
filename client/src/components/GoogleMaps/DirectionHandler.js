@@ -29,11 +29,13 @@ const getDirections = (origin, destination, setDirections) => {
         travelMode: google.maps.TravelMode.DRIVING,
     }, (result, status) => {
         if (status === google.maps.DirectionsStatus.OK) {
+            console.log(result)
             setDirections(result)
         } else {
             setDirections(null)
         }
     });
+
 }
 
 export {

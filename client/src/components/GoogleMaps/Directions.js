@@ -1,4 +1,6 @@
 import React from 'react'
+import { Table } from 'react-bootstrap'
+import './Directions.css'
 
 // maybe add restriction to map to limit panning later
 const Directions = (props) => {
@@ -18,14 +20,27 @@ const Directions = (props) => {
     } else {
         return (
             <div>
-                <p style={{textAlign: 'left'}}>{
-                    props.directions &&
-                    props.directions.routes[0].legs[0].steps.map((element, index) => {
-                        let step = element.instructions.replace(/<\/?[^>]+(>|$)/g, " ")
-                        let decodedStep = decodeHtml(step)
-                        return <li key={index}>{decodedStep}</li>;
-                    })
-                }</p>
+                <div className="directions-section">
+                    <h3 className="directions-header">Time Estime: {props.directions.routes[0].legs[0].duration.text}.</h3>
+                    <h3 className="directions-header">Distance: {props.directions.routes[0].legs[0].distance.text}.</h3>
+                </div>
+                <Table bordered hover>
+                    <tbody>
+                    {
+                        props.directions &&
+                        props.directions.routes[0].legs[0].steps.map((element, index) => {
+                            let step = element.instructions.replace(/<\/?[^>]+(>|$)/g, " ")
+                            let decodedStep = decodeHtml(step)
+                            let distance = element.distance.text
+
+                            return (
+                                <tr key={index}>
+                                    <td>{decodedStep} for {distance}.</td>
+                                </tr>
+                            )
+                    })}
+                    </tbody>
+                </Table>
             </div>
         )
     }
