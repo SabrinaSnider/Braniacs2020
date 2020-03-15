@@ -1,7 +1,7 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import './NavBar.css';
+import { Navbar, Nav } from 'react-bootstrap'
 import 'bootstrap/dist/css/bootstrap.css';
+import './NavBar.css';
 
 const NavBar = (props) => {
     return (
@@ -12,40 +12,28 @@ const NavBar = (props) => {
                     <h1 id="department-title">UF Department of Neurosurgery</h1>
                 </div>
             }
-            <nav id="main-navbar" className="navbar navbar-expand-md navbar-light" style={{margin:'0', "backgroundColor": "#ffffff", height: '100%'}}>
+            <Navbar id="main-navbar" expand="md" style={{margin:'0', "backgroundColor": "#ffffff", height: '100%'}}>
                 {!props.home &&
                     <img src="/UFhealth.png" style={{float: 'left', height: '8vh', width: 'auto', 'maxHeight': '100%', 'margin': '0px 0px 0px 20px'}} alt=""></img>
                 }
                 <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon"></span>
                 </button>
-                <div className="collapse navbar-collapse w-100 order-1 order-md-0 dual-collapse2" id="navbarNav">
-                    <ul className="navbar-nav mr-auto">
-                        <li className="nav-item active">
-                            <Link className = "nav-link" to='/Home'>Home</Link>
-                        </li>
-                        <li className="nav-item">
-                            <Link className = "nav-link" to='/Register'>Extra Page</Link>
-                        </li>
-                        <li className="nav-item">
-                            <Link className = "nav-link" to='/Navigation/GeneralInformaiton'>Navigation</Link>
-                        </li>
-                    </ul>
-                </div>
-                <div className="collapse navbar-collapse w-100 order-1 order-md-0 dual-collapse2">
-                    <ul className="navbar-nav ml-auto">
-                        <li className="nav-item">
-                            <Link className = "nav-link" to='/Help'>Help</Link>
-                        </li>
-                        <li className="nav-item">
-                            <Link className = "nav-link" to='/SignIn'>Sign In</Link>
-                        </li>
-                        <li className="nav-item">
-                            <Link className = "nav-link" to='/SignUp'>Sign Up</Link>
-                        </li>
-                    </ul>
-                </div>
-            </nav>
+                <Navbar.Collapse className="w-100 dual-collapse2">
+                    <Nav className="mr-auto">
+                        <Nav.Link className = "nav-item" href='/Home'>Home</Nav.Link>
+                        <Nav.Link className = "nav-item" href='/Register'>Extra Page</Nav.Link>
+                        <Nav.Link className = "nav-item" href='/Navigation/GeneralInformaiton'>Navigation</Nav.Link>
+                    </Nav>
+                </Navbar.Collapse>
+                <Navbar.Collapse className="w-100 dual-collapse2">
+                    <Nav className="ml-auto">
+                        <Nav.Link className = "nav-item" href='/Help'>Help</Nav.Link>
+                        <Nav.Link className = "nav-item" href='/SignIn'>Sign In</Nav.Link>
+                        <Nav.Link className = "nav-item" href='/SignUp'>Sign Up</Nav.Link>
+                    </Nav>
+                </Navbar.Collapse>
+            </Navbar>
         </div>
     )
 };
