@@ -15,7 +15,8 @@ const updatePosition = async (setPosition, destination, setDirections) => {
             // updates the directions using the new position
             getDirections(newPosition, destination, setDirections)
         },
-        error => {if (error) console.log(error)}   
+        error => {if (error) console.log(error)} ,
+        { maximumAge:10000, timeout:5000, enableHighAccuracy: true }  
     )
 }
 

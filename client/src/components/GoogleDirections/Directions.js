@@ -8,13 +8,6 @@ import './Directions.css'
     displayed in a table.
 */
 const Directions = (props) => {
-    // removes html styling from text
-    function decodeHtml(html) {
-        var txt = document.createElement("textarea");
-        txt.innerHTML = html;
-        return txt.value;
-    }
-
     if (props.directions == null || props.directions.routes[0].legs[0].steps == null) {
         return (
             <div>
@@ -33,13 +26,25 @@ const Directions = (props) => {
                     {
                         props.directions &&
                         props.directions.routes[0].legs[0].steps.map((element, index) => {
-                            let step = element.instructions.replace(/<\/?[^>]+(>|$)/g, " ")
-                            let decodedStep = decodeHtml(step)
-                            let distance = element.distance.text
+                            let step = element.instructions.replace(/<\/?[^>]+(>|$)/g, "")
 
+                            let distance = element.distance.text
+                            let maneuver = element.maneuver
+                            let conjunction = "for"
+
+                            // make in say "in {distance}" if turning
+                            if (maneuver === "turn-left" || maneuver === "turn-right") {
+                                conjunction = "in"
+                            }
+
+                            // add period if start of destination sentence
+                            if (step.includes("Destination")) {
+                                step = step.replace("Destination", ". Destination")
+                            }
+                            
                             return (
                                 <tr key={index}>
-                                    <td>{decodedStep} for {distance}.</td>
+                                    <td>{step} {conjunction} {distance}.</td>
                                 </tr>
                             )
                     })}
