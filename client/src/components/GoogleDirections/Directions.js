@@ -27,6 +27,8 @@ const Directions = (props) => {
                         props.directions &&
                         props.directions.routes[0].legs[0].steps.map((element, index) => {
                             let step = element.instructions.replace(/<\/?[^>]+(>|$)/g, "")
+                            step = step.replace("&nbsp;", " ")
+                            step = step.replace("Pass", ". Pass")
 
                             let distance = element.distance.text
                             let maneuver = element.maneuver
@@ -37,14 +39,23 @@ const Directions = (props) => {
                                 conjunction = "in"
                             }
 
-                            // add period if start of destination sentence
+                            let parsedStep = step + " " + conjunction + " " + distance
+
+                            // parsing if destination sentence it at the end
                             if (step.includes("Destination")) {
-                                step = step.replace("Destination", ". Destination")
+                                parsedStep = step.replace("Destination", conjunction + " " + distance + ". Destination")
                             }
+
+                            // parsing if "pass by" sentence is at the end
+                            if (step.includes("Pass")) {
+                                parsedStep = step.replace("Pass", conjunction + " " + distance + ". Pass")
+                            }
+
+                            parsedStep += "."
                             
                             return (
                                 <tr key={index}>
-                                    <td>{step} {conjunction} {distance}.</td>
+                                    <td>{parsedStep}</td>
                                 </tr>
                             )
                     })}
