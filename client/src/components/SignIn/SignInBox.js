@@ -1,10 +1,12 @@
 import React from 'react';
+import { useHistory } from 'react-router-dom';
 import './SignInBox.css'
 
 /*
     Sign in box component
 */
 function SignInBox() {
+	const history = useHistory();
     return (
         <div>
             <form id="container">
@@ -22,7 +24,7 @@ function SignInBox() {
 
                 <div className="form-group" id="button-group">
                     <button type="button" id="login-btn" className="btn row">Login</button>
-                    <button type="button" id="create-btn" className="btn row">Create Account</button>
+                    <button type="button" id="create-btn" className="btn row" onClick={() => {history.push('/SignUp')}}>Create Account</button>
                 </div>
                 <p id="forgot-pwd" className="row">Forgot Password?</p>
             </form>
