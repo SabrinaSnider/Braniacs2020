@@ -2,6 +2,7 @@ const express = require('./config/express.js')
 const config = require('./config/config.js')
 const mapsRouter = require('./routes/mapsRouter')
 const patientDbRouter = require('./routes/patientDbRouter')
+const apptDbRouter = require('./routes/apptDbRouter')
 const mongoose = require('mongoose')
  
 mongoose.connect(config.db.uri, {useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false}).then(() => {
@@ -16,3 +17,4 @@ app.listen(port, () => console.log(`Server now running on port ${port}!`));
 
 app.use('/maps', mapsRouter)
 app.use('/patient', patientDbRouter)
+app.use('/appt', apptDbRouter)

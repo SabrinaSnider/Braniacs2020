@@ -27,7 +27,7 @@ module.exports.init = () => {
     app.use(bodyParser.json());
 
     // add a router
-    app.use('/testing', patientDbRouter);
+    //app.use('/testing', patientDbRouter);
 
     if (process.env.NODE_ENV === 'production') {
         // Serve any static files
