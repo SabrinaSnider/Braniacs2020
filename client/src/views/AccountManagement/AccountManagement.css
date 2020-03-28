@@ -1,0 +1,33 @@
+#account-management-page {
+    padding: 30px 0;
+    border-left: .5px solid #ababab;
+    border-right: .5px solid #ababab;
+    background-color: white;
+    flex-grow: 1;
+    width: 90%;
+    margin: auto;
+    padding: 60px;
+}
+
+#account-management-header {
+    font-size: 2rem;
+}
+
+.account-row:not(#account-management-header) {
+    margin: 20px 0px;
+}
+
+.account-label {
+    width: 120px;
+    text-align: right;
+    margin: auto;
+    color: #8c8c8c;
+}
+
+.col {
+    padding-right: 0px;
+}
+
+.account-row.btn {
+    float: right;
+}

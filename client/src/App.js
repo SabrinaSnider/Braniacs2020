@@ -6,6 +6,7 @@ import NavBar from "./components/NavBar/NavBar";
 import SignIn from './views/SignIn/SignIn'
 import SignUp from './views/SignUp/SignUp'
 import NavigationPage from './views/Navigation/Navigation'
+import AccountManagement from './views/AccountManagement/AccountManagement'
 
 /*
   Checks for the homepage route first. If not routing to home, sends to DefaultContainer.
@@ -34,6 +35,7 @@ const DefaultContainer = () => (
       <Route exact path="/Navigation/:option" component={NavigationPage} />
       <Route exact path="/SignIn" component={SignIn} /> 
       <Route exact path="/SignUp" component={SignUp} />
+      <Route exact path="/Account" component={AccountManagement} />
       <Route exact path="/">
         <Redirect to="/Home" />
       </Route>
