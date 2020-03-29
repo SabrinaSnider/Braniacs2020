@@ -1,8 +1,9 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { enGB } from 'date-fns/locale'
 import { DatePicker } from 'react-nice-dates'
 import { Form } from 'react-bootstrap'
 import 'react-nice-dates/build/style.css'
+import './DatePickerBasic.css'
 
 const DatePickerBasic = (props) => {
   return (

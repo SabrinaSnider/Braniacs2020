@@ -10,9 +10,14 @@ import DatePickerBasic from '../../components/DatePicker/DatePickerBasic'
 */
 function AccountManagement(props) {
     const [firstName, setFirstName] = useState()
-    const [lastName, setLastName] = useState()
+    const [lastName, setLastName] = useState("starter")
     const [email, setEmail] = useState()
     const [date, setDate] = useState()
+
+    const updateData = () => {
+        console.log(lastName);
+    }
+
     return (
         <Card id="account-management-page">
             <h1 id="account-management-header" className="account-row">Account Informaton</h1>
@@ -20,12 +25,12 @@ function AccountManagement(props) {
             <Form>
                 <Form.Group className="account-row">
                     <h2 className="account-label">First name</h2>
-                    <Form.Control defaultValue="name1"/>
+                    <Form.Control value={firstName}  onChange={event => setFirstName(event.target.value)}/>
                 </Form.Group>
 
                 <Form.Group className="account-row">
                     <h2 className="account-label">Last name</h2>
-                    <Form.Control defaultValue="name1"/>
+                    <Form.Control value={lastName}  onChange={event => setLastName(event.target.value)}/>
                 </Form.Group>
 
                 <Form.Group className="account-row last-row">
@@ -38,10 +43,10 @@ function AccountManagement(props) {
 
                 <Form.Group className="account-row">
                     <h2 className="account-label">Email</h2>
-                    <Form.Control defaultValue="name1 name2"/>
+                    <Form.Control value={email}  onChange={event => setEmail(event.target.value)}/>
                 </Form.Group>
 
-                <Button id="account-save-btn" className="account-row" variant="primary" type="submit">
+                <Button id="account-save-btn" className="account-row" variant="primary" type="submit" onClick={updateData}>
                     Save
                 </Button>
             </Form>
