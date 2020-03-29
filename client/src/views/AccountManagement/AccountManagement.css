@@ -3,31 +3,29 @@
     border-left: .5px solid #ababab;
     border-right: .5px solid #ababab;
     background-color: white;
-    flex-grow: 1;
     width: 90%;
-    margin: auto;
-    padding: 60px;
+    margin: 20px auto 0px;
+    padding: 40px;
 }
 
 #account-management-header {
-    font-size: 2rem;
+    font-size: 1.3rem;
+    font-weight: bold;
 }
 
 .account-row:not(#account-management-header) {
-    margin: 20px 0px;
+    margin: 30px 0px;
 }
 
 .account-label {
-    width: 120px;
-    text-align: right;
-    margin: auto;
+    font-size: 1rem;
+    width: auto;
+    float: left;
     color: #8c8c8c;
+    margin: 5px 0px;
 }
 
-.col {
-    padding-right: 0px;
-}
-
-.account-row.btn {
+#account-save-btn {
     float: right;
+    margin: 0px !important;
 }
