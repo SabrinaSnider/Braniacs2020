@@ -1,13 +1,18 @@
-import React from 'react';
+import React, { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
 import './AccountManagement.css'
 import { Form, Button, Card } from 'react-bootstrap'
+import DatePickerBasic from '../../components/DatePicker/DatePickerBasic'
 
 /*
     Account management page for viewing and displaying user information.
     Displays email, date of birth, first name, last name.
 */
 function AccountManagement(props) {
+    const [firstName, setFirstName] = useState()
+    const [lastName, setLastName] = useState()
+    const [email, setEmail] = useState()
+    const [date, setDate] = useState()
     return (
         <Card id="account-management-page">
             <h1 id="account-management-header" className="account-row">Account Informaton</h1>
@@ -23,13 +28,16 @@ function AccountManagement(props) {
                     <Form.Control defaultValue="name1"/>
                 </Form.Group>
 
-                <Form.Group className="account-row">
-                    <h2 className="account-label">Email</h2>
-                    <Form.Control defaultValue="name1 name2"/>
-                </Form.Group>
-
                 <Form.Group className="account-row last-row">
                     <h2 className="account-label">Date of Birth</h2>
+                    <DatePickerBasic
+                        date = {date}
+                        setDate = {setDate}
+                    />
+                </Form.Group>
+
+                <Form.Group className="account-row">
+                    <h2 className="account-label">Email</h2>
                     <Form.Control defaultValue="name1 name2"/>
                 </Form.Group>
 
