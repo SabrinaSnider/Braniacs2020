@@ -3,6 +3,7 @@ import 'bootstrap/dist/css/bootstrap.css';
 import './AccountManagement.css'
 import { Form, Button, Card } from 'react-bootstrap'
 import DatePickerBasic from '../../components/DatePicker/DatePickerBasic'
+import axios from 'axios';
 
 /*
     Account management page for viewing and displaying user information.
@@ -14,8 +15,34 @@ function AccountManagement(props) {
     const [email, setEmail] = useState()
     const [date, setDate] = useState()
 
-    const updateData = () => {
+    const updateData = (event) => {
+        event.preventDefault();
+        
         console.log(lastName);
+        
+        // axios.get("/patient/user")
+        // .then(function (response) {
+        //   console.log(response.data);
+        // })
+        // .catch(function (error) {
+        //   console.log(error);
+        // });
+        
+        axios.put("/patient/update", {
+            name: {
+                first: firstName,
+                last: lastName
+            },
+            dob: date,
+            email: email
+
+        }).then(function (response) {
+            console.log(response.data);
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
+          
     }
 
     return (
