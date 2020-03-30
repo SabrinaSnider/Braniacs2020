@@ -63,3 +63,5 @@ exports.updatePatients = function(req, res){
 		if (err) res.status(200).send("NaN");
 		else res.status(200).send("Successful update");
 	})
+}
+	
