@@ -5,7 +5,6 @@ import axios from 'axios'
 import { deleteAppointment } from '../actions';
 
 
-
 class AppointmentList extends Component {
 
     onDeleteAppointment = (appointment) => {
@@ -14,17 +13,16 @@ class AppointmentList extends Component {
 
     updateApps = () => {
         let sampleAppoint = [];
-        
+
         axios.get('/appt/list', {})
           .then(function (response) {
             sampleAppoint.data = (response.data);
-            console.log(sampleAppoint.data[1]);
+            console.log(sampleAppoint.data);
           })
           .catch(function (error) {
             console.log(error);
           }); 
-
-          return sampleAppoint;
+        return sampleAppoint;
     }
 
     renderAppointment = (appointment) => {

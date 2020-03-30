@@ -76,17 +76,13 @@ export const deleteAppointment = (appointment) => {
 
         try {
             // normally some asyn logic goes here to delete the data from the database
-    
-            console.log("delete: ");
-            console.log(appointment);
-    
-            //axios.delete('/appt/remove', { params: { name: "AJ" } });
 
-            //axios.delete(`/api/listings/${id}`);
 
-            axios.delete('/appt/remove', {appointment});
 
-            dispatch({ type: DELETE_APPOINTMENT, payload: appointment});
+            axios.delete('/appt/remove',  {data: {patientId: appointment.patientID}} );
+            
+
+            dispatch({ type: DELETE_APPOINTMENT, payload: appointment.id});
 
 
         } catch (error) {
