@@ -25,10 +25,14 @@ export default (state = INITIAL_STATE, action) => {
     switch (action.type) {
         case ADD_APPOINTMENT:
             // add the appointment to the store
+           
             action.payload.id = uuid.v4();
             let items = state.items.slice(0);
             items.push(action.payload);
-            
+        
+            console.log(state.items);
+
+
             return {
                 ...state,
                 items,

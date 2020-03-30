@@ -23,14 +23,15 @@ class Home extends Component {
         }
     }
 
-    onAddAppointment = (timeStamp, durration, patientID) => {
-        this.props.addAppointment(timeStamp, durration, patientID);
+    onAddAppointment = (timeStamp, durration, patientID, name) => {
+        this.props.addAppointment(timeStamp, durration, patientID, name);
     }
 
     state = {
         dateTime: moment().add(1, 'hour'),
         durration: 15,
         patientID: 0,
+        name: "",
         reminder: null
     };
 
@@ -41,6 +42,9 @@ class Home extends Component {
     onIDChange = (e) => {
         this.setState({ patientID: e.target.value });
     }
+    onNameChange = (e) => {
+        this.setState({ name: e.target.value });
+    }
 
     onReminderChange = (e) => {
         this.setState({ reminder: e.target.value });
@@ -50,11 +54,10 @@ class Home extends Component {
         this.setState({ durration: e.target.value });
     }
 
-
     preAdd = () => {
         let endTime = moment(this.state.dateTime).add(this.state.durration, 'minutes');
 
-        this.onAddAppointment(this.state.dateTime.unix(), endTime.unix(), this.state.patientID);
+        this.onAddAppointment(this.state.dateTime.unix(), endTime.unix(), this.state.patientID,  this.state.name );
     }
 
     renderError = () => {
@@ -113,6 +116,8 @@ class Home extends Component {
                                                 <div className="form-group">
                                                     <label>Patient ID</label>
                                                     <input type="text" onChange={this.onIDChange} className="form-control" value={this.state.patientID} required />
+                                                    <label>Patient Name</label>
+                                                    <input type="text" onChange={this.onNameChange} className="form-control" value={this.state.name} />
                                                 </div>
                                                 <div className="form-group">
                                                     <label>Proposed Time</label>
