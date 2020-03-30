@@ -8,13 +8,11 @@ const slotSchema = new mongoose.Schema ({
 module.exports = mongoose.model('Slot',slotSchema);
 
 const apptSchema = new mongoose.Schema({
-	clinicId: {type: String},
+	patientId: {type: Number, get: i => Math.round(i), set: i => Math.round(i)},
+	reminder: Boolean,
+	startTime: Date,
+	endTime: Date,
 	name: String,
-	email: String,
-	phone: Number,
-	physician: {type: String},
-	slots: mongoose.Schema.Types.ObjectId,
-	created_at: Date
 });
 
 /* Use your schema to instantiate a Mongoose model

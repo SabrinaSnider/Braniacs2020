@@ -52,7 +52,7 @@ exports.popPatients = async (req, res) => {
 			console.log(cr);
 		}
 	})
-}
+	}
 	res.status(200).send("DB should be populated now");
 }
 
@@ -63,4 +63,3 @@ exports.updatePatients = function(req, res){
 		if (err) res.status(200).send("NaN");
 		else res.status(200).send("Successful update");
 	})
-}

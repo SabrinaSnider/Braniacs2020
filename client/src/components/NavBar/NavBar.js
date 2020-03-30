@@ -31,10 +31,12 @@ const NavBar = (props) => {
                         <Nav.Link className = "nav-item" href='/Home'>Home</Nav.Link>
                         <Nav.Link className = "nav-item" href='/Register'>Extra Page</Nav.Link>
                         <Nav.Link className = "nav-item" href='/Navigation/GeneralInformaiton'>Navigation</Nav.Link>
+
                     </Nav>
                 </Navbar.Collapse>
                 <Navbar.Collapse className="w-100 dual-collapse2">
                     <Nav className="ml-auto">
+                        <Nav.Link className = "nav-item" href='/Appointment'>Administrators</Nav.Link>
                         <Nav.Link className = "nav-item" href='/Help'>Help</Nav.Link>
                         <Nav.Link className = "nav-item" href='/SignIn'>Sign In</Nav.Link>
                         <Nav.Link className = "nav-item" href='/SignUp'>Sign Up</Nav.Link>
