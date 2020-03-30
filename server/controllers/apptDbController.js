@@ -1,4 +1,4 @@
-const appt = require('../models/appt.model.js')
+const patient = require('../models/appt.model.js')
 const config = require('../config/config.js')
 const mongoose = require('mongoose')
 
