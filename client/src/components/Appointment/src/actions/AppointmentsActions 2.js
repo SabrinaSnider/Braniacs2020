@@ -1,30 +1,22 @@
 import moment from 'moment';
-import axios from 'axios'
-import React from 'react';
-
-
 import {
     ADD_APPOINTMENT,
     DELETE_APPOINTMENT,
     APPOINTMENT_FAIL
 } from './types';
-const mongoose = require('mongoose');
 
-export const addAppointment = (startTime, endTime, patientID, name) => {
+export const addAppointment = (startTime, endTime, patientID) => {
     return async (dispatch, getState) => {
         
         dispatch({ type: APPOINTMENT_FAIL, payload: '' });
 
         try {
-           
             // normally some asyn logic goes here to add this appointment to a database
 
             // typically it will be the database that can reject a new appointment insertion but since
             // there is no database then the current store state will be checked
             
             // check for time in the past
-
-            
             if(startTime < moment().unix()) {
                 dispatch({ type: APPOINTMENT_FAIL, payload: 'You are adding an appointment thst is in the past. Only future date appointments can be set. Please try again' });
                 return
@@ -46,22 +38,9 @@ export const addAppointment = (startTime, endTime, patientID, name) => {
                 let appointment = {
                     startTime,
                     endTime, 
-                    patientID, 
-                    name
+                    patientID
                 }
-
-                axios({
-                    method: 'post',
-                    url: '/appt/create',
-                    data: {
-                        name: name,
-                        patientId: patientID,
-                        reminder: true,
-                        startTime: moment.unix(startTime).format('MMMM Do, YYYY (hh:mm a)'),
-                        endTime: moment.unix(endTime).format('MMMM Do, YYYY (hh:mm a)')
-                    }
-                })
-
+    
                 dispatch({ type: ADD_APPOINTMENT, payload: appointment });
             }
         } catch (error) {
@@ -70,25 +49,14 @@ export const addAppointment = (startTime, endTime, patientID, name) => {
     };
 };
 
-export const deleteAppointment = (appointment) => {
+export const deleteAppointment = (appointmentId) => {
     return async (dispatch) => {
         dispatch({ type: APPOINTMENT_FAIL, payload: '' });
 
         try {
             // normally some asyn logic goes here to delete the data from the database
-    
-            console.log("delete: ");
-            console.log(appointment);
-    
-            //axios.delete('/appt/remove', { params: { name: "AJ" } });
-
-            //axios.delete(`/api/listings/${id}`);
-
-            axios.delete('/appt/remove', {appointment});
-
-            dispatch({ type: DELETE_APPOINTMENT, payload: appointment});
-
-
+            
+            dispatch({ type: DELETE_APPOINTMENT, payload: appointmentId});
         } catch (error) {
             //console.log('Failed to delete appointment', error);
             dispatch({ type: APPOINTMENT_FAIL, payload: 'Appointment failed to be deleted - contact technical support' });

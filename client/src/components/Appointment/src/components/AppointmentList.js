@@ -7,61 +7,71 @@ import { deleteAppointment } from '../actions';
 
 
 class AppointmentList extends Component {
+    constructor(props) {
+        super(props);
+        // change code below this line
+    this.state = {
+      myArray: []
+    };
+    
+    let sampleAppoint = [];
+    let arr = [];
+    let currentComponent = this;
 
-    onDeleteAppointment = (appointment) => {
-        this.props.deleteAppointment(appointment);
-    }
-
-    updateApps = () => {
-        let sampleAppoint = [];
-        
         axios.get('/appt/list', {})
           .then(function (response) {
+            
             sampleAppoint.data = (response.data);
-            console.log(sampleAppoint.data[1]);
+            sampleAppoint.data.forEach(element => { 
+                arr.push(element);
+                console.log(element); 
+              }); 
+
+            currentComponent.setState({
+                myArray: arr
+            });
+            //console.log(sampleAppoint.data[1].name);
           })
           .catch(function (error) {
             console.log(error);
           }); 
 
-          return sampleAppoint;
+          
+
+        }
+    onDeleteAppointment = (appointment) => {
+        this.props.deleteAppointment(appointment);
     }
 
-    renderAppointment = (appointment) => {
-
-        this.updateApps();
-
-        let startTime = moment.unix(appointment.startTime).format('MMMM Do, YYYY (hh:mm a)');
-        let endTime = moment.unix(appointment.endTime).format('MMMM Do, YYYY (hh:mm a)');
-        let patientId = appointment.patientId;
-        let name = appointment.name;
+    RequestNodes = (appointment) => {
 
         return (
-               <li key={appointment.id} className="list-group-item">
-                <strong>Patient ID: </strong>
-                <span>{patientId}</span>
-                <strong>Patient name: </strong>
-                <span>{name}</span>
-                <strong> Starting Time: </strong>
-                <span>{startTime}</span>
-                <span> - </span>
-                <strong>Ending Time: </strong>
-                <span>{endTime}</span>
-                <button onClick={this.onDeleteAppointment.bind(this, appointment)} className="btn btn-sm btn-warning float-right">delete</button>
+            <li key={appointment._id} className="list-group-item">
+             <strong>Patient ID: </strong>
+             <span>{appointment.patientId}</span>
+             <strong>Patient name: </strong>
+             <span>{appointment.name}</span>
+             <strong> Starting Time: </strong>
+             <span>{appointment.startTime}</span>
+             <span> - </span>
+             <strong>Ending Time: </strong>
+             <span>{appointment.endTime}</span>
+             <button onClick={this.onDeleteAppointment.bind(this, appointment)} className="btn btn-sm btn-warning float-right">delete</button>
 
-            </li> 
-            //{this.props.appointments.map(this.renderAppointment)}
-        );
+         </li> 
+         //{this.props.appointments.map(this.renderAppointment)}
+     );
     }
 
-    render() {
+    render () {
         return (
             <ul className="list-group">
-                {this.props.appointments.map(this.renderAppointment)}
+                {this.state.myArray.map(this.RequestNodes)}
             </ul>
         );
     }
-}
+};
+
 
 const mapStateToProps = (state) => {
     return {

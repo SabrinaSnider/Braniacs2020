@@ -156,7 +156,7 @@ class Home extends Component {
                             My current appointments
                         </div>
 
-                        <AppointmentList appointments={this.props.appointments} />
+                        <AppointmentList />
                     </div>
 
                 </div>
@@ -167,6 +167,7 @@ class Home extends Component {
 }
 
 const mapStateToProps = (state) => {
+    
     return {
         user: state.auth.user,
         appointments: state.appointments.items,
