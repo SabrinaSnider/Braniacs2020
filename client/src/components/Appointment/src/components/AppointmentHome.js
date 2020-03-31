@@ -5,6 +5,7 @@ import Header from './Header';
 import AppointmentList from './AppointmentList';
 import InputMoment from 'input-moment';
 import moment from 'moment';
+import axios from 'axios'
 import 'bootstrap/dist/css/bootstrap.css';
 import 'input-moment/dist/input-moment.css'
 import "jquery/dist/jquery.min.js";
@@ -21,6 +22,33 @@ class Home extends Component {
         if (props.user === null) {
             this.props.history.push('/AppointmentLogin');
         }
+        this.getDBAppointments();
+
+    }
+
+
+    getDBAppointments = () => {
+        let sampleAppoint = [];
+        let arr = [];
+        let currentComponent = this;
+
+        axios.get('/appt/list', {})
+            .then(function (response) {
+
+                sampleAppoint.data = (response.data);
+                sampleAppoint.data.forEach(element => {
+                    arr.push(element);
+                    console.log(element);
+                });
+
+                currentComponent.setState({
+                    myArray: arr
+                });
+                //console.log(sampleAppoint.data[1].name);
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
     }
 
     onAddAppointment = (timeStamp, durration, patientID, name) => {
@@ -32,7 +60,8 @@ class Home extends Component {
         durration: 15,
         patientID: 0,
         name: "",
-        reminder: null
+        reminder: null,
+        myArray: []
     };
 
     onDateChange = (newDateTime) => {
@@ -57,7 +86,8 @@ class Home extends Component {
     preAdd = () => {
         let endTime = moment(this.state.dateTime).add(this.state.durration, 'minutes');
 
-        this.onAddAppointment(this.state.dateTime.unix(), endTime.unix(), this.state.patientID,  this.state.name );
+        this.onAddAppointment(this.state.dateTime.unix(), endTime.unix(), this.state.patientID, this.state.name);
+        this.getDBAppointments();
     }
 
     renderError = () => {
@@ -77,7 +107,6 @@ class Home extends Component {
 
     render() {
         let displayTime = this.state.dateTime.format('MMMM Do, YYYY (hh:mm a)');
-
         return (
             <div>
 
@@ -156,7 +185,7 @@ class Home extends Component {
                             My current appointments
                         </div>
 
-                        <AppointmentList />
+                        <AppointmentList appointments={this.state.myArray}/>
                     </div>
 
                 </div>
@@ -167,10 +196,10 @@ class Home extends Component {
 }
 
 const mapStateToProps = (state) => {
-    
+
     return {
         user: state.auth.user,
-        appointments: state.appointments.items,
+        appointments: state.appointments,
         appointmentError: state.appointments.error
     }
 };
