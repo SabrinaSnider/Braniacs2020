@@ -36,7 +36,15 @@ const NavBar = (props) => {
                 <Navbar.Collapse className="w-100 dual-collapse2">
                     <Nav className="ml-auto">
                         <Nav.Link className = "nav-item" href='/Help'>Help</Nav.Link>
-                        <Nav.Link className = "nav-item" href='/SignIn'>Sign In</Nav.Link>
+                        {props.currentUser ?
+                        (
+                            <Nav.Link className = "nav-item" href='/LogOut'>Log Out</Nav.Link>
+
+                        ):(
+                            <Nav.Link className = "nav-item" href='/SignIn'>Sign In</Nav.Link>
+                        )
+                        }
+                        
                         <Nav.Link className = "nav-item" href='/SignUp'>Sign Up</Nav.Link>
                     </Nav>
                 </Navbar.Collapse>

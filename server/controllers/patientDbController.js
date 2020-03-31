@@ -1,57 +1,86 @@
-const patient = require('../models/patient.model.js')
-const config = require('../config/config.js')
-const mongoose = require('mongoose')
+const Patient = require('../models/patient.model.js'),
+    signToken = require('../authHelperFunctions').signToken;
 
-/*
-USING fetchEmails:
-Make a get request with "email" added to the request.
-*/
-exports.fetchEmails = function(req, res){
-	patient.find(null, 'email', function(err, ls){
-		if (err) throw err;
-		else res.status(200).send(ls);
-	})
-}
+module.exports = {
+    // list users
+    index: async (req, res) => {
+        try {
+            const users = await Patient.find({});
+            res.json(users);
+        } catch(err) {
+            alert(err);
+        }
+    },
 
-/*
-USING fetchUser:
-Make a get request with "email" added to the request.
-*/
-exports.fetchUser = function(req, res){
-	patient.findOne({ 'email' : req.email}, function(err, usr){
-		if (err) res.status(200).send("NaN");
-		else res.status(200).json({
-			email: usr.email,
-			password: usr.password
-		})
-	})
-}
+    // get one user
+    show: async (req, res) => {
+        console.log("Current User:");
+        console.log(req.user);
 
-/*
-USING newPatient:
-Make a post request with your patient json (first name, last name, email, and password) added to the request.
-*/
-exports.newPatient = async (req, res) => {
-	console.log(req.body);
-	patient.create({name: {first: req.body.first, last: req.body.last}, email: req.body.email, password: req.body.password}, function(err, pt){
-		res.status(200).send("Success");
-		console.log("Done");
-	});
-}
+        try {
+            const user = await Patient.findById(req.params.id);
+            res.json(user);
+        } catch(err) {
+            alert(err);
+        }
+    },
 
-/*
-USING popPatients:
-Don't actually invoke this from the client! This is a testing function used to bake a database for patients!
-*/
-exports.popPatients = async (req, res) => {
-	emailsToPop = ['vega@uac.com','kryten@jupitermining.co','123omega@gun.un','ronkataiser@dcmfpr.se','elsenova@sudra.net'];
-	for (var i=0;i<emailsToPop.length;i++){
-	patient.create({name: {first: "test", last:"ificate"}, email: emailsToPop[i], password: 'skeleton'}, function(err, cr){
-		if (err) res.status(403).send({error: 'oh no'});
-		else{
-			console.log(cr);
-		}
-	})
-	}
-	res.status(200).send("DB should be populated now");
-}
+    // creates new user
+    create: async (req, res) => {
+        try{
+            //const user = await Patient.create(req.body);
+            const patient = new Patient({
+                name: {
+                    first: req.body.first,
+                    last: req.body.last
+                },
+
+                email: req.body.email,
+                password: req.body.password
+            })
+
+            console.log(patient);
+            patient.save();
+            const token = await signToken(patient);
+            console.log(token);
+            res.json({success: true, message: "User created with token", token});
+        } catch(err) {
+            res.json({success: false, code: err.code});
+        }
+    },
+
+    // update a user
+    update: async (req, res) => {
+        try {
+            const user = await Patient.findById(req.params.id);
+            Object.assign(user, req.body);
+            await user.save();
+
+            res.json({success: true, message: "User updated", user});
+        } catch(err) {
+            res.json({success: false, code: err.code});
+        }
+    },
+
+    // delete a user
+    destroy: async (req, res) => {
+        try {
+            const user = await Patient.findByIdAndRemove(req.params.id);
+            res.json({success: true, message: "User deleted", user});
+        } catch(err) {
+            res.json({success: false, code: err.code});
+        }
+    },
+
+    authenticate: async (req, res) => {
+        console.log(req.body);
+        const user = await Patient.findOne({email: req.body.email});
+
+        if(!user || !user.validPassword(req.body.password)) {
+            return res.json({success: false, message: "Invalid Login"});
+        }
+
+        const token = await signToken(user);
+        res.json({success: true, message: "Token attached", token});
+    }
+};
