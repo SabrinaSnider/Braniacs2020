@@ -35,7 +35,7 @@ httpUser.logIn = async function(credentials) {
 };
 
 httpUser.signUp = async function(userInfo) {
-    const response = await axios.post('/patient', userInfo);
+    const response = await axios.post('/patient/register', userInfo);
 
 
     const token = response.data.token;

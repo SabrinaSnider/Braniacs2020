@@ -6,7 +6,7 @@ import SignUpBox from '../../components/SignUp/SignUpBox'
     Sign up page. Displays the sign up box component.
 */
 function SignUp(props) {
-    const onLoginSuccess = () => {
+    const onLoginSuccess = async function() {
         props.onLoginSuccess();
     }
 

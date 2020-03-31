@@ -6,7 +6,7 @@ import SignInBox from '../../components/SignIn/SignInBox'
     Sign in page. Displays the sign in box component.
 */
 function SignIn(props) {
-    const onLoginSuccess = () => {
+    const onLoginSuccess = async function() {
         props.onLoginSuccess();
     }
 

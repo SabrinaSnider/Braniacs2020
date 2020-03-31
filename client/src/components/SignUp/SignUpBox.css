@@ -35,6 +35,10 @@
     border: 1px solid #0021A5;
 }
 
+#error{
+    color: red;
+}
+
 .form-label {
     float: left;
 }

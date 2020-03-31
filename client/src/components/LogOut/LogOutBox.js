@@ -2,11 +2,14 @@ import React, {useEffect} from 'react'
 import { Redirect } from 'react-router-dom'
 
 const LogOutBox = (props) => {
-    useEffect((props) => {
-        props.onLogOut();
-    }, []);
+    // useEffect((props) => {
+    //     props.logOut();
+    // }, []);
 
-    return <Redirect to="/login" />
+    props.logOut();
+    alert('You have successfully logged out')
+
+    return <Redirect to="/Home" />
 };
 
 export default LogOutBox;

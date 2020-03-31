@@ -17,21 +17,20 @@ import httpUser from './httpUser'
 const App = (props) => {
   const [currentUser, setCurrentUser] = useState(httpUser.getCurrentUser());
 
-  const onLoginSuccess = () => {
-      setCurrentUser(httpUser.getCurrentUser());
-      console.log(currentUser);
+  const onLoginSuccess = async function() {
+      await setCurrentUser(httpUser.getCurrentUser());
   };
 
-  const logOut = () => {
+  const logOut = async function() {
       httpUser.logOut();
-      setCurrentUser(null);
+      await setCurrentUser(null);
   };
 
   return (
     <div style={{display: 'flex', 'flexFlow': 'column', 'minHeight': '100vh'}}>
       <Switch>
-        <Route exact path="/Home" component={Home}/>
-        <Route render={() => <DefaultContainer onLoginSuccess={onLoginSuccess} logOut={logOut}/>} />  {/*currentUser={currentUser}* setCurrentUser={setCurrentUser()}*/}
+        <Route exact path="/Home" render={() => <Home currentUser={currentUser} />}/>
+        <Route render={() => <DefaultContainer onLoginSuccess={onLoginSuccess} logOut={logOut} currentUser={currentUser}/>} />  {/*currentUser={currentUser}* setCurrentUser={setCurrentUser()}*/}
       </Switch>
     </div>
   );
@@ -43,18 +42,23 @@ const App = (props) => {
 */
 
 const DefaultContainer = (props) => {
-  const onLoginSuccess = () => {
+  const onLoginSuccess = async function() {
     props.onLoginSuccess();
-}
+  }
+
+  const logOut = async function(){
+    props.logOut();
+  }
+  
+  const currentUser = props.currentUser;
   return(
   <div style={{display: 'flex', 'flexFlow': 'column', 'minHeight': '100vh', 'backgroundImage': 'url(/background.png)'}}>
-    <NavBar currentUser={props.currentUser} />
+    <NavBar currentUser={currentUser} />
     <Switch>
       <Route exact path="/Navigation/:option" component={NavigationPage} />
       <Route path="/SignIn" render={(props) => <SignIn {...props} onLoginSuccess={onLoginSuccess} />}  /> {/*currentUser={props.currentUser} setCurrentUser={props.setCurrentUser}*/}
       <Route path="/SignUp" render={(props) => <SignUp {...props} onLoginSuccess={onLoginSuccess} />}  /> {/* onLoginSuccess={props.onLoginSuccess()} currentUser={props.currentUser} setCurrentUser={props.setCurrentUser}*/}
-      <Route path="/logout" component={LogOut} logOut={props.logOut} /> {/*currentUser={props.currentUser} setCurrentUser={props.setCurrentUser}*/}
-      {console.log(props)}
+      <Route path="/LogOut" render={(props) => <LogOut {...props} logOut={logOut} />} /> {/*currentUser={props.currentUser} setCurrentUser={props.setCurrentUser}*/}
       <Route exact path="/">
         <Redirect to="/Home" />
       </Route>
