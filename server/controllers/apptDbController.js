@@ -50,6 +50,7 @@ exports.updateAppt = function(req, res){
 	})
 }
 
+
 exports.deleteAppt = function(req, res){
 	appt.deleteOne({ 'patientId' : req.body.patientId}, function(err, usra){
 		if (err) res.status(200).send("NaN");

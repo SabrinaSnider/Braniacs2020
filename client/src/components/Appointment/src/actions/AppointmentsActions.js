@@ -1,3 +1,4 @@
+
 import moment from 'moment';
 import axios from 'axios'
 import React from 'react';
@@ -57,8 +58,8 @@ export const addAppointment = (startTime, endTime, patientID, name) => {
                         name: name,
                         patientId: patientID,
                         reminder: true,
-                        startTime: startTime,
-                        endTime: endTime
+                        startTime: moment.unix(startTime).format('MMMM Do, YYYY (hh:mm a)'),
+                        endTime: moment.unix(endTime).format('MMMM Do, YYYY (hh:mm a)')
                     }
                 })
 
@@ -76,17 +77,10 @@ export const deleteAppointment = (appointment) => {
 
         try {
             // normally some asyn logic goes here to delete the data from the database
-
-
-
-            axios.delete('/appt/remove',  {data: {patientId: appointment.patientID}} );
-            
-
+            axios.delete('/appt/remove',  {data: {patientId: appointment.patientId}} );
             dispatch({ type: DELETE_APPOINTMENT, payload: appointment.id});
-
-
         } catch (error) {
-            //console.log('Failed to delete appointment', error);
+            console.log('Failed to delete appointment', error);
             dispatch({ type: APPOINTMENT_FAIL, payload: 'Appointment failed to be deleted - contact technical support' });
         }
     };

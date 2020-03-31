@@ -10,8 +10,8 @@ module.exports = mongoose.model('Slot',slotSchema);
 const apptSchema = new mongoose.Schema({
 	patientId: {type: Number, get: i => Math.round(i), set: i => Math.round(i)},
 	reminder: Boolean,
-	startTime: Date,
-	endTime: Date,
+	startTime: String,
+	endTime: String,
 	name: String,
 });
 
