@@ -1,3 +1,4 @@
+
 import moment from 'moment';
 import axios from 'axios'
 import React from 'react';
@@ -76,21 +77,17 @@ export const deleteAppointment = (appointment) => {
 
         try {
             // normally some asyn logic goes here to delete the data from the database
-    
-            console.log("delete: ");
-            console.log(appointment);
-    
-            //axios.delete('/appt/remove', { params: { name: "AJ" } });
 
-            //axios.delete(`/api/listings/${id}`);
 
-            axios.delete('/appt/remove', {appointment});
+            console.log(appointment.patientId + ' deleted');
+            axios.delete('/appt/remove',  {data: {patientId: appointment.patientId}} );
+            
 
-            dispatch({ type: DELETE_APPOINTMENT, payload: appointment});
+            dispatch({ type: DELETE_APPOINTMENT, payload: appointment.id});
 
 
         } catch (error) {
-            //console.log('Failed to delete appointment', error);
+            console.log('Failed to delete appointment', error);
             dispatch({ type: APPOINTMENT_FAIL, payload: 'Appointment failed to be deleted - contact technical support' });
         }
     };

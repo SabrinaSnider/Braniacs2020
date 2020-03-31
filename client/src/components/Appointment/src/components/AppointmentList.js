@@ -4,8 +4,6 @@ import moment from 'moment';
 import axios from 'axios'
 import { deleteAppointment } from '../actions';
 
-
-
 class AppointmentList extends Component {
 
     onDeleteAppointment = (appointment) => {

@@ -27,7 +27,7 @@ class Home extends Component {
     }
 
 
-    getDBAppointments = () => {
+      getDBAppointments = () => {
         let sampleAppoint = [];
         let arr = [];
         let currentComponent = this;
@@ -38,7 +38,6 @@ class Home extends Component {
                 sampleAppoint.data = (response.data);
                 sampleAppoint.data.forEach(element => {
                     arr.push(element);
-                    console.log(element);
                 });
 
                 currentComponent.setState({
