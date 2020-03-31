@@ -1,6 +1,11 @@
+  
 const patient = require('../models/patient.model.js')
 const config = require('../config/config.js')
 const mongoose = require('mongoose')
+const signToken = require('../authHelperFunctions').signToken
+
+// const validateRegisterInput = require("../../validation/register");
+// const validateLoginInput = require("../../validation/login");
 
 /*
 USING fetchEmails:
@@ -27,16 +32,36 @@ exports.fetchUser = function(req, res){
 	})
 }
 
+
+
 /*
 USING newPatient:
 Make a post request with your patient json (first name, last name, email, and password) added to the request.
 */
 exports.newPatient = async (req, res) => {
-	console.log(req.body);
-	patient.create({name: {first: req.body.first, last: req.body.last}, email: req.body.email, password: req.body.password}, function(err, pt){
-		res.status(200).send("Success");
-		console.log("Done");
-	});
+    //  console.log(req.body);
+    //  patient.create({name: {first: req.body.first, last: req.body.last}, email: req.body.email, password: req.body.password}, function(err, pt){
+    //      res.status(200).send("Success");
+    // 	    console.log("Done");
+    //  });
+    try{
+
+        const newPatient = new patient({
+            name: {
+                first: req.body.first,
+                last: req.body.last
+            },
+
+            email: req.body.email,
+            password: req.body.password
+        })
+        newPatient.save();
+        const token = await signToken(newPatient);
+        console.log(token);
+        res.json({success: true, message: "User created with token", token});
+    } catch(err) {
+        res.json({success: false, code: err.code});
+    }
 }
 
 /*
@@ -64,4 +89,15 @@ exports.updatePatients = function(req, res){
 		else res.status(200).send("Successful update");
 	})
 }
-	
+
+exports.authenticate = async (req, res) => {
+    console.log(req.body);
+    const user = await patient.findOne({email: req.body.email});
+
+    if(!user || !user.validPassword(req.body.password)) {
+        return res.json({success: false, message: "Invalid Login"});
+    }
+
+    const token = await signToken(user);
+    res.json({success: true, message: "Token attached", token});
+}
