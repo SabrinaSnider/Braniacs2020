@@ -46,8 +46,7 @@ const NavBar = (props) => {
                             <Nav.Link className = "nav-item" href='/SignIn'>Sign In</Nav.Link>
                         )
                         }
-                        
-                        <Nav.Link className = "nav-item" href='/SignUp'>Sign Up</Nav.Link>
+                        {!props.currentUser && <Nav.Link className = "nav-item" href='/SignUp'>Sign Up</Nav.Link>}
                     </Nav>
                 </Navbar.Collapse>
             </Navbar>
