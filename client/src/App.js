@@ -58,7 +58,7 @@ const DefaultContainer = (props) => {
     <NavBar currentUser={currentUser} />
     <Switch>
       <Route exact path="/Navigation/:option" component={NavigationPage} />
-      <Route exact path="/Account" component={AccountManagement} />
+      <Route exact path="/Account" render={(props) => <AccountManagement {...props} currentUser={currentUser} />} />
       <Route exact path="/Appointment" component={Appointment} />
       <Route path="/SignIn" render={(props) => <SignIn {...props} onLoginSuccess={onLoginSuccess} />}  /> {/*currentUser={props.currentUser} setCurrentUser={props.setCurrentUser}*/}
       <Route path="/SignUp" render={(props) => <SignUp {...props} onLoginSuccess={onLoginSuccess} />}  /> {/* onLoginSuccess={props.onLoginSuccess()} currentUser={props.currentUser} setCurrentUser={props.setCurrentUser}*/}

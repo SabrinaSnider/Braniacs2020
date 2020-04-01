@@ -1,41 +1,55 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
 import './AccountManagement.css'
 import { Form, Button, Card } from 'react-bootstrap'
 import DatePickerBasic from '../../components/DatePicker/DatePickerBasic'
 import axios from 'axios';
+var ObjectId = require('mongodb').ObjectId;
 
 /*
     Account management page for viewing and displaying user information.
     Displays email, date of birth, first name, last name.
 */
+
+
 function AccountManagement(props) {
-    const [firstName, setFirstName] = useState()
-    const [lastName, setLastName] = useState("starter")
-    const [email, setEmail] = useState()
-    const [date, setDate] = useState()
+    const [firstName, setFirstName] = useState("")
+    const [lastName, setLastName] = useState("")
+    const [email, setEmail] = useState("")
+    const [dob, setDob] = useState(new Date())
+
+    console.log(props.currentUser)
+
+    const GetAccountInfo = async() => {
+        axios.post("/patient/useraccount", {
+            email: props.currentUser.email,
+        })
+        .then(function (response) {
+            console.log("response is", response)
+            if (response.data.name.first) setFirstName(response.data.name.first)
+            if (response.data.name.last) setLastName(response.data.name.last)
+            if (response.data.email) setEmail(response.data.email)
+            if (response.data.dob) setDob(response.data.dob)
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+    }
+
+    useEffect(()=>{
+        GetAccountInfo();
+    }, [])
 
     const updateData = (event) => {
         event.preventDefault();
         
-        console.log(lastName);
-        
-        // axios.get("/patient/user")
-        // .then(function (response) {
-        //   console.log(response.data);
-        // })
-        // .catch(function (error) {
-        //   console.log(error);
-        // });
-        
-        axios.put("/patient/update", {
+        axios.post("/patient/update", {
             name: {
                 first: firstName,
                 last: lastName
             },
-            dob: date,
+            dob: dob,
             email: email
-
         }).then(function (response) {
             console.log(response.data);
         })
@@ -62,8 +76,8 @@ function AccountManagement(props) {
                 <Form.Group className="account-row last-row">
                     <h2 className="account-label">Date of Birth</h2>
                     <DatePickerBasic
-                        date = {date}
-                        setDate = {setDate}
+                        date = {dob}
+                        setDate = {setDob}
                     />
                 </Form.Group>
 
