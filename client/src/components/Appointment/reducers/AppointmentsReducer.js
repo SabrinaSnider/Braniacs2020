@@ -1,6 +1,7 @@
 import moment from 'moment';
 import uuid from 'uuid';
 import _ from 'lodash';
+import axios from 'axios'
 
 import {
     ADD_APPOINTMENT,
@@ -8,15 +9,30 @@ import {
     APPOINTMENT_FAIL
 } from '../actions/types';
 
+    let sampleAppoint = [];
+    let arr = [];
+
+    axios.get('/appt/list', {})
+        .then(function (response) {
+            console.log("Appointment response", response)
+            sampleAppoint.data = (response.data);
+            sampleAppoint.data.forEach(element => {
+                arr.push(element);
+                });
+            console.log("arr", arr)
+
+            //currentComponent.setState({
+                //myArray: arr
+            //});
+            //console.log(sampleAppoint.data[1].name);
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
+
 // One default appointment item added as example
 const INITIAL_STATE = {
-    items: [
-        {
-            id: uuid.v4(),
-            startTime: moment('2018-10-10T15:00:00Z').unix(),
-            endTime: moment('2018-10-10T15:00:00Z').add('15', 'minutes').unix()
-        }
-    ],
+    items: arr,
     error: ''
 };
 
@@ -47,7 +63,7 @@ export default (state = INITIAL_STATE, action) => {
         case DELETE_APPOINTMENT:
             // remove the appointment by id from store
             state.items = _.remove(state.items, (appointment) => {
-                return appointment.id !== action.payload;
+                return appointment.patientId !== action.payload;
             });
 
             return {

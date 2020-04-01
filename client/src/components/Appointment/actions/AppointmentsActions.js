@@ -10,7 +10,7 @@ import {
 } from './types';
 const mongoose = require('mongoose');
 
-export const addAppointment = (startTime, endTime, patientID, name) => {
+export const addAppointment = (startTime, endTime, patientID, name, reminder) => {
     return async (dispatch, getState) => {
         
         dispatch({ type: APPOINTMENT_FAIL, payload: '' });
@@ -43,11 +43,15 @@ export const addAppointment = (startTime, endTime, patientID, name) => {
             if (overlap) {
                 dispatch({ type: APPOINTMENT_FAIL, payload: 'You are adding an appointment that has an overlap conflict with your current appointments. Please try again' });
             } else {
+                let startTime1 = moment.unix(startTime).format('MMMM Do, YYYY (hh:mm a)');
+                let endTime1= moment.unix(endTime).format('MMMM Do, YYYY (hh:mm a)');
+
                 let appointment = {
-                    startTime,
-                    endTime, 
-                    patientID, 
-                    name
+                    startTime: startTime1,
+                    endTime: endTime1, 
+                    patientId: patientID, 
+                    name, 
+                    reminder
                 }
 
                 axios({
@@ -56,9 +60,9 @@ export const addAppointment = (startTime, endTime, patientID, name) => {
                     data: {
                         name: name,
                         patientId: patientID,
-                        reminder: true,
-                        startTime: moment.unix(startTime).format('MMMM Do, YYYY (hh:mm a)'),
-                        endTime: moment.unix(endTime).format('MMMM Do, YYYY (hh:mm a)')
+                        reminder: reminder,
+                        startTime: startTime1,
+                        endTime: endTime1
                     }
                 })
 
@@ -77,7 +81,8 @@ export const deleteAppointment = (appointment) => {
         try {
             // normally some asyn logic goes here to delete the data from the database
             axios.delete('/appt/remove',  {data: {patientId: appointment.patientId}} );
-            dispatch({ type: DELETE_APPOINTMENT, payload: appointment.id});
+
+            dispatch({ type: DELETE_APPOINTMENT, payload: appointment.patientId});
         } catch (error) {
             console.log('Failed to delete appointment', error);
             dispatch({ type: APPOINTMENT_FAIL, payload: 'Appointment failed to be deleted - contact technical support' });
