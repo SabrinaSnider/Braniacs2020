@@ -4,8 +4,7 @@ import { addAppointment } from '../actions/AppointmentsActions';
 import Header from './Header';
 import AppointmentList from './AppointmentList';
 import InputMoment from 'input-moment';
-import moment from 'moment';
-import axios from 'axios'
+import moment, { duration } from 'moment';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'input-moment/dist/input-moment.css'
 import "jquery/dist/jquery.min.js";
@@ -22,54 +21,31 @@ class Home extends Component {
         if (props.user === null) {
             this.props.history.push('/AppointmentLogin');
         }
-        this.getDBAppointments();
-
     }
 
-
-      getDBAppointments = () => {
-        let sampleAppoint = [];
-        let arr = [];
-        let currentComponent = this;
-
-        axios.get('/appt/list', {})
-            .then(function (response) {
-                console.log("Appointment response", response)
-                sampleAppoint.data = (response.data);
-                sampleAppoint.data.forEach(element => {
-                    arr.push(element);
-                });
-                console.log("arr", arr)
-
-                currentComponent.setState({
-                    myArray: arr
-                });
-                //console.log(sampleAppoint.data[1].name);
-            })
-            .catch(function (error) {
-                console.log(error);
-            });
-    }
-
-    onAddAppointment = (timeStamp, durration, patientID, name) => {
-        this.props.addAppointment(timeStamp, durration, patientID, name);
+    onAddAppointment = (startTime, endTime, patientId, name, reminder) => {
+        this.props.addAppointment(startTime, endTime, patientId, name, reminder);
     }
 
     state = {
-        dateTime: moment().add(1, 'hour'),
-        durration: 15,
-        patientID: 0,
-        name: "",
-        reminder: null,
-        myArray: []
+        patientId: 0,
+		reminder: null,
+		startTime: moment(),
+		endTime: moment(),
+		name: "",
+		durration: 15,
+		dateTime: moment().add(1, 'hour')
     };
 
     onDateChange = (newDateTime) => {
-        this.setState({ newDateTime });
+		let startTime1 = moment(newDateTime);
+		let endTime1 = moment(newDateTime).add(this.state.durration, 'minutes');
+
+        this.setState({ startTime: startTime1, endTime: endTime1});
     }
 
     onIDChange = (e) => {
-        this.setState({ patientID: e.target.value });
+        this.setState({ patientId: e.target.value });
     }
     onNameChange = (e) => {
         this.setState({ name: e.target.value });
@@ -83,13 +59,14 @@ class Home extends Component {
         this.setState({ durration: e.target.value });
     }
 
-    preAdd = () => {
-        let endTime = moment(this.state.dateTime).add(this.state.durration, 'minutes');
 
-        this.onAddAppointment(this.state.dateTime.unix(), endTime.unix(), this.state.patientID, this.state.name);
-        this.getDBAppointments();
+
+    preAdd = () => {
+        this.onAddAppointment(this.state.startTime.unix(), this.state.endTime.unix(), this.state.patientId, this.state.name, this.state.reminder);
     }
 
+
+   
     renderError = () => {
         if (this.props.appointmentError) {
             return (
@@ -104,9 +81,11 @@ class Home extends Component {
             )
         }
     }
+    
 
     render() {
         let displayTime = this.state.dateTime.format('MMMM Do, YYYY (hh:mm a)');
+
         return (
             <div>
 
@@ -144,7 +123,7 @@ class Home extends Component {
                                             <div className="col-md-6">
                                                 <div className="form-group">
                                                     <label>Patient ID</label>
-                                                    <input type="text" onChange={this.onIDChange} className="form-control" value={this.state.patientID} required />
+                                                    <input type="text" onChange={this.onIDChange} className="form-control" value={this.state.patientId} required />
                                                     <label>Patient Name</label>
                                                     <input type="text" onChange={this.onNameChange} className="form-control" value={this.state.name} />
                                                 </div>
@@ -184,8 +163,7 @@ class Home extends Component {
                         <div className="card-header">
                             My current appointments
                         </div>
-
-                        <AppointmentList appointments={this.state.myArray}/>
+                        <AppointmentList appointments={this.props.appointments} />
                     </div>
 
                 </div>
@@ -196,10 +174,9 @@ class Home extends Component {
 }
 
 const mapStateToProps = (state) => {
-
     return {
         user: state.auth.user,
-        appointments: state.appointments,
+        appointments: state.appointments.items,
         appointmentError: state.appointments.error
     }
 };

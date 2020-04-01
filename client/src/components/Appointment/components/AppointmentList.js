@@ -5,13 +5,14 @@ import axios from 'axios'
 import { deleteAppointment } from '../actions/AppointmentsActions';
 
 class AppointmentList extends Component {
-    onDeleteAppointment = (appointment) => {
-        this.props.deleteAppointment(appointment);
+    onDeleteAppointment = (appointmentId) => {
+        this.props.deleteAppointment(appointmentId);
     }
 
-    RequestNodes = (appointment) => {
+    renderAppointment = (appointment) => {
+    
         return (
-            <li key={appointment._id} className="list-group-item">
+            <li key={appointment.patientId} className="list-group-item">
                 <strong>Patient ID: </strong>
                 <span>{appointment.patientId}</span>
                 <strong> Patient name: </strong>
@@ -23,22 +24,21 @@ class AppointmentList extends Component {
                 <span>{appointment.endTime}</span>
                 <button onClick={this.onDeleteAppointment.bind(this, appointment)} className="btn btn-sm btn-warning float-right">delete</button>
             </li>
-            //{this.props.appointments.map(this.renderAppointment)}
         );
     }
 
     render() {
-        console.log("This is the data in appointmnet list", this.props.appointments)
         return (
             <ul className="list-group">
-                {this.props.appointments.map(this.RequestNodes)}
+                {this.props.appointments.map(this.renderAppointment)}
             </ul>
         );
     }
-};
+}
 
 const mapStateToProps = (state) => {
     return {
+
     }
 };
 
