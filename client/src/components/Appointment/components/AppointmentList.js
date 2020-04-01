@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import moment from 'moment';
 import axios from 'axios'
-import { deleteAppointment } from '../actions';
+import { deleteAppointment } from '../actions/AppointmentsActions';
 
 class AppointmentList extends Component {
     onDeleteAppointment = (appointment) => {

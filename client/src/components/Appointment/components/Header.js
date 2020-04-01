@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { logoutUser } from '../actions';
+import { logoutUser } from '../actions/AuthActions';
 
 class Header extends Component {
 

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { addAppointment } from '../actions';
+import { addAppointment } from '../actions/AppointmentsActions';
 import Header from './Header';
 import AppointmentList from './AppointmentList';
 import InputMoment from 'input-moment';

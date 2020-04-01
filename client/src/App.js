@@ -8,7 +8,7 @@ import SignUp from './views/SignUp/SignUp'
 import LogOut from './views/LogOut/LogOut'
 import NavigationPage from './views/Navigation/Navigation'
 import AccountManagement from './views/AccountManagement/AccountManagement'
-import Appointment from "./components/Appointment/src/Appointment";
+import Appointment from "./components/Appointment/Appointment";
 import httpUser from './httpUser'
 
 /*
