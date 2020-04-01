@@ -28,6 +28,7 @@ class AppointmentList extends Component {
     }
 
     render() {
+        console.log("This is the data in appointmnet list", this.props.appointments)
         return (
             <ul className="list-group">
                 {this.props.appointments.map(this.RequestNodes)}

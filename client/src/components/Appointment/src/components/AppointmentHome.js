@@ -34,11 +34,12 @@ class Home extends Component {
 
         axios.get('/appt/list', {})
             .then(function (response) {
-
+                console.log("Appointment response", response)
                 sampleAppoint.data = (response.data);
                 sampleAppoint.data.forEach(element => {
                     arr.push(element);
                 });
+                console.log("arr", arr)
 
                 currentComponent.setState({
                     myArray: arr
