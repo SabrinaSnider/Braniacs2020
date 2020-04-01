@@ -16,6 +16,10 @@
 .row {
     margin: 5px;
 }
+#error{
+    color: red;
+}
+
 
 .form-control {
     padding: 20px;

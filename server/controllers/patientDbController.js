@@ -5,8 +5,8 @@ const mongoose = require('mongoose')
 const signToken = require('../authHelperFunctions').signToken
 const ObjectId = require('mongodb').ObjectID;
 
-// const validateRegisterInput = require("../../validation/register");
-// const validateLoginInput = require("../../validation/login");
+const validateRegisterInput = require("../validation/register");
+const validateLoginInput = require("../validation/login");
 
 /*
 USING fetchEmails:
@@ -77,11 +77,31 @@ exports.newPatient = async (req, res) => {
 
             email: req.body.email,
             password: req.body.password
-        })
-        newPatient.save();
+        });
+
+        const { errors, isValid } = await validateRegisterInput(req.body);
+
+        if (!isValid) {
+            return res.status(200).json({errors: errors});
+        } 
+
         const token = await signToken(newPatient);
-        console.log(token);
-        res.json({success: true, message: "User created with token", token});
+        
+        let alreadyExists;
+        patient.findOne({email: newPatient.email}).then(user =>{
+            if (user) {
+                alreadyExists = true;
+                return res.status(200).json({ errors:{email: "Email already exists" }});
+            } else{
+                alreadyExists = false;
+            }
+        }).then(()=>{
+            if(!alreadyExists){
+                newPatient.save();
+                res.json({success: true, message: "User created with token", token});
+            }
+        })
+
     } catch(err) {
         res.json({success: false, code: err.code});
     }
@@ -114,13 +134,19 @@ exports.updatePatients = function(req, res){
 }
 
 exports.authenticate = async (req, res) => {
-    console.log(req.body);
-    const user = await patient.findOne({email: req.body.email});
-
-    if(!user || !user.validPassword(req.body.password)) {
-        return res.json({success: false, message: "Invalid Login"});
+    const { errors, isValid } = validateLoginInput(req.body);
+    if (!isValid) {
+        return res.status(200).json(errors);
     }
 
-    const token = await signToken(user);
-    res.json({success: true, message: "Token attached", token});
+    const user = await patient.findOne({email: req.body.email});
+
+    if(!user){
+        return res.status(200).json({ errors: {email: "Email not found" }});
+    } else if(!user.validPassword(req.body.password)) {
+        return res.status(200).json({ errors:{ password: "Email and password do not match. Please try again." }});
+    } else {
+        const token = await signToken(user);
+        res.json({success: true, message: "Token attached", token});
+    }
 }
