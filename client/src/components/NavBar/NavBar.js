@@ -53,7 +53,7 @@ const NavBar = (props) => {
                             <Nav.Link className = "nav-item" href='/Account'>Account</Nav.Link>
 
                         ):(
-                            <Nav.Link className = "nav-item" href='/SignIn'>Sign Up</Nav.Link>
+                            <Nav.Link className = "nav-item" href='/SignUp'>Sign Up</Nav.Link>
                         )
                         }
                     </Nav>

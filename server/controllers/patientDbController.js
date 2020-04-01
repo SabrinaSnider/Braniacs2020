@@ -48,8 +48,8 @@ exports.newPatient = async (req, res) => {
 
         const newPatient = new patient({
             name: {
-                first: req.body.first,
-                last: req.body.last
+                first: req.body.name.first,
+                last: req.body.name.last
             },
 
             email: req.body.email,
