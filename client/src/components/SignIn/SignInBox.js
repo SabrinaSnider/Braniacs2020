@@ -8,6 +8,10 @@ import httpUser from '../../httpUser'
 const SignInBox = (props) => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [errors, setErrors] = useState({
+        password: "",
+        email: ""
+    });
 
     // used to update user input for either password or email
     const onEmailChange = (e) => {
@@ -24,15 +28,19 @@ const SignInBox = (props) => {
     // used to submit user values for password and email
     const onFormSubmit = async (e) => {
         e.preventDefault();
-        console.log("Submitted");
         const newUser = {
             email: email,
             password: password
         }
         const user = await httpUser.logIn(newUser);
-
+        if(user.errors !== undefined){
+            setErrors({
+                email: user.errors.email,
+                password: user.errors.password
+            });
+        }
        
-        if(user) {
+        else if(user) {
             props.onLoginSuccess(user);
             props.history.push('/Home');
         }
@@ -46,11 +54,17 @@ const SignInBox = (props) => {
                 <div className="form-group">
                     <label htmlFor="email" className="form-label">Email</label>
                     <input type="email" className="form-control" placeholder="" onChange = {onEmailChange}></input>
+                    {errors.email !== undefined &&
+                        <label id = "error">{errors.email}</label>
+                    }
                 </div>
 
                 <div className="form-group">
                     <label htmlFor="password" className="form-label">Password</label>
                     <input type="password" className="form-control" placeholder="" onChange={onPasswordChange}></input>
+                    {errors.password !== undefined &&
+                        <label id = "error">{errors.password}</label>
+                    }
                 </div>
 
                 <div className="form-group" id="button-group">

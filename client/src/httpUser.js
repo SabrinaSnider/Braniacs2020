@@ -20,6 +20,10 @@ httpUser.getCurrentUser = function() {
 httpUser.logIn = async function(credentials) {
     try {
         const response = await axios.post( '/patient/authenticate', credentials );
+        console.log("https response", response);
+        if(response.data.errors !== undefined){
+            return response.data;
+        }
 
         const token = response.data.token;
         if(token) {
@@ -36,6 +40,11 @@ httpUser.logIn = async function(credentials) {
 
 httpUser.signUp = async function(userInfo) {
     const response = await axios.post('/patient/register', userInfo);
+
+    console.log("https response", response);
+    if(response.data.errors !== undefined){
+        return response.data;
+    }
 
 
     const token = response.data.token;
