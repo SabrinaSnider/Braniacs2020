@@ -13,6 +13,7 @@ import './NavBar.css';
     different navbar.
 */
 const NavBar = (props) => {
+    console.log("current user", props.currentUser)
     return (
         <div style={{width: '100%'}}>
             {props.home && 
@@ -46,7 +47,15 @@ const NavBar = (props) => {
                             <Nav.Link className = "nav-item" href='/SignIn'>Sign In</Nav.Link>
                         )
                         }
-                        {!props.currentUser && <Nav.Link className = "nav-item" href='/SignUp'>Sign Up</Nav.Link>}
+
+                        {props.currentUser ?
+                        (
+                            <Nav.Link className = "nav-item" href='/Account'>Account</Nav.Link>
+
+                        ):(
+                            <Nav.Link className = "nav-item" href='/SignIn'>Sign Up</Nav.Link>
+                        )
+                        }
                     </Nav>
                 </Navbar.Collapse>
             </Navbar>
