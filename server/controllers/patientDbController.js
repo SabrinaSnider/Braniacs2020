@@ -85,6 +85,10 @@ exports.newPatient = async (req, res) => {
             return res.status(200).json({errors: errors});
         } 
 
+        if(newPatient.password !== req.body.password2){
+            return res.status(200).json({errors: {password: "Passwords must match"}});
+        }
+
         const token = await signToken(newPatient);
         
         let alreadyExists;

@@ -80,7 +80,8 @@ const SignUpBox = (props) => {
                     last: last
                 },
                 email: email,
-                password: password
+                password: password,
+                password2: password2
             }
             const user = await httpUser.signUp(newUser);
             console.log("Errors frontend",user.errors);
@@ -93,12 +94,7 @@ const SignUpBox = (props) => {
                 });
                 
                 console.log(errors);
-            } else if(password !== password2){
-                setErrors({
-                    password: "Passwords must match"
-                });
-            }
-
+            } 
             else if(user) {
                 console.log(props);
                 props.onLoginSuccess(); //input: user
