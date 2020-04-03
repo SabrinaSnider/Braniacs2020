@@ -1,0 +1,28 @@
+#parking-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+#directions-container-parking {
+    width: 47%;
+}
+
+#maps-contianer-parking {
+    width: 47%;
+    height: 60vh;
+}
+
+@media (max-width: 1000px) {
+    #parking-container {
+        flex-direction: column;
+    }
+
+    #directions-container-parking {
+        width: 100%;
+    }
+
+    #maps-contianer-parking {
+        width: 100%;
+    }
+}

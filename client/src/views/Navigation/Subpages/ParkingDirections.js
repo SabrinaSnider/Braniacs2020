@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react'
 import GMaps from '../../../components/GoogleMaps/GMaps'
 import Directions from '../../../components/GoogleDirections/Directions'
 import { updatePosition } from '../../../components/GoogleDirections/DirectionHandler'
+import { Card, Button } from 'react-bootstrap'
+import "./ParkingDirections.css"
 
 let destination = {
     latitude: 29.640730,
@@ -23,23 +25,21 @@ const ParkingDirections = () => {
     }, [])
 
     return (
-        <div style={{float: 'right', flexGrow: '1'}}>
-            <div id="directions-parking-container" style={{display:'flex', 'flexDirection': 'row', 'justifyContent': 'center'}}>
-                <div style = {{float: 'left', margin: '0px 20px 0px 40px', width: '50%'}}>
-                    <h2>Directions to Parking</h2>
-                    <Directions // update instructions whenever the directions change
-                        directions = {directions}
-                    />
-                </div>
-                <div style = {{width: '50%', height: `60vh`, float: 'right', margin: '0px 40px 0px 20px'}}>
+        <div id="parking-container">
+            <div id="directions-container-parking">
+                <h2>Directions to Parking</h2>
+                <Directions // update instructions whenever the directions change
+                    directions = {directions}
+                />
+            </div>
+            <Card id="maps-contianer-parking">
                 <GMaps // update Google Maps component whenever the directions change
                     loadingElement = {<div style = {{height: '100%'}}/>}
                     containerElement = {<div style = {{height: '100%'}}/>}
                     mapElement = {<div style = {{height: '100%'}}/>}
                     directions = {directions}
                 />
-                </div>
-            </div>
+            </Card>
         </div>
     )
 }
