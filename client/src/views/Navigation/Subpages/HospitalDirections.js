@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import GMaps from '../../../components/GoogleMaps/GMaps'
 import Directions from '../../../components/GoogleDirections/Directions'
 import { updatePosition } from '../../../components/GoogleDirections/DirectionHandler'
-import { Card, Button } from 'react-bootstrap'
+import { Card, Button, Form } from 'react-bootstrap'
 import "./HospitalDirections.css"
 
 let destination = {
@@ -28,15 +28,21 @@ function HostpitalDirections(props) {
         <div style={{padding: '0px 10px'}}>
             <div id="hospital-header">
                 <h2>Directions to Hospital</h2>
-                <Button>Google Maps</Button>
+                <Button>Open in Google Maps</Button>
             </div>
 
-            {directions &&
-                <div className="directions-section">
-                    <h3 className="directions-header">Time Estimate: {directions.routes[0].legs[0].duration.text}.</h3>
-                    <h3 className="directions-header">Distance: {directions.routes[0].legs[0].distance.text}.</h3>
-                </div>
-            }
+            <div id="hospital-subheader">
+                {directions &&
+                    <div className="directions-section">
+                        <h3 className="directions-header">Time Estimate: {directions.routes[0].legs[0].duration.text}.</h3>
+                        <h3 className="directions-header">Distance: {directions.routes[0].legs[0].distance.text}.</h3>
+                    </div>
+                }
+                <Form id="hospital-address-form">
+                    <h3 className="directions-header" style={{flexShrink: 0, margin: 'auto'}}>Start point:</h3>
+                    <Form.Control className="hospital" placeholder={"Current Position"}  onChange={event => setPosition(position)}/>
+                </Form>
+            </div>
 
             <div id="hospital-container">
                 <div id="directions-container-hospital">
@@ -44,7 +50,7 @@ function HostpitalDirections(props) {
                         directions = {directions}
                     />
                 </div>
-                
+
                 <Card id="maps-contianer-hospital">
                     <GMaps // update Google Maps component whenever the directions change
                         loadingElement = {<div style = {{height: '100%'}}/>}
