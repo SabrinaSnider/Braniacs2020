@@ -1,19 +1,68 @@
+#parking-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 0px 0px 10px 0px;
+}
+
+#parking-subheader {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 0px 0px 10px 0px;
+}
+
+.directions-header {
+    font-size: 1.2rem;
+}
+
 #parking-container {
     display: flex;
     flex-direction: row;
-    justify-content: space-evenly;
+    justify-content: space-between;
 }
 
 #directions-container-parking {
-    width: 47%;
+    width: 49%;
 }
 
 #maps-contianer-parking {
-    width: 47%;
+    width: 49%;
     height: 60vh;
 }
 
+#parking-address-form {
+    width: 49%;
+    display: flex;
+    flex-direction: row;
+}
+
+.form-control.parking {
+    margin: auto;
+}
+
 @media (max-width: 1000px) {
+    #parking-header {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    #parking-subheader {
+        flex-direction: column-reverse;
+    }
+
+    #parking-address-form {
+        margin: 20px 0px;
+    }
+
+    #directions-section {
+        margin: 20px;
+    }
+
+    #parking-address-form {
+        width: 100%;
+    }
+
     #parking-container {
         flex-direction: column;
     }
