@@ -38,11 +38,9 @@ USING fetchUser:
 Make a get request with "email" added to the request.
 */
 exports.fetchUserFromEmail = function(req, res){
-	console.log("looking for user with id", req.body._id)
 	patient.findOne({ "email" : req.body.email}, function(err, usr){
 		if (err) res.status(200).send("NaN");
         else {
-            console.log(usr)
             res.status(200).json({
                 name: {
                     first: usr.name.first,
@@ -126,7 +124,6 @@ exports.popPatients = async (req, res) => {
 
 /*make a post request with patient json(first name, last name, email, dob, and password) added to the request to update patient info*/
 exports.updatePatients = function(req, res){
-	console.log("here");
 	patient.updateOne({ 'email' : req.body.email}, {name: {first: req.body.first, last: req.body.last}, email: req.body.email, password: req.body.password, dob: req.body.dob}, function(err, usr){
 		if (err) res.status(200).send("NaN");
 		else res.status(200).send("Successful update");

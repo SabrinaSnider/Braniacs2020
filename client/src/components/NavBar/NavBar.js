@@ -30,6 +30,7 @@ const NavBar = (props) => {
                     <Nav className="mr-auto">
                         <Nav.Link className = "nav-item" href='/Home'>Home</Nav.Link>
                         <Nav.Link className = "nav-item" href='/Navigation/GeneralInformaiton'>Navigation</Nav.Link>
+                        <Nav.Link className = "nav-item" href='/MyAppointments'>Appointments</Nav.Link>
 
                     </Nav>
                 </Navbar.Collapse>
@@ -53,6 +54,8 @@ const NavBar = (props) => {
                         ):(
                             <Nav.Link className = "nav-item" href='/SignUp'>Sign Up</Nav.Link>
                         )
+                        }
+
                         }
                     </Nav>
                 </Navbar.Collapse>
