@@ -5,14 +5,23 @@ import 'react-big-calendar/lib/css/react-big-calendar.css';
 
 const localizer = momentLocalizer(moment) 
 
-const ScheduleCalendar = props => (
-    <Calendar
-        localizer={localizer}
-        events={[]}
-        startAccessor="start"
-        endAccessor="end"
-        style={{ minHeight: 500 }}
-    />
-)
+var onClick = (props) => {
+    console.log("click event!")
+}
+
+const ScheduleCalendar = props => {
+    console.log("events are", props.events)
+    return (
+        <Calendar
+            date={new Date()}
+            localizer={localizer}
+            events={props.events}
+            startAccessor="start"
+            endAccessor="end"
+            onNavigate={date => this.setState({ date })}
+            onSelectEvent={onClick}
+        />
+    )
+}
 
 export default ScheduleCalendar

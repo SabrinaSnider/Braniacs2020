@@ -1,3 +1,63 @@
 #appointment-page-container {
     padding: 40px 80px;
+    display: flex;
+    flex-direction: column;
+}
+
+.appointment-content-row {
+    display: flex;
+    flex-direction: row;
+}
+
+#appointment-page-list{
+    flex-grow: 3;
+    text-align: center;
+    margin: 20px 20px 20px 0px;
+    padding: 10px;
+}
+
+#appointment-page-reminders {
+    flex-grow: 1;
+    text-align: center;
+    margin: 20px 0px 20px 20px;
+    padding: 10px;
+}
+
+.appointment-header {
+    font-size: 1.7rem;
+    font-weight: bold;
+}
+
+.rbc-calendar {
+    min-width: 600px;
+    min-height: 600px;
+}
+
+@media (max-width: 800px) {
+    #appointment-page-container {
+        padding: 40px 0px;
+    }
+
+    .appointment-content-row {
+        flex-direction: column-reverse;
+    }
+
+    #appointment-page-list{
+        flex-grow: 1;
+        text-align: center;
+        margin: 20px 0px;
+        padding: 10px;
+    }
+    
+    #appointment-page-reminders {
+        flex-grow: 1;
+        text-align: center;
+        margin: 20px 0px;
+        padding: 10px;
+    }
+
+    .rbc-calendar {
+        min-width: 0;
+        min-height: 600px;
+    }
 }
