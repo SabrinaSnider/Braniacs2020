@@ -18,6 +18,9 @@ module.exports.init = () => {
     mongoose.set('useCreateIndex', true);
     mongoose.set('useFindAndModify', false);
 
+    //initializing twilio api
+    //const twilioClient = require('twilio')(('./config').twilioAPI.accountSid, ('./config').twilioAPI.authToken)
+
     // initialize app
     const app = express();
 

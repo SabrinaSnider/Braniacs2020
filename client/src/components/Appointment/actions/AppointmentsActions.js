@@ -34,7 +34,7 @@ export const addAppointment = (startTime, endTime, patientID, name, reminder) =>
             let overlap = false;
             let appointments = getState().appointments;
 
-            appointments.items.forEach((appointment) => {
+            appointments.itemsAppt.forEach((appointment) => {
                 if ((startTime >= appointment.startTime && startTime <= appointment.endTime) || (endTime >= appointment.startTime && endTime <= appointment.endTime)) {
                     overlap = true;
                 }
