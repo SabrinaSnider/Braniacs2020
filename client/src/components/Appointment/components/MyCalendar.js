@@ -23,8 +23,7 @@ class MyCalendar extends Component {
 	render() {
 		this.props.appointments.forEach((appointment) => {
 			var start1 = new Date(moment(appointment.startTime, 'MMMM Do, YYYY (hh:mm a)').toDate());
-			var end1 = new Date(moment(appointment.startTime, 'MMMM Do, YYYY (hh:mm a)').toDate());
-			console.log(start1);
+			var end1 = new Date(moment(appointment.endTime, 'MMMM Do, YYYY (hh:mm a)').toDate());
 
 			sampleAppoint = {
 				id: appointment.patientId,
@@ -43,7 +42,7 @@ class MyCalendar extends Component {
 				step={60}
 				showMultiDayTimes
 				max={dates.add(dates.endOf(new Date(2015, 17, 1), 'day'), -1, 'hours')}
-				defaultDate={new Date(2015, 3, 1)}
+				defaultDate={new Date(moment().toDate())}
 				components={{
 					timeSlotWrapper: ColoredDateCellWrapper,
 				}}
