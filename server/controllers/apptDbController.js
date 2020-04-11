@@ -33,6 +33,18 @@ exports.listAppt = function (req, res) {
 
 };
 
+exports.listByID = function (req, res) {
+	console.log("id is", req.body.patientId)
+    appt.find({ 'patientId' : req.body.patientId}, function(err, obj) {
+      if (err) {
+		if (err) res.status(200).send("NaN");
+      } else {
+		res.json(obj);
+      }
+    }); 
+
+};
+
 /*
 USING newAppt:
 Make a post request with your appointment json.

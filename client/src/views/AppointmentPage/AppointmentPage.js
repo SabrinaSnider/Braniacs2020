@@ -1,10 +1,12 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
+import axios from 'axios'
 import { Card } from 'react-bootstrap'
 import './AppointmentPage.css'
+import moment from 'moment'
 import ScheduleCalendar from '../../components/Calendar/ScheduleCalendar'
 
 /*
-    Appointment page. Reroutes to different components together with the navbar.
+    Appointment page.
 
     Event item default format:
     Event {
@@ -16,30 +18,78 @@ import ScheduleCalendar from '../../components/Calendar/ScheduleCalendar'
     }
 */
 
-var events = [
-    {
-      'title': 'All Day Event very long title',
-      'allDay': true,
-      'start': new Date(2020, 3, 1),
-      'end': new Date(2020, 3, 1)
-    },
-    {
-      'title': 'Long Event',
-      'start': new Date(2020, 3, 10, 10),
-      'end': new Date(2020, 3, 10, 12)
-    }
-]
 function AppointmentPage(props) {
+    const [appts, setAppts] = useState([])
+    const [eventAppts, setEventAppts] = useState([])
+
+    useEffect(()=>{
+        getMyAppts();
+    }, [])
+
+    useEffect(()=>{
+        setEventAppts(appts.map(formatApptEvent))
+    }, [appts])
+
+    const getMyAppts = async() => {
+        axios.post("/appt/list/my-appointments", {
+            patientId: 123,
+        })
+        .then(function (response) {
+            console.log("response is", response.data)
+            setAppts(response.data)
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+    }
+
+    const formatApptEvent = appointment => {
+        var start = new Date(moment(appointment.startTime, 'MMMM Do, YYYY (hh:mm a)').toDate());
+        var end = new Date(moment(appointment.startTime, 'MMMM Do, YYYY (hh:mm a)').toDate());
+
+        var formatted = {
+            id: appointment.patientId,
+            title: appointment.name,
+            start: start,
+            end: end
+        };
+        console.log("formatted event:", formatted)
+        return formatted
+    }
+
+    const renderAppt = (appointment) => {
+        return (
+            <li key={appointment.patientId}>
+                <strong>Patient ID: </strong>
+                <span>{appointment.patientId}</span>
+                <strong> Patient name: </strong>
+                <span>{appointment.name}</span>
+                <strong> Starting Time: </strong>
+                <span>{appointment.startTime}</span>
+                <span> - </span>
+                <strong> Ending Time: </strong>
+                <span>{appointment.endTime}</span>
+            </li>
+        );
+    }
+
     return (
         <div id="appointment-page-container">
             <Card id="appointment-calendar-container">
                     <ScheduleCalendar 
-                        events = {events}
+                        events = {eventAppts}
                     />
             </Card>
             <div className="appointment-content-row">
                 <Card id="appointment-page-list">
                     <h2 className="appointment-header">Appointment List</h2>
+                    <div>
+                        {(appts === undefined || appts.length == 0) &&
+                            <ul>
+                                {appts.map(renderAppt)}
+                            </ul>
+                        }    
+                    </div>
                 </Card>
                 <Card id="appointment-page-reminders">
                     <h2 className="appointment-header">Reminders</h2>

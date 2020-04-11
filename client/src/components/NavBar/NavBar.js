@@ -37,7 +37,6 @@ const NavBar = (props) => {
                 <Navbar.Collapse className="w-100 dual-collapse2">
                     <Nav className="ml-auto">
                         <Nav.Link className = "nav-item" href='/Appointment'>Administrators</Nav.Link>
-                        <Nav.Link className = "nav-item" href='/Help'>Help</Nav.Link>
                         {props.currentUser ?
                         (
                             <Nav.Link className = "nav-item" href='/LogOut'>Log Out</Nav.Link>
@@ -56,7 +55,6 @@ const NavBar = (props) => {
                         )
                         }
 
-                        }
                     </Nav>
                 </Navbar.Collapse>
             </Navbar>
