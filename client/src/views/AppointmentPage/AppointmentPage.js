@@ -59,11 +59,17 @@ function AppointmentPage(props) {
     const renderAppt = (appointment) => {
         return (
             <li key={appointment.patientId} class="list-group-item">
-                <strong> Starting Time: </strong>
-                <span>{appointment.startTime}</span>
-                <span> - </span>
-                <strong> Ending Time: </strong>
-                <span>{appointment.endTime}</span>
+                <div style={{'clear': 'both'}}>
+                    <strong> Name: </strong>
+                    <span>{appointment.name}</span>
+                </div>
+                <div>
+                    <strong> Starting Time: </strong>
+                    <span>{appointment.startTime}</span>
+                    <span> - </span>
+                    <strong> Ending Time: </strong>
+                    <span>{appointment.endTime}</span>
+                </div>
             </li>
         );
     }
@@ -77,7 +83,7 @@ function AppointmentPage(props) {
             </Card>
             <div className="appointment-content-row">
                 <Card id="appointment-page-list" style={{'padding': '0px'}}>
-                    <Card.Header className="appointment-header">Appointment List</Card.Header>
+                    <Card.Header className="appointment-header" style={{'text-align': 'center'}}>Appointment List</Card.Header>
                     <div>
                         {(appts !== undefined && appts.length != 0) &&
                             <ul style={{'padding': '0px', 'margin': '0px'}}>
@@ -87,7 +93,7 @@ function AppointmentPage(props) {
                     </div>
                 </Card>
                 <Card id="appointment-page-reminders" style={{'padding': '0px'}}>
-                    <Card.Header className="appointment-header">Reminders</Card.Header>
+                    <Card.Header className="appointment-header" style={{'text-align': 'center'}}>Reminders</Card.Header>
                 </Card>
             </div>
         </div>
