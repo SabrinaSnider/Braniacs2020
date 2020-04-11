@@ -48,7 +48,6 @@ function AppointmentPage(props) {
         var end = new Date(moment(appointment.startTime, 'MMMM Do, YYYY (hh:mm a)').toDate());
 
         var formatted = {
-            id: appointment.patientId,
             title: appointment.name,
             start: start,
             end: end
@@ -59,11 +58,7 @@ function AppointmentPage(props) {
 
     const renderAppt = (appointment) => {
         return (
-            <li key={appointment.patientId}>
-                <strong>Patient ID: </strong>
-                <span>{appointment.patientId}</span>
-                <strong> Patient name: </strong>
-                <span>{appointment.name}</span>
+            <li key={appointment.patientId} class="list-group-item">
                 <strong> Starting Time: </strong>
                 <span>{appointment.startTime}</span>
                 <span> - </span>
@@ -81,18 +76,18 @@ function AppointmentPage(props) {
                     />
             </Card>
             <div className="appointment-content-row">
-                <Card id="appointment-page-list">
-                    <h2 className="appointment-header">Appointment List</h2>
+                <Card id="appointment-page-list" style={{'padding': '0px'}}>
+                    <Card.Header className="appointment-header">Appointment List</Card.Header>
                     <div>
-                        {(appts === undefined || appts.length == 0) &&
-                            <ul>
+                        {(appts !== undefined && appts.length != 0) &&
+                            <ul style={{'padding': '0px', 'margin': '0px'}}>
                                 {appts.map(renderAppt)}
                             </ul>
                         }    
                     </div>
                 </Card>
-                <Card id="appointment-page-reminders">
-                    <h2 className="appointment-header">Reminders</h2>
+                <Card id="appointment-page-reminders" style={{'padding': '0px'}}>
+                    <Card.Header className="appointment-header">Reminders</Card.Header>
                 </Card>
             </div>
         </div>
