@@ -70,7 +70,8 @@ exports.newPatient = async (req, res) => {
     try{
 
         const newPatient = new patient({
-			patientId: Math.random().toString(36).substr(2,15),
+			//patientId: Math.random().toString(36).substr(2,15),
+			patientId: req.body.patientId
             name: {
                 first: req.body.name.first,
                 last: req.body.name.last
