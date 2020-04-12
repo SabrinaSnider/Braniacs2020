@@ -2,14 +2,17 @@ const mongoose = require('mongoose')
 const bcrypt = require('bcrypt-nodejs')
 
 const patientSchema = new mongoose.Schema({
+	patientId: {type: String},
 	email: {type: String, required: true},
 	password: {type: String, required: true},
 	clinicId: {type: String},
 	dob: {type: Date},
+	phone: {type: String}, //could probably be stored as a String, make sure to have some check for a number.
 	name: {
 		first: {type: String},
 		last: {type: String}
-	}
+	},
+	admin: Boolean
 });
 
 patientSchema.methods.generateHash = function(password) {

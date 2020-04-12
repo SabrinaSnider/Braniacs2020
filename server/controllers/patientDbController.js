@@ -1,4 +1,3 @@
-  
 const patient = require('../models/patient.model.js')
 const config = require('../config/config.js')
 const mongoose = require('mongoose')
@@ -50,8 +49,9 @@ exports.fetchUserFromEmail = function(req, res){
                 },
                 clinicId: usr.clinicId,
                 email: usr.email,
+				phone: usr.phone,
                 dob: usr.dob,
-                password: usr.password
+                password: usr.password,
             })
         }
 	})
@@ -70,13 +70,16 @@ exports.newPatient = async (req, res) => {
     try{
 
         const newPatient = new patient({
+			patientId: Math.random().toString(36).substr(2,15),
             name: {
                 first: req.body.name.first,
                 last: req.body.name.last
             },
-
             email: req.body.email,
-            password: req.body.password
+            password: req.body.password,
+			dob: req.body.dob,
+			phone: req.body.phone,
+			admin: false //automatically set to false
         });
 
         const { errors, isValid } = await validateRegisterInput(req.body);

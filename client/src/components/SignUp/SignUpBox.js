@@ -10,13 +10,17 @@ const SignUpBox = (props) => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [password2, setPassword2] = useState("");
+    const [dob, setDob] = useState({m: "", d: "", y: ""});
+	const [phone, setPhone] = useState("");
 
     const [errors, setErrors] = useState({
         first: "",
         last: "",
         password: "",
         email: "",
-        password2: ""
+        password2: "",
+		dob: {m: "", d: "", y: ""},
+		phone: ""
     });
 
     // used to update user input for either password or email
@@ -33,6 +37,26 @@ const SignUpBox = (props) => {
     const onEmailChange = (e) => {
         e.persist();
         setEmail(e.target.value);
+    };
+	
+	const onDobChangeM = (e) => {
+		e.persist();
+		setDob({m: e.target.value, d: dob.d, y: dob.y});
+	};
+	
+	const onDobChangeD = (e) => {
+		e.persist();
+		setDob({m: dob.m, d: e.target.value, y: dob.y});
+	};
+	
+	const onDobChangeY = (e) => {
+		e.persist();
+		setDob({m: dob.m, d: dob.d, y: e.target.value});
+	};
+	
+    const onPhoneChange = (e) => {
+        e.persist();
+        setPhone(e.target.value);
     };
 
     const onPasswordChange = (e) => {
@@ -74,13 +98,25 @@ const SignUpBox = (props) => {
     // used to submit user values for password and email
     const onFormSubmit = async (e) => {
         e.preventDefault();
+			var date = new Date();
+			try{
+			date.setMonth(parseInt(dob.m - 1,10));
+			date.setDate(parseInt(dob.d,10));
+			date.setYear(parseInt(dob.y,10));
+			}
+			catch{
+				date = null;
+			}
+			console.log(date);
             const newUser = {
                 name: {
                     first: first,
                     last: last
                 },
                 email: email,
-                password: password
+                password: password,
+				dob: date,
+				phone: phone
             }
             const user = await httpUser.signUp(newUser);
             console.log("Errors frontend",user.errors);
@@ -133,6 +169,21 @@ const SignUpBox = (props) => {
                 <div className="form-group">
                     <label htmlFor="email" className="form-label">Email</label>
                     <input id="email" type="email" class="form-control" placeholder="" onChange={onEmailChange}></input>
+                    {errors.email !== undefined &&
+                        <label id = "error">{errors.email}</label>
+                    }
+                </div>
+				
+				<div className="form-group">
+                    <label htmlFor="dob" className="form-label">Date of Birth</label><br></br>
+					<input id="dobm" type="dobm" style={{width: 25 + '%',marginLeft:-30 + '%'}} class="form-control-dob" placeholder="mm" maxlength="2" onChange={onDobChangeM}></input> / 
+                    <input id="dobd" type="dobd" style={{width: 25 + '%'}} class="form-control-dob" placeholder="dd" maxlength="2" onChange={onDobChangeD}></input> / 
+                    <input id="doby" type="doby" style={{width: 40 + '%'}} class="form-control-dob" placeholder="yyyy" maxlength="4" onChange={onDobChangeY}></input>
+                </div>
+				
+				<div className="form-group">
+                    <label htmlFor="email" className="form-label">Phone Number</label>
+					<input id="phone" type="phone" class="form-control" placeholder="" maxlength="10" onChange={onPhoneChange}></input>
                     {errors.email !== undefined &&
                         <label id = "error">{errors.email}</label>
                     }
