@@ -18,6 +18,8 @@ function AccountManagement(props) {
     const [email, setEmail] = useState("")
     const [dob, setDob] = useState(new Date())
 
+    console.log(props.currentUser)
+
     const GetAccountInfo = async() => {
         axios.post("/patient/useraccount", {
             email: props.currentUser.email,

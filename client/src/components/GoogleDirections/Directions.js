@@ -17,10 +17,10 @@ const Directions = (props) => {
     } else {
         return (
             <div>
-                {/* <div className="directions-section">
+                <div className="directions-section">
                     <h3 className="directions-header">Time Estimate: {props.directions.routes[0].legs[0].duration.text}.</h3>
                     <h3 className="directions-header">Distance: {props.directions.routes[0].legs[0].distance.text}.</h3>
-                </div> */}
+                </div>
                 <Table bordered hover>
                     <tbody>
                     {

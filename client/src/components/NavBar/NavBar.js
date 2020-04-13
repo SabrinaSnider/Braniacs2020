@@ -13,6 +13,7 @@ import './NavBar.css';
     different navbar.
 */
 const NavBar = (props) => {
+    console.log("current user", props.currentUser)
     return (
         <div style={{width: '100%'}}>
             {props.home && 
@@ -29,6 +30,7 @@ const NavBar = (props) => {
                 <Navbar.Collapse className="w-100 dual-collapse2">
                     <Nav className="mr-auto">
                         <Nav.Link className = "nav-item" href='/Home'>Home</Nav.Link>
+                        <Nav.Link className = "nav-item" href='/Register'>Extra Page</Nav.Link>
                         <Nav.Link className = "nav-item" href='/Navigation/GeneralInformaiton'>Navigation</Nav.Link>
 
                     </Nav>

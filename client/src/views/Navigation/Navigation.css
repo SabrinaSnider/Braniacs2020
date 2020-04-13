@@ -9,11 +9,3 @@
     width: 90%;
     margin: auto;
 }
-
-@media (max-width: 767px) {
-    #navigation-page-container {
-        width: 100%;
-        flex-direction: column;
-        padding: 20px;
-    }
-}

@@ -2,8 +2,6 @@ import React, { useState, useEffect } from 'react'
 import GMaps from '../../../components/GoogleMaps/GMaps'
 import Directions from '../../../components/GoogleDirections/Directions'
 import { updatePosition } from '../../../components/GoogleDirections/DirectionHandler'
-import { Card, Button, Form } from 'react-bootstrap'
-import "./HospitalDirections.css"
 
 let destination = {
     latitude: 29.639375,
@@ -25,36 +23,22 @@ function HostpitalDirections(props) {
     }, [])
 
     return (
-        <div style={{padding: '0px 10px'}}>
-            <div id="hospital-header">
-                <h2>Directions to Hospital</h2>
-            </div>
-
-            <div id="hospital-subheader">
-                {directions &&
-                    <div className="directions-section">
-                        <h3 className="directions-header">Time Estimate: {directions.routes[0].legs[0].duration.text}.</h3>
-                        <h3 className="directions-header">Distance: {directions.routes[0].legs[0].distance.text}.</h3>
-                    </div>
-                }
-                <Button href='https://www.google.com/maps/dir//UF+Department+of+Neurosurgery,+Southwest+Archer+Road+%231097,+Gainesville,+FL/@29.6396834,-82.3794005,13z/data=!3m1!4b1!4m9!4m8!1m0!1m5!1m1!1s0x88e8a39e42a9d089:0xff5d2d7f10057cd9!2m2!1d-82.344381!2d29.639688!3e0' target="_blank" style={{'max-height': '40px'}}>Open in Google Maps</Button>
-            </div>
-
-            <div id="hospital-container">
-                <div id="directions-container-hospital">
+        <div style={{float: 'right', flexGrow: '1'}}>
+            <div id="directions-parking-container" style={{display:'flex', 'flexDirection': 'row', 'justifyContent': 'center'}}>
+                <div style = {{float: 'left', margin: '0px 20px 0px 40px', width: '50%'}}>
+                    <h2>Directions to Hospital</h2>
                     <Directions // update instructions whenever the directions change
                         directions = {directions}
                     />
                 </div>
-
-                <Card id="maps-contianer-hospital">
-                    <GMaps // update Google Maps component whenever the directions change
-                        loadingElement = {<div style = {{height: '100%'}}/>}
-                        containerElement = {<div style = {{height: '100%'}}/>}
-                        mapElement = {<div style = {{height: '100%'}}/>}
-                        directions = {directions}
-                    />
-                </Card>
+                <div style = {{width: '50%', height: `60vh`, float: 'right', margin: '0px 40px 0px 20px'}}>
+                <GMaps // update Google Maps component whenever the directions change
+                    loadingElement = {<div style = {{height: '100%'}}/>}
+                    containerElement = {<div style = {{height: '100%'}}/>}
+                    mapElement = {<div style = {{height: '100%'}}/>}
+                    directions = {directions}
+                />
+                </div>
             </div>
         </div>
     );
