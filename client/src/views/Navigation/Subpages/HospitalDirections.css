@@ -1,0 +1,77 @@
+#hospital-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 0px 0px 10px 0px;
+}
+
+#hospital-subheader {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 0px 0px 10px 0px;
+}
+
+.directions-header {
+    font-size: 1.2rem;
+}
+
+#hospital-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+#directions-container-hospital {
+    width: 49%;
+}
+
+#maps-contianer-hospital {
+    width: 49%;
+    height: 60vh;
+}
+
+#hospital-address-form {
+    width: 49%;
+    display: flex;
+    flex-direction: row;
+}
+
+.form-control.hospital {
+    margin: auto;
+}
+
+@media (max-width: 1000px) {
+    #hospital-header {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    #hospital-subheader {
+        flex-direction: column-reverse;
+    }
+
+    #hospital-address-form {
+        margin: 20px 0px;
+    }
+
+    #directions-section {
+        margin: 20px;
+    }
+
+    #hospital-address-form {
+        width: 100%;
+    }
+
+    #hospital-container {
+        flex-direction: column;
+    }
+
+    #directions-container-hospital {
+        width: 100%;
+    }
+
+    #maps-contianer-hospital {
+        width: 100%;
+    }
+}
