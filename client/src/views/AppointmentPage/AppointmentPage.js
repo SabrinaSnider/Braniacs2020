@@ -62,21 +62,30 @@ function AppointmentPage(props) {
 
     // formatting the time of each event to be in ##:## AM - ##:## PM format
     const formatDate = date => {
-        var year = date.getYear()
-        var month = date.getMonth()
-        var day = date.getDay()
-        var hour = date.getHours()
-        var minute = date.getMinutes()
-        var suffix = "AM"
+        return moment(date).format('MMMM Do, YYYY (hh:mm a)')
+    }
 
-        if (hour > 12) {
-            hour = hour - 12
-            suffix = "PM"
-        }
+    // function to remove an appointment from the front-end array and back-end database
+    const deleteAppt = (appointment) => {
+        // remove from front-end
+        const filteredAppts = appts.filter((item) => {
+            // return true if start or end time is different
+            return (item.start.getTime() !== appointment.start.getTime()) || (item.end.getTime() !== appointment.end.getTime())
+        });
+        setAppts(filteredAppts)
 
-        var date = month + "/" + day + "/" + year
-        var time = hour + ":" + minute + " " + suffix
-        return date + " " + time
+        // delete the appointment with the following patientId and times from the database
+        // Date object must be converted to a "unix moment," then formatted to the below string
+        axios.delete("/appt/remove-appt", {
+            data: {
+                patientId: 450,
+                startTime: formatDate(appointment.start),
+                endTime: formatDate(appointment.end)
+            }
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
     }
 
     // function to render a component for each listed appointment. Taken largely from the admin page.
@@ -86,6 +95,7 @@ function AppointmentPage(props) {
                 <div style={{'clear': 'both'}}>
                     <strong> Name: </strong>
                     <span>{appointment.title}</span>
+                    <Button onClick={() => deleteAppt(appointment)} variant="danger" style={{"float": "right"}}>delete</Button>
                 </div>
                 <div style={{'maxWidth': '100%'}}>
                     <strong> Start: </strong>
