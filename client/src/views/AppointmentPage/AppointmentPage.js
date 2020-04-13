@@ -36,7 +36,15 @@ function AppointmentPage(props) {
         })
         .then(function (response) {
             console.log("response is", response.data)
-            setAppts(response.data)
+            var appointments = response.data
+
+            appointments.sort(function(a,b){
+                var start_a = new Date(moment(a.startTime, 'MMMM Do, YYYY (hh:mm a)').toDate());
+                var start_b = new Date(moment(b.startTime, 'MMMM Do, YYYY (hh:mm a)').toDate());
+                return start_a - start_b;
+            })
+
+            setAppts(appointments)
         })
         .catch(function (error) {
           console.log(error);
@@ -52,7 +60,6 @@ function AppointmentPage(props) {
             start: start,
             end: end
         };
-        console.log("formatted event:", formatted)
         return formatted
     }
 
