@@ -6,7 +6,9 @@ import 'react-big-calendar/lib/css/react-big-calendar.css';
 
 const localizer = momentLocalizer(moment) 
 
+// component renderer for each calendar event
 const EventRenderer = (event) => {
+    // formatting the time of each event to be in ##:## AM - ##:## PM format
     var hour = event.event.start.getHours()
     var minute = event.event.start.getMinutes()
     var suffix = "PM"
@@ -29,6 +31,7 @@ const EventRenderer = (event) => {
 
     var end = hour + ":" + minute + " " + suffix
 
+    // popup component
     var popup = (
         <Popover style={{zIndex:10000}}>
             <strong>Start: </strong> {start} - <strong>End: </strong> {end}
@@ -44,9 +47,11 @@ const EventRenderer = (event) => {
     );
 }
 
+
+// return the calendar with the given events
+// The event value under components determines how events are rendered on the calendar
 const ScheduleCalendar = props => {
     const [date, setDate] = useState(new Date())
-    const [modal, setModal] = useState(false)
 
     return (
         <div>

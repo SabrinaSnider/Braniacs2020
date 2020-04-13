@@ -22,14 +22,18 @@ function AppointmentPage(props) {
     const [appts, setAppts] = useState([])
     const [eventAppts, setEventAppts] = useState([])
 
+    // on page load, make a get request for appointments
     useEffect(()=>{
         getMyAppts();
     }, [])
 
+    // on page load OR a change in appointments, set the calendar events
     useEffect(()=>{
         setEventAppts(appts.map(formatApptEvent))
     }, [appts])
 
+    // function to make a get request for appoints of the given ID
+    // appointsments are sorted based on start date
     const getMyAppts = async() => {
         axios.post("/appt/list/my-appointments", {
             patientId: 450,
@@ -51,6 +55,8 @@ function AppointmentPage(props) {
         });
     }
 
+    // fuction to assign the calendar event array to the formatted appointment list
+    // calendar events have the default format as given below
     const formatApptEvent = appointment => {
         var start = new Date(moment(appointment.startTime, 'MMMM Do, YYYY (hh:mm a)').toDate());
         var end = new Date(moment(appointment.startTime, 'MMMM Do, YYYY (hh:mm a)').toDate());
@@ -63,6 +69,7 @@ function AppointmentPage(props) {
         return formatted
     }
 
+    // function to render a component for each listed appointment. Taken largely from the admin page.
     const renderAppt = (appointment) => {
         return (
             <li key={appointment.patientId} className="list-group-item">
