@@ -1,7 +1,8 @@
 #container {
     background-color: rgba(207, 207, 207, .5);
     margin: 20px auto;
-    width: 30vw; 
+    width: 30%; 
+    min-width: 400px;
     display: flex; 
     flex-flow: column;
     text-align: center;
@@ -49,4 +50,11 @@
 
 #button-group {
     width: 100%;
+}
+
+@media (max-width: 450px) {
+    #container {
+        width: 100%;
+        min-width: 0px;
+    }
 }
