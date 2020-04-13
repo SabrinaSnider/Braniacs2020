@@ -32,7 +32,7 @@ function AppointmentPage(props) {
 
     const getMyAppts = async() => {
         axios.post("/appt/list/my-appointments", {
-            patientId: 123,
+            patientId: 450,
         })
         .then(function (response) {
             console.log("response is", response.data)
@@ -58,16 +58,16 @@ function AppointmentPage(props) {
 
     const renderAppt = (appointment) => {
         return (
-            <li key={appointment.patientId} class="list-group-item">
+            <li key={appointment.patientId} className="list-group-item">
                 <div style={{'clear': 'both'}}>
                     <strong> Name: </strong>
                     <span>{appointment.name}</span>
                 </div>
-                <div>
-                    <strong> Starting Time: </strong>
+                <div style={{'maxWidth': '100%'}}>
+                    <strong> Start: </strong>
                     <span>{appointment.startTime}</span>
                     <span> - </span>
-                    <strong> Ending Time: </strong>
+                    <strong> End: </strong>
                     <span>{appointment.endTime}</span>
                 </div>
             </li>
@@ -83,7 +83,7 @@ function AppointmentPage(props) {
             </Card>
             <div className="appointment-content-row">
                 <Card id="appointment-page-list" style={{'padding': '0px'}}>
-                    <Card.Header className="appointment-header" style={{'text-align': 'center'}}>Appointment List</Card.Header>
+                    <Card.Header className="appointment-header" style={{'textAlign': 'center'}}>Appointment List</Card.Header>
                     <div>
                         {(appts !== undefined && appts.length != 0) &&
                             <ul style={{'padding': '0px', 'margin': '0px'}}>
@@ -93,7 +93,7 @@ function AppointmentPage(props) {
                     </div>
                 </Card>
                 <Card id="appointment-page-reminders" style={{'padding': '0px'}}>
-                    <Card.Header className="appointment-header" style={{'text-align': 'center'}}>Reminders</Card.Header>
+                    <Card.Header className="appointment-header" style={{'textAlign': 'center'}}>Reminders</Card.Header>
                 </Card>
             </div>
         </div>
