@@ -21,7 +21,6 @@ class MyCalendar extends Component {
 	myEventsList = [];
 
 	renderAppointment = (appointment) => {
-    
         var start1 = new Date(moment.unix(appointment.startTime).toDate());
 		var end1 = new Date(moment.unix(appointment.endTime).toDate());
 

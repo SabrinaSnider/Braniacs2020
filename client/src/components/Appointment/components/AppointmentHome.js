@@ -131,12 +131,12 @@ class Home extends Component {
                     <p></p><p></p>
                     <p></p>
                     <div className="card">
-                        <div className="card-body" style={{ height: '500px', background: '#FFFFFF' }}>
+                        <div className="card-body" style={{ height: '750px', background: '#FFFFFF' }}>
                             <MyCalendar appointments={this.props.appointments} />  </div>
                     </div>
                     <p></p><p></p>
                     <p></p>
-                    
+
                     <div className="row">
                         <div className="col-sm-6">
                             <div className="card">
