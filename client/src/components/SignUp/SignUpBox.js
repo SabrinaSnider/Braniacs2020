@@ -11,7 +11,8 @@ const SignUpBox = (props) => {
     const [password, setPassword] = useState("");
     const [password2, setPassword2] = useState("");
     const [dob, setDob] = useState({m: "", d: "", y: ""});
-	const [phone, setPhone] = useState("");
+    const [phone, setPhone] = useState("");
+    const [id, setId] = useState("");
 
     const [errors, setErrors] = useState({
         first: "",
@@ -20,7 +21,8 @@ const SignUpBox = (props) => {
         email: "",
         password2: "",
 		dob: {m: "", d: "", y: ""},
-		phone: ""
+        phone: "",
+        id: ""
     });
 
     // used to update user input for either password or email
@@ -28,6 +30,11 @@ const SignUpBox = (props) => {
         e.persist();
         setFirst(e.target.value);
     };
+
+    const onIdChange = (e) => {
+        e.persist();
+        setId(e.target.value);
+    }
 
     const onLastChange = (e) => {
         e.persist();
@@ -62,12 +69,6 @@ const SignUpBox = (props) => {
     const onPasswordChange = (e) => {
         e.persist();
         setPassword(e.target.value);
-        // if(password.length < 5 || password.length > 18){
-        //     setErrors(errors => ({...errors, password: "Passwords must be at least 6 characters and no more than 18 characters"}));
-        // } else{
-        //     setErrors(errors => ({...errors, password: ""}));
-        // }
-
     };
 
     const onPassword2Change = (e) => {
@@ -75,25 +76,6 @@ const SignUpBox = (props) => {
         setPassword2(e.target.value);
     };
 
-    // const checkEmails =  function(emails, newEmail){
-    //     console.log(emails.length);
-    //     for(let i=0;i<emails.length;i++){
-    //         console.log(emails[i]);
-    //         if (newEmail === emails[i].email)
-    //             return false;
-    //     }
-    //     return true;
-    // }
-
-	//Check emails for uniqueness
-	// function checkEmail(thisEmail){
-    //     let emailsInUse = [];
-    //     axios.get("/patient/emails").then(function (response){
-    //         emailsInUse = (response.data);
-    //         let hasAccount = checkEmails(emailsInUse, thisEmail);
-    //         return hasAccount;
-    //     });	        
-	// }
 
     // used to submit user values for password and email
     const onFormSubmit = async (e) => {
@@ -116,7 +98,8 @@ const SignUpBox = (props) => {
                 email: email,
                 password: password,
 				dob: date,
-				phone: phone
+                phone: phone,
+                patientId: id
             }
             const user = await httpUser.signUp(newUser);
             console.log("Errors frontend",user.errors);
@@ -125,7 +108,8 @@ const SignUpBox = (props) => {
                     first: user.errors.first,
                     last: user.errors.last,
                     email: user.errors.email,
-                    password: user.errors.password
+                    password: user.errors.password,
+                    id: user.errors.patientId
                 });
                 
                 console.log(errors);
@@ -135,9 +119,9 @@ const SignUpBox = (props) => {
                 });
             }
 
-            else if(user) {
-                console.log(props);
-                props.onLoginSuccess(); //input: user
+            else if(user.token) {
+                console.log(user);
+                props.onLoginSuccess(user.token, user.id); 
                 props.history.push('/Home');
             }
         }
@@ -203,6 +187,14 @@ const SignUpBox = (props) => {
                     {/*errors.password2 &&
                         <label id = "error">{errors.password2}</label>
                     */}
+                </div>
+
+                <div className="form-group">
+                    <label htmlFor="id" className="form-label">Patient ID</label>
+                    <input id="id" type="text" class="form-control" placeholder="" onChange={onIdChange}></input>
+                    {errors.id !== undefined &&
+                        <label id = "error">{errors.id}</label>
+                    }
                 </div>
 
                 <div className="form-group" id="button-group">

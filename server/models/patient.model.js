@@ -12,7 +12,7 @@ const patientSchema = new mongoose.Schema({
 		first: {type: String},
 		last: {type: String}
 	},
-	admin: Boolean
+	admin: {type: Boolean}
 });
 
 patientSchema.methods.generateHash = function(password) {

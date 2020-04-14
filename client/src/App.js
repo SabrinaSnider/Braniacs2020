@@ -18,21 +18,25 @@ import httpUser from './httpUser'
 */
 const App = (props) => {
   const [currentUser, setCurrentUser] = useState(httpUser.getCurrentUser());
+  const [currentId, setCurrentId] = useState(httpUser.getCurrentId());
 
   const onLoginSuccess = async function() {
       await setCurrentUser(httpUser.getCurrentUser());
+      await setCurrentId(httpUser.getCurrentId());
+
   };
 
   const logOut = async function() {
       httpUser.logOut();
       await setCurrentUser(null);
+      await setCurrentId(null);
   };
 
   return (
     <div style={{display: 'flex', 'flexFlow': 'column', 'minHeight': '100vh'}}>
       <Switch>
         <Route exact path="/Home" render={() => <Home currentUser={currentUser} />}/>
-        <Route render={() => <DefaultContainer onLoginSuccess={onLoginSuccess} logOut={logOut} currentUser={currentUser}/>} />  {/*currentUser={currentUser}* setCurrentUser={setCurrentUser()}*/}
+        <Route render={() => <DefaultContainer onLoginSuccess={onLoginSuccess} logOut={logOut} currentUser={currentUser} currentId={currentId}/>} />  {/*currentUser={currentUser}* setCurrentUser={setCurrentUser()}*/}
       </Switch>
     </div>
   );
@@ -53,6 +57,8 @@ const DefaultContainer = (props) => {
   }
   
   const currentUser = props.currentUser;
+  const currentId = props.currentId;
+  console.log(currentId);
   return(
   <div style={{display: 'flex', 'flexFlow': 'column', 'minHeight': '100vh', 'backgroundImage': 'url(/background.png)'}}>
     <NavBar currentUser={currentUser} />
