@@ -191,7 +191,7 @@ const SignUpBox = (props) => {
 
                 <div className="form-group">
                     <label htmlFor="id" className="form-label">Patient ID</label>
-                    <input id="id" type="text" class="form-control" placeholder="" onChange={onIdChange}></input>
+                    <input id="id" type="number" class="form-control" placeholder="" onChange={onIdChange}></input>
                     {errors.id !== undefined &&
                         <label id = "error">{errors.id}</label>
                     }

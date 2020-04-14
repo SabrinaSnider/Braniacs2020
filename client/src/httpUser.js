@@ -25,7 +25,7 @@ httpUser.setId = function(id){
 httpUser.getCurrentId = function(){
     const id = this.getId();
     console.log(id);
-    return id;
+    return JSON.parse(id);
 };
 
 httpUser.getCurrentUser = function() {
