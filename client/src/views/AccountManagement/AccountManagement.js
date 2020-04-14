@@ -39,8 +39,7 @@ function AccountManagement(props) {
     }, [])
 
     const updateData = (event) => {
-        event.preventDefault();
-        
+        event.preventDefault(); 
         axios.post("/patient/update", {
             name: {
                 first: firstName,
@@ -48,7 +47,9 @@ function AccountManagement(props) {
             },
             dob: dob,
             email: email
-        }).then(function (response) {
+        }
+        ).then(function (response) {
+            console.log(firstName);
             console.log(response.data);
         })
         .catch(function (error) {
