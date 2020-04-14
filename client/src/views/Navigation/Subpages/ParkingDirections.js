@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import GMaps from '../../../components/GoogleMaps/GMaps'
 import Directions from '../../../components/GoogleDirections/Directions'
 import { updatePosition } from '../../../components/GoogleDirections/DirectionHandler'
-import { Card, Button } from 'react-bootstrap'
+import { Card, Button, Form } from 'react-bootstrap'
 import "./ParkingDirections.css"
 
 let destination = {
@@ -11,10 +11,10 @@ let destination = {
 }
 
 /*
-    Parking directions section on the navigation page. Uses the user's current geolocation
+    Hospital directions section on the navigation page. Uses the user's current geolocation
     to display auto-generated directions to the parking lot.
 */
-const ParkingDirections = () => {
+function ParkingDirections(props) {
     const [directions, setDirections] = useState(null);
     const [position, setPosition] = useState(null);
 
@@ -25,9 +25,9 @@ const ParkingDirections = () => {
     }, [])
 
     return (
-        <div style={{padding: '0px 10px'}}>
+        <div style={{padding: '0px 20px', 'flexGrow': '1'}}>
             <div id="parking-header">
-                <h2>Directions to Parking</h2>
+                <h2>Directions to Parking Lot</h2>
             </div>
 
             <div id="parking-subheader">
@@ -37,10 +37,10 @@ const ParkingDirections = () => {
                         <h3 className="directions-header">Distance: {directions.routes[0].legs[0].distance.text}.</h3>
                     </div>
                 }
-                <Button href='https://www.google.com/maps/dir//Parking+Garage+10,+Newell+Dr,+Gainesville,+FL+32603/@29.6406927,-82.3437087,17.42z/data=!4m9!4m8!1m0!1m5!1m1!1s0x88e8a39ee4f6ccf9:0x949ff4a6f6d2cd7f!2m2!1d-82.3416633!2d29.6406203!3e0' target="_blank" style={{'max-height': '40px'}}>Open in Google Maps</Button>
+                <Button href='https://www.google.com/maps/dir//UF+Department+of+Neurosurgery,+Southwest+Archer+Road+%231097,+Gainesville,+FL/@29.6396834,-82.3794005,13z/data=!3m1!4b1!4m9!4m8!1m0!1m5!1m1!1s0x88e8a39e42a9d089:0xff5d2d7f10057cd9!2m2!1d-82.344381!2d29.639688!3e0' target="_blank" style={{'max-height': '40px'}}>Open in Google Maps</Button>
             </div>
 
-            <div id="parking-container">
+            <div id="parking-content">
                 <div id="directions-container-parking">
                     <Directions // update instructions whenever the directions change
                         directions = {directions}
@@ -57,7 +57,7 @@ const ParkingDirections = () => {
                 </Card>
             </div>
         </div>
-    )
+    );
 }
 
 export default ParkingDirections;
