@@ -10,7 +10,7 @@ import {
 } from './types';
 const mongoose = require('mongoose');
 
-export const addAppointment = (startTime, endTime, patientID, name, reminder) => {
+export const addAppointment = (startTime, endTime, patientID, name, reminderBool) => {
     return async (dispatch, getState) => {
         
         dispatch({ type: APPOINTMENT_FAIL, payload: '' });
@@ -34,7 +34,7 @@ export const addAppointment = (startTime, endTime, patientID, name, reminder) =>
             let overlap = false;
             let appointments = getState().appointments;
 
-            appointments.itemsAppt.forEach((appointment) => {
+            appointments.items.forEach((appointment) => {
                 if ((startTime >= appointment.startTime && startTime <= appointment.endTime) || (endTime >= appointment.startTime && endTime <= appointment.endTime)) {
                     overlap = true;
                 }
@@ -43,15 +43,15 @@ export const addAppointment = (startTime, endTime, patientID, name, reminder) =>
             if (overlap) {
                 dispatch({ type: APPOINTMENT_FAIL, payload: 'You are adding an appointment that has an overlap conflict with your current appointments. Please try again' });
             } else {
-                let startTime1 = moment.unix(startTime).format('MMMM Do, YYYY (hh:mm a)');
-                let endTime1= moment.unix(endTime).format('MMMM Do, YYYY (hh:mm a)');
+                //let startTime1 = moment.unix(startTime).format('MMMM Do, YYYY (hh:mm a)');
+                //let endTime1= moment.unix(endTime).format('MMMM Do, YYYY (hh:mm a)');
 
                 let appointment = {
-                    startTime: startTime1,
-                    endTime: endTime1, 
+                    startTime,
+                    endTime, 
                     patientId: patientID, 
                     name, 
-                    reminder
+                    reminderBool    
                 }
 
                 axios({
@@ -60,9 +60,9 @@ export const addAppointment = (startTime, endTime, patientID, name, reminder) =>
                     data: {
                         name: name,
                         patientId: patientID,
-                        reminder: reminder,
-                        startTime: startTime1,
-                        endTime: endTime1
+                        reminderBool: reminderBool,
+                        startTime,
+                        endTime
                     }
                 })
 

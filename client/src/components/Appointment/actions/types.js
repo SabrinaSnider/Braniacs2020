@@ -9,5 +9,5 @@ export const DELETE_APPOINTMENT = 'delete_appointment';
 export const APPOINTMENT_FAIL = 'add_appointment_fail';
 
 export const CREATE_REMINDER = 'create_reminder';
-export const RESEND_REMINDER = 'resend_reminder';
-export const REMINDER_FAIL = 'create_reminder_fail';
+export const REMINDER_FAIL = 'reminder_fail';
+export const DELETEALL_REMINDER = 'deleteall_reminders';

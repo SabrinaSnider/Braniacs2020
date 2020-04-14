@@ -12,7 +12,7 @@ exports.fetchAppt = function(req, res){
 		if (err) res.status(200).send("NaN");
 		else res.status(200).json({
 			patientId: usra.patientId,
-			reminder: usra.reminder,
+			reminderBool: usra.reminderBool,
 			startTime: usra.startTime,
 			endTime: usra.endTime,
 			name: usra.name
@@ -39,13 +39,14 @@ USING newAppt:
 Make a post request with your appointment json.
 */
 exports.newAppt = async (req, res) => {
-	appt.create({patientId: req.body.patientId, reminder: req.body.reminder, startTime: req.body.startTime, endTime: req.body.endTime, name: req.body.name}, function(err, pt){
-		res.status(200).send("Success");
-	});
+	appt.create({patientId: req.body.patientId, reminderBool: req.body.reminderBool, startTime: req.body.startTime, endTime: req.body.endTime, name: req.body.name}, function(err, pt){
+		if (err) res.status(404).send("NaN");
+		else res.status(200).send("Successful update");
+		});
 }
 
 exports.updateAppt = function(req, res){
-	appt.updateOne({ 'patientId' : req.patientId}, {'name' : req.name, 'reminder' : req.reminder, 'startTime' : req.startTime, 'endTime' : req.endTime}, function(err, usra){
+	appt.updateOne({ 'patientId' : req.patientId}, {'name' : req.name, 'reminderBool' : req.reminderBool, 'startTime' : req.startTime, 'endTime' : req.endTime}, function(err, usra){
 		if (err) res.status(200).send("NaN");
 		else res.status(200).send("Successful update");
 	})

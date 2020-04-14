@@ -6,7 +6,6 @@ import * as dates from '../modules/dates'
 import 'react-big-calendar/lib/css/react-big-calendar.css'
 const localizer = momentLocalizer(moment)
 let sampleAppoint = [];
-let myEventsList = [];
 
 let allViews = Object.keys(Views).map(k => Views[k])
 
@@ -19,25 +18,30 @@ const ColoredDateCellWrapper = ({ children }) =>
 
 
 class MyCalendar extends Component {
+	myEventsList = [];
 
-	render() {
-		this.props.appointments.forEach((appointment) => {
-			var start1 = new Date(moment(appointment.startTime, 'MMMM Do, YYYY (hh:mm a)').toDate());
-			var end1 = new Date(moment(appointment.endTime, 'MMMM Do, YYYY (hh:mm a)').toDate());
+	renderAppointment = (appointment) => {
+    
+        var start1 = new Date(moment.unix(appointment.startTime).toDate());
+		var end1 = new Date(moment.unix(appointment.endTime).toDate());
 
 			sampleAppoint = {
 				id: appointment.patientId,
 				title: appointment.name,
 				start: start1,
 				end: end1
-			};
+			}
+			this.myEventsList.push(sampleAppoint);
+	}
 
-			myEventsList.push(sampleAppoint);
-		})
+	render() {
+		this.myEventsList = [];
+		{this.props.appointments.map(this.renderAppointment)}
 
 		return (
+			
 			<Calendar
-				events={myEventsList}
+				events={this.myEventsList}
 				views={allViews}
 				step={60}
 				showMultiDayTimes
