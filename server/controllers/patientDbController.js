@@ -7,6 +7,7 @@ const ObjectId = require('mongodb').ObjectID;
 const async = require('async')
 const nodemailer = require('nodemailer')
 const crypto = require('crypto')
+const bcrypt = require('bcrypt-nodejs')
 
 const validateRegisterInput = require("../validation/register");
 const validateLoginInput = require("../validation/login");
@@ -91,7 +92,7 @@ exports.reset = function(req, res){
         function(done) {
           patient.findOneAndUpdate(
             { resetPasswordToken: req.params.token, resetPasswordExpires: { $gt: Date.now() } }, 
-            { password: req.body.password },
+            { password: bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(8)) },
             function(err, user) {
               if (!user) { // if no user found, do not update
                 // req.flash('error', 'Password reset token is invalid or has expired.');
@@ -263,7 +264,6 @@ exports.authenticate = async (req, res) => {
     }
 
     const user = await patient.findOne({email: req.body.email});
-
     if(!user){
         return res.status(200).json({ errors: {email: "Email not found" }});
     } else if(!user.validPassword(req.body.password)) {
