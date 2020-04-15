@@ -3,7 +3,7 @@ import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import { Router, Redirect, Route, Switch } from 'react-router-dom';
 import ReduxThunk from 'redux-thunk';
-import reducers from './reducers';
+import reducers from './reducers/index';
 
 import history from './modules/history';
 import AppointmentHome from './components/AppointmentHome';
