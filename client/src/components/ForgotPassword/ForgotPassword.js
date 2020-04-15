@@ -6,7 +6,7 @@ const ForgotPassword = (props) => {
     return (
         <div class="row">
 			<div class="col-md-12">
-				<form action="/forgot" method="POST">
+				<form action="/patient/forgot" method="POST">
 					<legend>Forgot Password</legend>
 					<div class="form-group">
 						<label for="email">Email</label>

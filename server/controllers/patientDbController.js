@@ -16,6 +16,7 @@ exports.forgot = function(req, res){
 }
 
 exports.forgotP = function(req, res, next){
+  console.log("in the function")
     async.waterfall([
         function(done) {
           crypto.randomBytes(20, function(err, buf) {
