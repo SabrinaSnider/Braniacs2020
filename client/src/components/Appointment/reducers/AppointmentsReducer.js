@@ -6,12 +6,17 @@ import axios from 'axios'
 import {
     ADD_APPOINTMENT,
     DELETE_APPOINTMENT,
-    APPOINTMENT_FAIL
+    APPOINTMENT_FAIL,
+    CREATE_REMINDER,
+	REMINDER_FAIL
 } from '../actions/types';
 
     let sampleAppoint = [];
+    let sampleReminder = []; 
     let arr = [];
+    let arr2 =[];
 
+    //get appointments
     axios.get('/appt/list', {})
         .then(function (response) {
             console.log("Appointment response", response)
@@ -30,9 +35,29 @@ import {
             console.log(error);
         });
 
+    //get reminders change to reminder list
+    axios.get('/appt/list', {})
+        .then(function (response) {
+            console.log("reminder response", response)
+            sampleReminder.data = (response.data);
+            sampleReminder.data.forEach(element => {
+                arr2.push(element);
+                });
+            console.log("arr2", arr2)
+
+            //currentComponent.setState({
+                //myArray: arr
+            //});
+            //console.log(sampleAppoint.data[1].name);
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
+
 // One default appointment item added as example
 const INITIAL_STATE = {
-    items: arr,
+    itemsAppt: arr,
+    itemsRem: arr2,
     error: ''
 };
 
@@ -43,15 +68,15 @@ export default (state = INITIAL_STATE, action) => {
             // add the appointment to the store
            
             action.payload.id = uuid.v4();
-            let items = state.items.slice(0);
-            items.push(action.payload);
+            let itemsAppt = state.itemsAppt.slice(0);
+            itemsAppt.push(action.payload);
         
-            console.log(state.items);
+            console.log(state.itemsAppt);
 
 
             return {
                 ...state,
-                items,
+                itemsAppt,
                 error: ''
             };
         case APPOINTMENT_FAIL:
@@ -62,7 +87,7 @@ export default (state = INITIAL_STATE, action) => {
             };
         case DELETE_APPOINTMENT:
             // remove the appointment by id from store
-            state.items = _.remove(state.items, (appointment) => {
+            state.itemsAppt = _.remove(state.itemsAppt, (appointment) => {
                 return appointment.patientId !== action.payload;
             });
 
@@ -70,6 +95,30 @@ export default (state = INITIAL_STATE, action) => {
                 ...state,
                 error: ''
             };
+
+        case CREATE_REMINDER:
+            // add the appointment to the store
+            
+            action.payload.id = uuid.v4();
+            let itemsRem = state.itemsRem.slice(0);
+            itemsRem.push(action.payload);
+        
+            console.log(state.itemsRem);
+
+
+            return {
+                ...state,
+                itemsRem,
+                error: ''
+            };
+        case REMINDER_FAIL:
+            // set the appointment store error
+            return {
+                ...state,
+                error: action.payload
+            };
+        
+
         default:
             return state;
     }
