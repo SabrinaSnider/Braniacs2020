@@ -9,7 +9,9 @@ const patientSchema = new mongoose.Schema({
 	name: {
 		first: {type: String},
 		last: {type: String}
-	}
+	},
+	resetPasswordToken: {type: String},
+	resetPasswordExpires: {type: Date}
 });
 
 patientSchema.methods.generateHash = function(password) {
