@@ -12,11 +12,10 @@ const validateRegisterInput = require("../validation/register");
 const validateLoginInput = require("../validation/login");
 
 exports.forgot = function(req, res){
-    res.render('forgot');
+    res.send('forgot');
 }
 
 exports.forgotP = function(req, res, next){
-  console.log("in the function", req.body)
     async.waterfall([
         function(done) {
           crypto.randomBytes(20, function(err, buf) {
@@ -54,7 +53,7 @@ exports.forgotP = function(req, res, next){
             subject: 'Node.js Password Reset',
             text: 'You are receiving this because you (or someone else) have requested the reset of the password for your account.\n\n' +
               'Please click on the following link, or paste this into your browser to complete the process:\n\n' +
-              'http://' + req.headers.host + '/reset/' + token + '\n\n' +
+              'http://' + req.headers.host + '/patient/reset/' + token + '\n\n' +
               'If you did not request this, please ignore this email and your password will remain unchanged.\n'
           };
           smtpTransport.sendMail(mailOptions, function(err) {
@@ -71,9 +70,11 @@ exports.forgotP = function(req, res, next){
 };
 
 exports.reset = function(req, res){
+  console.log('reset')
     patient.findOne({ resetPasswordToken: req.params.token, resetPasswordExpires: { $gt: Date.now() } }, function(err, user) {
         if (!user) {
-          req.flash('error', 'Password reset token is invalid or has expired.');
+          // req.flash('error', 'Password reset token is invalid or has expired.');
+          console.log('Password reset token is invalid or has expired.')
           return res.redirect('/forgot');
         }
         res.render('reset', {token: req.params.token});
@@ -81,11 +82,13 @@ exports.reset = function(req, res){
 };
 
 exports.resetT = function(req, res){
+  console.log('reseTTTT')
     async.waterfall([
         function(done) {
           patient.findOne({ resetPasswordToken: req.params.token, resetPasswordExpires: { $gt: Date.now() } }, function(err, user) {
             if (!user) {
-              req.flash('error', 'Password reset token is invalid or has expired.');
+              // req.flash('error', 'Password reset token is invalid or has expired.');
+              console.log('Password reset token is invalid or has expired.')
               return res.redirect('back');
             }
             if(req.body.password === req.body.confirm) {
@@ -100,7 +103,8 @@ exports.resetT = function(req, res){
                 });
               })
             } else {
-                req.flash("error", "Passwords do not match.");
+                // req.flash("error", "Passwords do not match.");
+                console.log('Passwords do not match.')
                 return res.redirect('back');
             }
           });
