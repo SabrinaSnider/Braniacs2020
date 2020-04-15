@@ -28,9 +28,34 @@ exports.listAppt = function (req, res) {
 		if (err) res.status(200).send("NaN");
       } else {
 		res.json(obj);
-		console.log(obj)
       }
     }); 
+};
+
+
+// Returns a list of appointments for the user with the given id
+exports.listByID = function (req, res) {
+    appt.find({ 'patientId' : req.body.patientId}, function(err, obj) {
+      if (err) {
+		if (err) res.status(200).send("NaN");
+      } else {
+		res.json(obj);
+      }
+    }); 
+};
+
+// Removes the appointment with the given parameters
+exports.removeAppt = function (req, res) {
+	appt.deleteOne(
+		{ 
+			'patientId' : req.body.patientId,
+			'startTime' : req.body.startTime,
+			'endTime' : req.body.endTime
+		}
+	, function(err, usra){
+		if (err) res.status(200).send("NaN");
+		else res.status(200).send("Successful remove");
+	})
 
 };
 

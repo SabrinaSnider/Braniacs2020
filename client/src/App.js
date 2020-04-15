@@ -9,6 +9,7 @@ import LogOut from './views/LogOut/LogOut'
 import NavigationPage from './views/Navigation/Navigation'
 import AccountManagement from './views/AccountManagement/AccountManagement'
 import Appointment from "./components/Appointment/Appointment";
+import AppointmentPage from './views/AppointmentPage/AppointmentPage'
 import httpUser from './httpUser'
 
 /*
@@ -66,6 +67,7 @@ const DefaultContainer = (props) => {
       <Route exact path="/Navigation/:option" component={NavigationPage} />
       <Route exact path="/Account" render={(props) => <AccountManagement {...props} currentUser={currentUser} />} />
       <Route exact path="/Appointment" component={Appointment} />
+      <Route exact path="/MyAppointments" component={AppointmentPage} />
       <Route path="/SignIn" render={(props) => <SignIn {...props} onLoginSuccess={onLoginSuccess} />}  /> {/*currentUser={props.currentUser} setCurrentUser={props.setCurrentUser}*/}
       <Route path="/SignUp" render={(props) => <SignUp {...props} onLoginSuccess={onLoginSuccess} />}  /> {/* onLoginSuccess={props.onLoginSuccess()} currentUser={props.currentUser} setCurrentUser={props.setCurrentUser}*/}
       <Route path="/LogOut" render={(props) => <LogOut {...props} logOut={logOut} />} /> {/*currentUser={props.currentUser} setCurrentUser={props.setCurrentUser}*/}
