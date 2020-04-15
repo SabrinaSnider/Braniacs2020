@@ -79,13 +79,7 @@ function AppointmentPage(props) {
     }
     // fuction to format appointments for the calendar event array 
     const formatAppt = appointment => {
-        // old date format
-        // var start = new Date(moment(appointment.startTime, 'MMMM Do, YYYY (hh:mm a)').toDate());
-        // var end = new Date(moment(appointment.endTime, 'MMMM Do, YYYY (hh:mm a)').toDate());
-
-        //var start = new Date(moment.unix(appointment.startTime).toDate());
-        //var end = new Date(moment.unix(appointment.endTime).toDate());
-
+        
         var formatted = {
             name: appointment.name,
             startTime: appointment.startTime,
@@ -95,10 +89,7 @@ function AppointmentPage(props) {
     }
 
     const formatEvent = appointment => {
-        // old date format
-        // var start = new Date(moment(appointment.startTime, 'MMMM Do, YYYY (hh:mm a)').toDate());
-        // var end = new Date(moment(appointment.endTime, 'MMMM Do, YYYY (hh:mm a)').toDate());
-
+     
         var start = new Date(moment.unix(appointment.startTime).toDate());
         var end = new Date(moment.unix(appointment.endTime).toDate());
 
