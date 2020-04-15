@@ -16,7 +16,7 @@ exports.forgot = function(req, res){
 }
 
 exports.forgotP = function(req, res, next){
-  console.log("in the function")
+  console.log("in the function", req.body)
     async.waterfall([
         function(done) {
           crypto.randomBytes(20, function(err, buf) {
@@ -27,7 +27,8 @@ exports.forgotP = function(req, res, next){
         function(token, done) {
           patient.findOne({ email: req.body.email }, function(err, user) {
             if (!user) {
-              req.flash('error', 'No account with that email address exists.');
+              console.log('No account with that email address exists.')
+              // req.flash('error', 'No account with that email address exists.');
               return res.redirect('/forgot');
             }
     
@@ -58,7 +59,8 @@ exports.forgotP = function(req, res, next){
           };
           smtpTransport.sendMail(mailOptions, function(err) {
             console.log('mail sent');
-            req.flash('success', 'An e-mail has been sent to ' + user.email + ' with further instructions.');
+            console.log('An e-mail has been sent to ' + user.email + ' with further instructions.')
+            // req.flash('success', 'An e-mail has been sent to ' + user.email + ' with further instructions.');
             done(err, 'done');
           });
         }

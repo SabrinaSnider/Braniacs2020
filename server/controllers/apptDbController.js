@@ -28,7 +28,7 @@ exports.listAppt = function (req, res) {
 		if (err) res.status(200).send("NaN");
       } else {
 		res.json(obj);
-		console.log(obj)
+		// console.log(obj)
       }
     }); 
 
