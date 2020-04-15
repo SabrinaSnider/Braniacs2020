@@ -19,7 +19,6 @@ import ResetPass from './views/ResetPassword/ResetPass';
   called from the home component with a home prop passed in.
 */
 const App = (props) => {
-  console.log('front end')
   const [currentUser, setCurrentUser] = useState(httpUser.getCurrentUser());
 
   const onLoginSuccess = async function() {

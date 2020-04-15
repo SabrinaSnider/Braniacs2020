@@ -30,7 +30,9 @@ function ResetPass(props) {
     return (
         <div style={{height: '100%', width: '100%', 'flexGrow' : '1'}}>
             {validated && 
-                <ResetPassword {...props} />
+                <ResetPassword
+                    token = {token}
+                />
             }
         </div>
     );
