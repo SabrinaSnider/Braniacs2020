@@ -28,6 +28,7 @@ export const createReminder = (patientId, name, phone, reminderMessage) => {
 			//search through patient database by id and retrieve. 
 		
 			phone = "+1" + phone;
+			patientId = parseInt(patientId);
 			let sid = "28";
 			let time = moment().unix();
 

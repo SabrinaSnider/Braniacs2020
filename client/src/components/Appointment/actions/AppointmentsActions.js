@@ -87,7 +87,7 @@ export const deleteAppointment = (appointment) => {
             // normally some asyn logic goes here to delete the data from the database
             axios.delete('/appt/remove',  {data: {patientId: appointment.patientId}} );
 
-            dispatch({ type: DELETE_APPOINTMENT, payload: appointment.patientId});
+            dispatch({ type: DELETE_APPOINTMENT, payload: appointment.startTime});
         } catch (error) {
             console.log('Failed to delete appointment', error);
             dispatch({ type: APPOINTMENT_FAIL, payload: 'Appointment failed to be deleted - contact technical support' });

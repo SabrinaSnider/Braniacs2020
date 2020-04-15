@@ -1,20 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Calendar, momentLocalizer, Views } from 'react-big-calendar'
 import moment from 'moment'
-import * as dates from '../modules/dates'
-import 'react-big-calendar/lib/css/react-big-calendar.css'
-const localizer = momentLocalizer(moment)
+import ScheduleCalendar from '../../Calendar/ScheduleCalendar'
+
 let sampleAppoint = [];
-
-let allViews = Object.keys(Views).map(k => Views[k])
-
-const ColoredDateCellWrapper = ({ children }) =>
-	React.cloneElement(React.Children.only(children), {
-		style: {
-			backgroundColor: 'lightblue',
-		},
-	})
 
 
 class MyCalendar extends Component {
@@ -39,18 +28,9 @@ class MyCalendar extends Component {
 
 		return (
 			
-			<Calendar
-				events={this.myEventsList}
-				views={allViews}
-				step={60}
-				showMultiDayTimes
-				max={dates.add(dates.endOf(new Date(2015, 17, 1), 'day'), -1, 'hours')}
-				defaultDate={new Date(moment().toDate())}
-				components={{
-					timeSlotWrapper: ColoredDateCellWrapper,
-				}}
-				localizer={localizer}
-			/>
+			<ScheduleCalendar 
+                        events = {this.myEventsList}
+                    />
 		);
 	}
 }

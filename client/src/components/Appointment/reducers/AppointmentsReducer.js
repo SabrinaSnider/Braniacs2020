@@ -17,11 +17,12 @@ import {
 
     axios.get('/appt/list', {})
         .then(function (response) {
-            // console.log("Appointment response", response)
+            console.log("Appointment response", response)
             sampleAppoint.data = (response.data);
             sampleAppoint.data.forEach(element => {
                 arr1.push(element);
                 });
+            console.log("arr", arr1)
 
             //currentComponent.setState({
                 //myArray: arr
@@ -90,7 +91,7 @@ export default (state = INITIAL_STATE, action) => {
             }
             else {
                 state.items = prevState;
-                prevState = [];
+                prevState =[];
             }
 
             return {
