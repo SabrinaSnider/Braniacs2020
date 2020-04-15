@@ -6,20 +6,22 @@ import axios from 'axios'
 import {
     ADD_APPOINTMENT,
     DELETE_APPOINTMENT,
-    APPOINTMENT_FAIL
+    APPOINTMENT_FAIL, 
+    SEARCH_APPOINTMENT
 } from '../actions/types';
 
     let sampleAppoint = [];
-    let arr = [];
+    let arr1 = [];
+    let prevState=[];
+
 
     axios.get('/appt/list', {})
         .then(function (response) {
             // console.log("Appointment response", response)
             sampleAppoint.data = (response.data);
             sampleAppoint.data.forEach(element => {
-                arr.push(element);
+                arr1.push(element);
                 });
-            // console.log("arr", arr)
 
             //currentComponent.setState({
                 //myArray: arr
@@ -32,7 +34,7 @@ import {
 
 // One default appointment item added as example
 const INITIAL_STATE = {
-    items: arr,
+    items: arr1,
     error: ''
 };
 
@@ -70,6 +72,32 @@ export default (state = INITIAL_STATE, action) => {
                 ...state,
                 error: ''
             };
+
+        case SEARCH_APPOINTMENT:
+            let newItems = [];
+            let error1 = '';
+        
+            if(action.payload !== "c"){
+                prevState = state.items;
+                let id = parseInt(action.payload);
+                state.items.forEach((o) => {
+                    if (o.patientId === id){
+                        newItems.push(o);
+                    }
+                })
+
+                state.items=newItems;
+            }
+            else {
+                state.items = prevState;
+                prevState = [];
+            }
+
+            return {
+                ...state,
+                error: error1
+            };
+    
         default:
             return state;
     }

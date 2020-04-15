@@ -50,6 +50,7 @@
     "redux-thunk": "^2.3.0",
     "should": "^13.2.3",
     "supertest": "^4.0.2",
+    "twilio": "^3.42.1",
     "uuid": "^3.3.2",
     "validator": "^13.0.0"
   },
