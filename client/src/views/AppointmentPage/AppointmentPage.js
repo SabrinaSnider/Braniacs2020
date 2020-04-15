@@ -22,6 +22,10 @@ function AppointmentPage(props) {
     const [appts, setAppts] = useState([])
     const [events, setEvents] = useState([])
     const [reminders, setReminders] = useState([])
+    const currentUser = props.currentUser;
+    const currentId = props.currentId;
+    console.log(currentId);
+    console.log(currentUser);
 
     // on page load, make a get request for appointments
     useEffect(()=>{

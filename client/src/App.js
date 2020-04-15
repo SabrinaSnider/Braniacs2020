@@ -66,8 +66,8 @@ const DefaultContainer = (props) => {
     <Switch>
       <Route exact path="/Navigation/:option" component={NavigationPage} />
       <Route exact path="/Account" render={(props) => <AccountManagement {...props} currentUser={currentUser} />} />
-      <Route exact path="/Appointment" component={Appointment} />
-      <Route exact path="/MyAppointments" component={AppointmentPage} />
+      <Route exact path="/Appointment" render={(props) => <Appointment {...props} currentUser={currentUser} currentId={currentId}/>} />
+      <Route exact path="/MyAppointments" render={(props) => <AppointmentPage {...props} currentUser={currentUser} currentId={currentId}/>} />
       <Route path="/SignIn" render={(props) => <SignIn {...props} onLoginSuccess={onLoginSuccess} />}  /> {/*currentUser={props.currentUser} setCurrentUser={props.setCurrentUser}*/}
       <Route path="/SignUp" render={(props) => <SignUp {...props} onLoginSuccess={onLoginSuccess} />}  /> {/* onLoginSuccess={props.onLoginSuccess()} currentUser={props.currentUser} setCurrentUser={props.setCurrentUser}*/}
       <Route path="/LogOut" render={(props) => <LogOut {...props} logOut={logOut} />} /> {/*currentUser={props.currentUser} setCurrentUser={props.setCurrentUser}*/}
