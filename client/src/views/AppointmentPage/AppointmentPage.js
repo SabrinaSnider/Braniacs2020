@@ -36,7 +36,7 @@ function AppointmentPage(props) {
     // appointments are sorted based on start date
     const getMyAppts = async() => {
         axios.post("/appt/list/my-appointments", {
-            patientId: parseInt(128),
+            patientId: parseInt(currentId),
         })
         .then(function (response) {
             console.log("response is", response.data)
@@ -55,7 +55,7 @@ function AppointmentPage(props) {
         });
 
         axios.post("/reminder/list/byId", {
-            patientId: parseInt(128),
+            patientId: parseInt(currentId),
         })
         .then(function (response) {
             console.log("reminder response is", response.data)
