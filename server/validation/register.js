@@ -8,6 +8,7 @@ module.exports = function validateRegisterInput(data) {
   data.name.last = !isEmpty(data.name.last) ? data.name.last : "";
   data.email = !isEmpty(data.email) ? data.email : "";
   data.password = !isEmpty(data.password) ? data.password : "";
+  data.patientId = !isEmpty(data.patientId) ? data.patientId : "";
   
 // Name checks
   if (Validator.isEmpty(data.name.first)) {
@@ -30,6 +31,12 @@ module.exports = function validateRegisterInput(data) {
   }
   if (!Validator.isLength(data.password, { min: 6, max: 30 })) {
     errors.password = "Password must be at least 6 characters";
+  }
+
+  //Clinic Id check
+  if (Validator.isEmpty(data.patientId)) {
+    console.log(data.patientId);
+    errors.patientId = "Clinic ID field is required";
   }
 return {
     errors,

@@ -9,6 +9,7 @@ import LogOut from './views/LogOut/LogOut'
 import NavigationPage from './views/Navigation/Navigation'
 import AccountManagement from './views/AccountManagement/AccountManagement'
 import Appointment from "./components/Appointment/Appointment";
+import AppointmentPage from './views/AppointmentPage/AppointmentPage'
 import httpUser from './httpUser'
 
 /*
@@ -18,21 +19,25 @@ import httpUser from './httpUser'
 */
 const App = (props) => {
   const [currentUser, setCurrentUser] = useState(httpUser.getCurrentUser());
+  const [currentId, setCurrentId] = useState(httpUser.getCurrentId());
 
   const onLoginSuccess = async function() {
       await setCurrentUser(httpUser.getCurrentUser());
+      await setCurrentId(httpUser.getCurrentId());
+
   };
 
   const logOut = async function() {
       httpUser.logOut();
       await setCurrentUser(null);
+      await setCurrentId(null);
   };
 
   return (
     <div style={{display: 'flex', 'flexFlow': 'column', 'minHeight': '100vh'}}>
       <Switch>
         <Route exact path="/Home" render={() => <Home currentUser={currentUser} />}/>
-        <Route render={() => <DefaultContainer onLoginSuccess={onLoginSuccess} logOut={logOut} currentUser={currentUser}/>} />  {/*currentUser={currentUser}* setCurrentUser={setCurrentUser()}*/}
+        <Route render={() => <DefaultContainer onLoginSuccess={onLoginSuccess} logOut={logOut} currentUser={currentUser} currentId={currentId}/>} />  {/*currentUser={currentUser}* setCurrentUser={setCurrentUser()}*/}
       </Switch>
     </div>
   );
@@ -53,13 +58,16 @@ const DefaultContainer = (props) => {
   }
   
   const currentUser = props.currentUser;
+  const currentId = props.currentId;
+  console.log(currentId);
   return(
   <div style={{display: 'flex', 'flexFlow': 'column', 'minHeight': '100vh', 'backgroundImage': 'url(/background.png)'}}>
     <NavBar currentUser={currentUser} />
     <Switch>
       <Route exact path="/Navigation/:option" component={NavigationPage} />
       <Route exact path="/Account" render={(props) => <AccountManagement {...props} currentUser={currentUser} />} />
-      <Route exact path="/Appointment" component={Appointment} />
+      <Route exact path="/Appointment" render={(props) => <Appointment {...props} currentUser={currentUser} currentId={currentId}/>} />
+      <Route exact path="/MyAppointments" render={(props) => <AppointmentPage {...props} currentUser={currentUser} currentId={currentId}/>} />
       <Route path="/SignIn" render={(props) => <SignIn {...props} onLoginSuccess={onLoginSuccess} />}  /> {/*currentUser={props.currentUser} setCurrentUser={props.setCurrentUser}*/}
       <Route path="/SignUp" render={(props) => <SignUp {...props} onLoginSuccess={onLoginSuccess} />}  /> {/* onLoginSuccess={props.onLoginSuccess()} currentUser={props.currentUser} setCurrentUser={props.setCurrentUser}*/}
       <Route path="/LogOut" render={(props) => <LogOut {...props} logOut={logOut} />} /> {/*currentUser={props.currentUser} setCurrentUser={props.setCurrentUser}*/}

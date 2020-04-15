@@ -6,44 +6,23 @@ import axios from 'axios'
 import {
     ADD_APPOINTMENT,
     DELETE_APPOINTMENT,
-    APPOINTMENT_FAIL,
-    CREATE_REMINDER,
-	REMINDER_FAIL
+    APPOINTMENT_FAIL, 
+    SEARCH_APPOINTMENT
 } from '../actions/types';
 
     let sampleAppoint = [];
-    let sampleReminder = []; 
-    let arr = [];
-    let arr2 =[];
+    let arr1 = [];
+    let prevState=[];
 
-    //get appointments
+
     axios.get('/appt/list', {})
         .then(function (response) {
             console.log("Appointment response", response)
             sampleAppoint.data = (response.data);
             sampleAppoint.data.forEach(element => {
-                arr.push(element);
+                arr1.push(element);
                 });
-            console.log("arr", arr)
-
-            //currentComponent.setState({
-                //myArray: arr
-            //});
-            //console.log(sampleAppoint.data[1].name);
-        })
-        .catch(function (error) {
-            console.log(error);
-        });
-
-    //get reminders change to reminder list
-    axios.get('/appt/list', {})
-        .then(function (response) {
-            console.log("reminder response", response)
-            sampleReminder.data = (response.data);
-            sampleReminder.data.forEach(element => {
-                arr2.push(element);
-                });
-            console.log("arr2", arr2)
+            console.log("arr", arr1)
 
             //currentComponent.setState({
                 //myArray: arr
@@ -56,8 +35,7 @@ import {
 
 // One default appointment item added as example
 const INITIAL_STATE = {
-    itemsAppt: arr,
-    itemsRem: arr2,
+    items: arr1,
     error: ''
 };
 
@@ -68,15 +46,15 @@ export default (state = INITIAL_STATE, action) => {
             // add the appointment to the store
            
             action.payload.id = uuid.v4();
-            let itemsAppt = state.itemsAppt.slice(0);
-            itemsAppt.push(action.payload);
+            let items = state.items.slice(0);
+            items.push(action.payload);
         
-            console.log(state.itemsAppt);
+            console.log(state.items);
 
 
             return {
                 ...state,
-                itemsAppt,
+                items,
                 error: ''
             };
         case APPOINTMENT_FAIL:
@@ -87,7 +65,7 @@ export default (state = INITIAL_STATE, action) => {
             };
         case DELETE_APPOINTMENT:
             // remove the appointment by id from store
-            state.itemsAppt = _.remove(state.itemsAppt, (appointment) => {
+            state.items = _.remove(state.items, (appointment) => {
                 return appointment.patientId !== action.payload;
             });
 
@@ -96,29 +74,31 @@ export default (state = INITIAL_STATE, action) => {
                 error: ''
             };
 
-        case CREATE_REMINDER:
-            // add the appointment to the store
-            
-            action.payload.id = uuid.v4();
-            let itemsRem = state.itemsRem.slice(0);
-            itemsRem.push(action.payload);
+        case SEARCH_APPOINTMENT:
+            let newItems = [];
+            let error1 = '';
         
-            console.log(state.itemsRem);
+            if(action.payload !== "c"){
+                prevState = state.items;
+                let id = parseInt(action.payload);
+                state.items.forEach((o) => {
+                    if (o.patientId === id){
+                        newItems.push(o);
+                    }
+                })
 
+                state.items=newItems;
+            }
+            else {
+                state.items = prevState;
+                prevState =[];
+            }
 
             return {
                 ...state,
-                itemsRem,
-                error: ''
+                error: error1
             };
-        case REMINDER_FAIL:
-            // set the appointment store error
-            return {
-                ...state,
-                error: action.payload
-            };
-        
-
+    
         default:
             return state;
     }

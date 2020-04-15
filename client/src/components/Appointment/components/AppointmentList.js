@@ -10,19 +10,21 @@ class AppointmentList extends Component {
     }
 
     renderAppointment = (appointment) => {
-    
+        let startTime1 = moment.unix(appointment.startTime).format('MMMM Do, YYYY (hh:mm a)');
+        let endTime1 = moment.unix(appointment.endTime).format('MMMM Do, YYYY (hh:mm a)');
+
         return (
-            <li key={appointment.patientId} className="list-group-item">
+            <li key={appointment.startTime} className="list-group-item">
                 <strong>Patient ID: </strong>
                 <span>{appointment.patientId}</span>
                 <strong> Patient name: </strong>
                 <span>{appointment.name}</span>
                 <strong> Starting Time: </strong>
-                <span>{appointment.startTime}</span>
+                <span>{startTime1}</span>
                 <span> - </span>
                 <strong> Ending Time: </strong>
-                <span>{appointment.endTime}</span>
-                <button onClick={this.onDeleteAppointment.bind(this, appointment)} className="btn btn-sm btn-warning float-right">delete</button>
+                <span>{endTime1}</span>
+                <button onClick={this.onDeleteAppointment.bind(this, appointment)} className="btn btn-sm btn-warning float-right">Delete</button>
             </li>
         );
     }

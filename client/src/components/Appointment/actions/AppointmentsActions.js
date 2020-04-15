@@ -1,16 +1,18 @@
 import moment from 'moment';
 import axios from 'axios'
 import React from 'react';
+import { createReminder } from './ReminderActions';
 
 
 import {
     ADD_APPOINTMENT,
     DELETE_APPOINTMENT,
-    APPOINTMENT_FAIL
+    APPOINTMENT_FAIL,
+    SEARCH_APPOINTMENT
 } from './types';
 const mongoose = require('mongoose');
 
-export const addAppointment = (startTime, endTime, patientID, name, reminder) => {
+export const addAppointment = (startTime, endTime, patientID, name, reminderBool) => {
     return async (dispatch, getState) => {
         
         dispatch({ type: APPOINTMENT_FAIL, payload: '' });
@@ -34,7 +36,7 @@ export const addAppointment = (startTime, endTime, patientID, name, reminder) =>
             let overlap = false;
             let appointments = getState().appointments;
 
-            appointments.itemsAppt.forEach((appointment) => {
+            appointments.items.forEach((appointment) => {
                 if ((startTime >= appointment.startTime && startTime <= appointment.endTime) || (endTime >= appointment.startTime && endTime <= appointment.endTime)) {
                     overlap = true;
                 }
@@ -43,15 +45,18 @@ export const addAppointment = (startTime, endTime, patientID, name, reminder) =>
             if (overlap) {
                 dispatch({ type: APPOINTMENT_FAIL, payload: 'You are adding an appointment that has an overlap conflict with your current appointments. Please try again' });
             } else {
-                let startTime1 = moment.unix(startTime).format('MMMM Do, YYYY (hh:mm a)');
-                let endTime1= moment.unix(endTime).format('MMMM Do, YYYY (hh:mm a)');
+                //let startTime1 = moment.unix(startTime).format('MMMM Do, YYYY (hh:mm a)');
+                //let endTime1= moment.unix(endTime).format('MMMM Do, YYYY (hh:mm a)');
+                
+                //create a reminder
+                
 
                 let appointment = {
-                    startTime: startTime1,
-                    endTime: endTime1, 
+                    startTime,
+                    endTime, 
                     patientId: patientID, 
                     name, 
-                    reminder
+                    reminderBool    
                 }
 
                 axios({
@@ -60,9 +65,9 @@ export const addAppointment = (startTime, endTime, patientID, name, reminder) =>
                     data: {
                         name: name,
                         patientId: patientID,
-                        reminder: reminder,
-                        startTime: startTime1,
-                        endTime: endTime1
+                        reminderBool: reminderBool,
+                        startTime,
+                        endTime
                     }
                 })
 
@@ -82,10 +87,23 @@ export const deleteAppointment = (appointment) => {
             // normally some asyn logic goes here to delete the data from the database
             axios.delete('/appt/remove',  {data: {patientId: appointment.patientId}} );
 
-            dispatch({ type: DELETE_APPOINTMENT, payload: appointment.patientId});
+            dispatch({ type: DELETE_APPOINTMENT, payload: appointment.startTime});
         } catch (error) {
             console.log('Failed to delete appointment', error);
             dispatch({ type: APPOINTMENT_FAIL, payload: 'Appointment failed to be deleted - contact technical support' });
+        }
+    };
+};
+
+export const searchAppointment = (patientId) => {
+    return async (dispatch) => {
+        dispatch({ type: APPOINTMENT_FAIL, payload: '' });
+
+        try {
+            // normally some asyn logic goes here to delete the data from the database
+            dispatch({ type: SEARCH_APPOINTMENT, payload: patientId});
+        } catch (error) {
+            dispatch({ type: APPOINTMENT_FAIL, payload: 'Appointment not found' });
         }
     };
 };
