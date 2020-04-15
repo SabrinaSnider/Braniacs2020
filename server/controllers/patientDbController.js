@@ -47,13 +47,14 @@ exports.forgotP = function(req, res, next){
               pass: 'patient0123' //process.env.GMAILPW
             }
           });
+          var site = (process.env.NODE_ENV === 'production') ? "https://brainiacs2020.herokuapp.com" : "localhost:3000"
           var mailOptions = {
             to: user.email,
             from: 'patientpassreset@gmail.com',
             subject: 'Node.js Password Reset',
             text: 'You are receiving this because you (or someone else) have requested the reset of the password for your account.\n\n' +
               'Please click on the following link, or paste this into your browser to complete the process:\n\n' +
-              'http://' + req.headers.host + '/reset/' + token + '\n\n' +
+              'http://' + site + '/reset/' + token + '\n\n' +
               'If you did not request this, please ignore this email and your password will remain unchanged.\n'
           };
           smtpTransport.sendMail(mailOptions, function(err) {
@@ -77,42 +78,33 @@ exports.validateReset = function(req, res){
           console.log('Password reset token is invalid or has expired.')
           return res.redirect('/forgot');
         }
-        console.log('all good')
         res.send({validated: true});
       });
 };
 
 exports.reset = function(req, res){
-  console.log('reset')
+    if(req.body.password !== req.body.confirm) {
+      console.log('Passwords do not match.')
+      return res.redirect('back');
+    }
     async.waterfall([
         function(done) {
-          patient.findOne({ resetPasswordToken: req.params.token, resetPasswordExpires: { $gt: Date.now() } }, function(err, user) {
-            if (!user) {
-              // req.flash('error', 'Password reset token is invalid or has expired.');
-              console.log('Password reset token is invalid or has expired.')
-              return res.redirect('/Home');
-            }
-            if(req.body.password === req.body.confirm) {
-              // user.setPassword(req.body.password, function(err) {
-              //   user.resetPasswordToken = undefined;
-              //   user.resetPasswordExpires = undefined;
-    
-              //   user.save(function(err) {
-              //     req.logIn(user, function(err) {
-                    done(err, user);
-              //     });
-              //   });
-              // })
-              console.log('yay1')
-            } else {
-                // req.flash("error", "Passwords do not match.");
-                console.log('Passwords do not match.')
-                return res.redirect('back');
-            }
-          });
-        },
-        function(user, done) {
-          console.log('pre-email')
+          patient.findOneAndUpdate(
+            { resetPasswordToken: req.params.token, resetPasswordExpires: { $gt: Date.now() } }, 
+            { password: req.body.password },
+            function(err, user) {
+              if (!user) { // if no user found, do not update
+                // req.flash('error', 'Password reset token is invalid or has expired.');
+                console.log('Password reset token is invalid or has expired.')
+                return res.redirect('/Home');
+              }
+              console.log('should be updated')
+              user.resetPasswordToken = undefined;
+              user.resetPasswordExpires = undefined;
+              done(err, user); 
+            });
+          },
+        function(user, done) { // after update, email user
           var smtpTransport = nodemailer.createTransport({
             service: 'Gmail', 
             auth: {
@@ -120,7 +112,6 @@ exports.reset = function(req, res){
               pass: 'patient0123' //process.env.GMAILPW
             }
           });
-          console.log('pre-email2')
           var mailOptions = {
             to: user.email,
             from: 'patientpassreset@gmail.com',
@@ -128,7 +119,6 @@ exports.reset = function(req, res){
             text: 'Hello,\n\n' +
               'This is a confirmation that the password for your account ' + user.email + ' has just been changed.\n'
           };
-          console.log('pre-email3')
           smtpTransport.sendMail(mailOptions, function(err) {
             // req.flash('success', 'Success! Your password has been changed.');
             console.log('Success! Your password has been changed.')
