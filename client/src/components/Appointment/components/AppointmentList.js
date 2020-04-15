@@ -20,7 +20,7 @@ class AppointmentList extends Component {
                 <strong> Patient name: </strong>
                 <span>{appointment.name}</span>
                 <strong> Starting Time: </strong>
-                <span>{appointment.startTime}</span>
+                <span>{startTime1}</span>
                 <span> - </span>
                 <strong> Ending Time: </strong>
                 <span>{endTime1}</span>

@@ -19,12 +19,11 @@ class LogIn extends Component {
                     <form onSubmit={this.onLogIn} className="form-signin">
                         <div className="text-center mb-4 mt-5">
                             <h1 className="h3 mb-3 font-weight-normal">Appointment Manager</h1>
-                            <p>Please enter your email address or username and click Log in</p>
+                            <p>Welcome to the appointment and reminder manager. </p>
+                            <p> Please click Log in</p>
                         </div>
 
-                        <div className="form-label-group mb-2">
-                            <input type="email" id="inputEmail" className="form-control" placeholder="Admin Username" autoFocus />
-                        </div>
+                        
                         <button className="btn btn-lg btn-primary btn-block" type="submit">Log in</button>
                     </form>
                 </div>

@@ -112,7 +112,7 @@ class Home extends Component {
     }
 
     onIDChange = (e) => {
-        this.setState({ patientId: e.target.value});
+        this.setState({ patientId: parseInt(e.target.value)});
     }
 
     onNameChange = (e) => {
@@ -183,9 +183,15 @@ class Home extends Component {
                     {this.renderError()}
                     <p></p><p></p>
                     <p></p>
+                    <div className="row">
+
+                    <div className="col-sm-12">
                     <div className="card">
-                        <div className="card-body" style={{ height: '750px', background: '#FFFFFF' }}>
+
+                        <div className="card-body">
                             <MyCalendar appointments={this.props.appointments} />  </div>
+                    </div>
+                    </div>
                     </div>
                     <p></p><p></p>
                     <p></p>

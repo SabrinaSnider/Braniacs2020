@@ -24,6 +24,15 @@ exports.fetchRem = function(req, res){
 	})
 }
 
+exports.listByID = function (req, res) {
+    rem.find({ 'patientId' : req.body.patientId}, function(err, obj) {
+      if (err) {
+		if (err) res.status(200).send("NaN");
+      } else {
+		res.json(obj);
+      }
+    }); 
+};
 
 exports.listRem = function (req, res) {
     /* Add your code. Make sure to send the documents as a JSON response.*/
