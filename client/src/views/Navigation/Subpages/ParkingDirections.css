@@ -16,7 +16,7 @@
     font-size: 1.2rem;
 }
 
-#parking-container {
+#parking-content {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -24,11 +24,17 @@
 
 #directions-container-parking {
     width: 49%;
+    height: 65vh;
+    min-height: 400px;
+    overflow-y: scroll;
+    overflow-x: hidden;
 }
 
 #maps-contianer-parking {
     width: 49%;
     height: 60vh;
+    height: 65vh;
+    min-height: 400px;
 }
 
 #parking-address-form {
@@ -63,15 +69,20 @@
         width: 100%;
     }
 
-    #parking-container {
-        flex-direction: column;
+    #parking-content {
+        flex-direction: column-reverse;
     }
 
     #directions-container-parking {
         width: 100%;
+        height: 50vh;
+        overflow: visible;
+        padding-top: 20px;
     }
-
+    
     #maps-contianer-parking {
         width: 100%;
+        height: 60vh;
+        height: 50vh;
     }
 }

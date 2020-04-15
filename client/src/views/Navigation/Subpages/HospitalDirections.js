@@ -25,7 +25,7 @@ function HostpitalDirections(props) {
     }, [])
 
     return (
-        <div style={{padding: '0px 10px'}}>
+        <div style={{padding: '0px 20px', 'flexGrow': '1'}}>
             <div id="hospital-header">
                 <h2>Directions to Hospital</h2>
             </div>
@@ -40,7 +40,7 @@ function HostpitalDirections(props) {
                 <Button href='https://www.google.com/maps/dir//UF+Department+of+Neurosurgery,+Southwest+Archer+Road+%231097,+Gainesville,+FL/@29.6396834,-82.3794005,13z/data=!3m1!4b1!4m9!4m8!1m0!1m5!1m1!1s0x88e8a39e42a9d089:0xff5d2d7f10057cd9!2m2!1d-82.344381!2d29.639688!3e0' target="_blank" style={{'max-height': '40px'}}>Open in Google Maps</Button>
             </div>
 
-            <div id="hospital-container">
+            <div id="hospital-content">
                 <div id="directions-container-hospital">
                     <Directions // update instructions whenever the directions change
                         directions = {directions}
