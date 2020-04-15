@@ -50,6 +50,9 @@ function AccountManagement(props) {
         }
         ).then(function (response) {
             console.log(firstName);
+            console.log(lastName);
+            console.log(dob);
+            console.log(email);
             console.log(response.data);
         })
         .catch(function (error) {
