@@ -10,6 +10,8 @@ import NavigationPage from './views/Navigation/Navigation'
 import AccountManagement from './views/AccountManagement/AccountManagement'
 import Appointment from "./components/Appointment/Appointment";
 import httpUser from './httpUser'
+import ForgotPass from './views/ForgotPassword/ForgotPass';
+import ResetPass from './views/ResetPassword/ResetPass';
 
 /*
   Checks for the homepage route first. If not routing to home, sends to DefaultContainer.
@@ -60,6 +62,8 @@ const DefaultContainer = (props) => {
       <Route exact path="/Navigation/:option" component={NavigationPage} />
       <Route exact path="/Account" render={(props) => <AccountManagement {...props} currentUser={currentUser} />} />
       <Route exact path="/Appointment" component={Appointment} />
+      <Route path="/forgot" render={(props) => <ForgotPass {...props} />} />
+      <Route path="/reset/:token" render={(props) => <ResetPass {...props} />} />
       <Route path="/SignIn" render={(props) => <SignIn {...props} onLoginSuccess={onLoginSuccess} />}  /> {/*currentUser={props.currentUser} setCurrentUser={props.setCurrentUser}*/}
       <Route path="/SignUp" render={(props) => <SignUp {...props} onLoginSuccess={onLoginSuccess} />}  /> {/* onLoginSuccess={props.onLoginSuccess()} currentUser={props.currentUser} setCurrentUser={props.setCurrentUser}*/}
       <Route path="/LogOut" render={(props) => <LogOut {...props} logOut={logOut} />} /> {/*currentUser={props.currentUser} setCurrentUser={props.setCurrentUser}*/}
