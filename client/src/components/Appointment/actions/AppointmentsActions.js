@@ -1,12 +1,14 @@
 import moment from 'moment';
 import axios from 'axios'
 import React from 'react';
+import { createReminder } from './ReminderActions';
 
 
 import {
     ADD_APPOINTMENT,
     DELETE_APPOINTMENT,
-    APPOINTMENT_FAIL
+    APPOINTMENT_FAIL,
+    SEARCH_APPOINTMENT
 } from './types';
 const mongoose = require('mongoose');
 
@@ -45,6 +47,9 @@ export const addAppointment = (startTime, endTime, patientID, name, reminderBool
             } else {
                 //let startTime1 = moment.unix(startTime).format('MMMM Do, YYYY (hh:mm a)');
                 //let endTime1= moment.unix(endTime).format('MMMM Do, YYYY (hh:mm a)');
+                
+                //create a reminder
+                
 
                 let appointment = {
                     startTime,
@@ -86,6 +91,19 @@ export const deleteAppointment = (appointment) => {
         } catch (error) {
             console.log('Failed to delete appointment', error);
             dispatch({ type: APPOINTMENT_FAIL, payload: 'Appointment failed to be deleted - contact technical support' });
+        }
+    };
+};
+
+export const searchAppointment = (patientId) => {
+    return async (dispatch) => {
+        dispatch({ type: APPOINTMENT_FAIL, payload: '' });
+
+        try {
+            // normally some asyn logic goes here to delete the data from the database
+            dispatch({ type: SEARCH_APPOINTMENT, payload: patientId});
+        } catch (error) {
+            dispatch({ type: APPOINTMENT_FAIL, payload: 'Appointment not found' });
         }
     };
 };

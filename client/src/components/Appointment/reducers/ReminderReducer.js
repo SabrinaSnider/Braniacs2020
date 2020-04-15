@@ -6,11 +6,14 @@ import axios from 'axios'
 import {
     CREATE_REMINDER, 
     REMINDER_FAIL,
-    DELETEALL_REMINDER
+    DELETEALL_REMINDER, 
+    SEARCH_REMINDER
 } from '../actions/types';
 
     let sampleAppoint2 = [];
     let arr2 = [];
+    let prevState = [];
+
 
 
     axios.get('/reminder/list', {})
@@ -72,6 +75,32 @@ export default (state = INITIAL_STATE, action) => {
 				...state,
 				error: ''
             };
+
+            case SEARCH_REMINDER:
+                let newItems = [];
+                let error1 = '';
+            
+                if(action.payload !== "c"){
+                    prevState = state.items1;
+                    let id = parseInt(action.payload);
+                    state.items1.forEach((o) => {
+                        if (o.patientId === id){
+                            newItems.push(o);
+                        }
+                    })
+    
+                    state.items1=newItems;
+                }
+                else {
+                    state.items1 = prevState;
+                    prevState = [];
+                }
+    
+                return {
+                    ...state,
+                    error: error1
+                };
+        
             
         default:
             return state;

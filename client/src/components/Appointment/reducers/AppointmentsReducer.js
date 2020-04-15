@@ -7,11 +7,12 @@ import {
     ADD_APPOINTMENT,
     DELETE_APPOINTMENT,
     APPOINTMENT_FAIL, 
+    SEARCH_APPOINTMENT
 } from '../actions/types';
 
     let sampleAppoint = [];
     let arr1 = [];
- 
+    let prevState=[];
 
 
     axios.get('/appt/list', {})
@@ -72,7 +73,31 @@ export default (state = INITIAL_STATE, action) => {
                 ...state,
                 error: ''
             };
-            
+
+        case SEARCH_APPOINTMENT:
+            let newItems = [];
+            let error1 = '';
+        
+            if(action.payload !== "c"){
+                prevState = state.items;
+                let id = parseInt(action.payload);
+                state.items.forEach((o) => {
+                    if (o.patientId === id){
+                        newItems.push(o);
+                    }
+                })
+
+                state.items=newItems;
+            }
+            else {
+                state.items = prevState;
+                prevState = [];
+            }
+
+            return {
+                ...state,
+                error: error1
+            };
     
         default:
             return state;

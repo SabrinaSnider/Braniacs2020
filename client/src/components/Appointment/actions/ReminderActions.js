@@ -1,23 +1,23 @@
 import moment from 'moment';
 import axios from 'axios'
-import React from 'react';
-
+import React, {useState} from 'react';
 
 
 import {
 	CREATE_REMINDER,
-	REMINDER_FAIL, 
-	DELETEALL_REMINDER
+	REMINDER_FAIL,
+	DELETEALL_REMINDER,
+	SEARCH_REMINDER
 } from './types';
 
 const mongoose = require('mongoose');
 
-export const createReminder = (patientId, message, name) => {
+
+export const createReminder = (patientId, name, phone, reminderMessage) => {
 	return async (dispatch, getState) => {
 		dispatch({ type: REMINDER_FAIL, payload: '' });
 
 		try {
-
 			// normally some asyn logic goes here to add this appointment to a database
 
 			// typically it will be the database that can reject a new appointment insertion but since
@@ -26,15 +26,11 @@ export const createReminder = (patientId, message, name) => {
 			// check for time in the past
 
 			//search through patient database by id and retrieve. 
-			let phoneNum = "+19202057240";		
-			let currname = "Susan";
+		
+			phone = "+1" + phone;
 			let sid = "28";
 			let time = moment().unix();
-			console.log(time);
 
-
-			
-			
 
 			//store reminder in database
 			axios({
@@ -42,39 +38,39 @@ export const createReminder = (patientId, message, name) => {
 				url: '/reminder/create',
 				data: {
 					timeStamp: time,
-					patientId: patientId,
-					name: currname,
-					phone: phoneNum,
-					reminderMessage: message,
+					patientId,
+					name,
+					phone,
+					reminderMessage,
 					messageId: sid
 				}
 			}).then(function (response) {
 				sid = response.data.sid;
-			  })
-			  .catch(function (error) {
-				console.log(error);
-			  });
+			})
+				.catch(function (error) {
+					console.log(error);
+				});
 
 			axios({
 				method: 'post',
 				url: '/remapi/send',
 				data: {
 					timeStamp: time,
-					patientId: patientId,
-					name: currname,
-					phone: phoneNum,
-					reminderMessage: message,
+					patientId,
+					name,
+					phone,
+					reminderMessage,
 					messageId: sid
 				}
 			})
-		
+
 			let reminder = {
 				timeStamp: time,
-				patientId: patientId,
-				name: currname,
-				phone: phoneNum,
-				reminderMessage: message,
-				messageId: sid
+					patientId,
+					name,
+					phone,
+					reminderMessage,
+					messageId: sid
 			}
 			console.log(reminder);
 
@@ -111,14 +107,28 @@ export const createReminder = (patientId, message, name) => {
 };*/
 
 export const deleteAllReminders = () => {
+	return async (dispatch) => {
+		dispatch({ type: REMINDER_FAIL, payload: '' });
+		try {
+			axios.delete('/reminder/removeAll');
+			dispatch({ type: DELETEALL_REMINDER });
+		} catch (error) {
+			console.log('Failed to delete appointment', error);
+			dispatch({ type: REMINDER_FAIL, payload: 'Remidners failed to be deleted - contact technical support' });
+		}
+	};
+};
+
+
+export const searchReminder = (patientId) => {
     return async (dispatch) => {
         dispatch({ type: REMINDER_FAIL, payload: '' });
+
         try {
-			axios.delete('/reminder/removeAll');
-            dispatch({ type: DELETEALL_REMINDER});
+            // normally some asyn logic goes here to delete the data from the database
+            dispatch({ type: SEARCH_REMINDER, payload: patientId});
         } catch (error) {
-            console.log('Failed to delete appointment', error);
-            dispatch({ type: REMINDER_FAIL, payload: 'Remidners failed to be deleted - contact technical support' });
+            dispatch({ type: REMINDER_FAIL, payload: 'Reminders not found' });
         }
     };
 };

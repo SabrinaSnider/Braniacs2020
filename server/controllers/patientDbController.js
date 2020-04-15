@@ -7,6 +7,19 @@ const ObjectId = require('mongodb').ObjectID;
 const validateRegisterInput = require("../validation/register");
 const validateLoginInput = require("../validation/login");
 
+exports.listPatients = function (req, res) {
+    /* Add your code. Make sure to send the documents as a JSON response.*/
+    patient.find(null, {}, function(err, obj) {
+      if (err) {
+		if (err) res.status(200).send("NaN");
+      } else {
+		res.json(obj);
+		console.log(obj)
+      }
+    }); 
+
+};
+
 /*
 USING fetchEmails:
 Make a get request with "email" added to the request.
@@ -39,6 +52,32 @@ Make a get request with "email" added to the request.
 exports.fetchUserFromEmail = function(req, res){
 	console.log("looking for user with id", req.body._id)
 	patient.findOne({ "email" : req.body.email}, function(err, usr){
+		if (err) res.status(200).send("NaN");
+        else {
+            console.log(usr)
+            res.status(200).json({
+                name: {
+                    first: usr.name.first,
+                    last: usr.name.last
+                },
+                clinicId: usr.clinicId,
+                email: usr.email,
+				phone: usr.phone,
+                dob: usr.dob,
+                password: usr.password,
+            })
+        }
+	})
+}
+
+/*
+USING fetchUserFromPatientId:
+Make a get request with "patientId" added to the request.
+*/
+
+exports.fetchUserFromPatientId = function(req, res){
+	console.log("looking for user with patient id", req.body.patientId)
+	patient.findOne({ "patientId" : req.body.patientId}, function(err, usr){
 		if (err) res.status(200).send("NaN");
         else {
             console.log(usr)

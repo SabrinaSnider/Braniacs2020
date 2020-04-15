@@ -20,11 +20,11 @@ class AppointmentList extends Component {
                 <strong> Patient name: </strong>
                 <span>{appointment.name}</span>
                 <strong> Starting Time: </strong>
-                <span>{startTime1}</span>
+                <span>{appointment.startTime}</span>
                 <span> - </span>
                 <strong> Ending Time: </strong>
                 <span>{endTime1}</span>
-                <button onClick={this.onDeleteAppointment.bind(this, appointment)} className="btn btn-sm btn-warning float-right">delete</button>
+                <button onClick={this.onDeleteAppointment.bind(this, appointment)} className="btn btn-sm btn-warning float-right">Delete</button>
             </li>
         );
     }
