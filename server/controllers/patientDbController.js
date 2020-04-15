@@ -69,27 +69,28 @@ exports.forgotP = function(req, res, next){
       });
 };
 
-exports.reset = function(req, res){
-  console.log('reset')
-    patient.findOne({ resetPasswordToken: req.params.token, resetPasswordExpires: { $gt: Date.now() } }, function(err, user) {
+exports.validateReset = function(req, res){
+  console.log('validate', req.body.token)
+    patient.findOne({ resetPasswordToken: req.body.token, resetPasswordExpires: { $gt: Date.now() } }, function(err, user) {
         if (!user) {
           // req.flash('error', 'Password reset token is invalid or has expired.');
           console.log('Password reset token is invalid or has expired.')
           return res.redirect('/forgot');
         }
-        res.render('reset', {token: req.params.token});
+        console.log('all good')
+        res.send({validated: true});
       });
 };
 
-exports.resetT = function(req, res){
-  console.log('reseTTTT')
+exports.reset = function(req, res){
+  console.log('reset')
     async.waterfall([
         function(done) {
           patient.findOne({ resetPasswordToken: req.params.token, resetPasswordExpires: { $gt: Date.now() } }, function(err, user) {
             if (!user) {
               // req.flash('error', 'Password reset token is invalid or has expired.');
               console.log('Password reset token is invalid or has expired.')
-              return res.redirect('back');
+              return res.redirect('/Home');
             }
             if(req.body.password === req.body.confirm) {
               user.setPassword(req.body.password, function(err) {
@@ -125,7 +126,8 @@ exports.resetT = function(req, res){
               'This is a confirmation that the password for your account ' + user.email + ' has just been changed.\n'
           };
           smtpTransport.sendMail(mailOptions, function(err) {
-            req.flash('success', 'Success! Your password has been changed.');
+            // req.flash('success', 'Success! Your password has been changed.');
+            console.log('Success! Your password has been changed.')
             done(err);
           });
         }

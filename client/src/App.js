@@ -19,6 +19,7 @@ import ResetPass from './views/ResetPassword/ResetPass';
   called from the home component with a home prop passed in.
 */
 const App = (props) => {
+  console.log('front end')
   const [currentUser, setCurrentUser] = useState(httpUser.getCurrentUser());
 
   const onLoginSuccess = async function() {
@@ -53,7 +54,7 @@ const DefaultContainer = (props) => {
   const logOut = async function(){
     props.logOut();
   }
-  
+
   const currentUser = props.currentUser;
   return(
   <div style={{display: 'flex', 'flexFlow': 'column', 'minHeight': '100vh', 'backgroundImage': 'url(/background.png)'}}>
