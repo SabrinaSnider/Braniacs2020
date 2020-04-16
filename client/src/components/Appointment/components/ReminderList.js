@@ -6,7 +6,8 @@ import { createReminder } from '../actions/ReminderActions';
 
 class ReminderList extends Component {
     onResend = (toResend) => {
-        this.props.createReminder(toResend.patientId, toResend.name, toResend.phone, toResend.reminderMessage);
+        let parsePhone = (toResend.phone).substr(2);
+        this.props.createReminder(toResend.patientId, toResend.name, parsePhone, toResend.reminderMessage);
     }
 
     renderReminder = (reminder) => {
