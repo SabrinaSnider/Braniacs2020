@@ -60,7 +60,7 @@ export default (state = INITIAL_STATE, action) => {
 
             return {
                 ...state,
-                items: state.items.filter( appointment => appointment.patientId !== action.payload ),
+                items: state.items.filter( appointment => appointment.startTime !== action.payload ),
                 error: ''
             };
 
