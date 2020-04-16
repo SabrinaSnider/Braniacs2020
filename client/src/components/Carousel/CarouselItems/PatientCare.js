@@ -6,8 +6,11 @@ import { CardDeck, Card } from 'react-bootstrap'
 */
 const PatientCare = (props) => {
     return (
-        <div style={{'backgroundColor': '#EAEAEA', padding: "20px 80px"}}>
-            <CardDeck style={{textAlign: 'left'}}>
+        <div style={{ width: '100%', height: '100%', padding: "20px 80px"}}>
+            <div style={{height: '9%', margin: '10px'}}>
+                <h2 style={{fontSize: '2rem', 'float': 'left', margin: '30px 0px 30px 0px'}}>PATIENT CARE</h2>
+            </div>
+            <CardDeck style={{textAlign: 'left', 'float': 'left', margin: '0px'}}>
                 <Card>
                     <Card.Img variant="top" src="/CarouselHome/PatientCare/I1.jpg" />
                     <Card.Body>
@@ -18,7 +21,9 @@ const PatientCare = (props) => {
                         </Card.Text>
                     </Card.Body>
                     <Card.Footer>
-                        <small className="text-muted">Make an Appointment</small>
+                        <a href="https://neurosurgery.ufl.edu/patient-care/appointments/" title="Make an Appointment" class="FancyLink td-n clickable ba-0 FancyLink--blue-light fs-14 fs-16--md ff-gm">
+                            <span class="FancyLink__Text">Make an Appointment </span>
+                        </a>
                     </Card.Footer>
                 </Card>
                 <Card>
@@ -35,7 +40,9 @@ const PatientCare = (props) => {
                         </Card.Text>
                     </Card.Body>
                     <Card.Footer>
-                    <small className="text-muted">Look-up an Adult Disease or Condition</small>
+                    <a href="https://neurosurgery.ufl.edu/patient-care/diseases-conditions/" title="Make an Appointment" class="FancyLink td-n clickable ba-0 FancyLink--blue-light fs-14 fs-16--md ff-gm">
+                            <span class="FancyLink__Text">Look-up an Adult Disease or Condition </span>
+                        </a>
                     </Card.Footer>
                 </Card>
                 <Card>
@@ -52,7 +59,9 @@ const PatientCare = (props) => {
                         </Card.Text>
                     </Card.Body>
                     <Card.Footer>
-                        <small className="text-muted">Look-up a Pediatric Disease or Condition</small>
+                        <a href="https://neurosurgery.ufl.edu/patient-care/pediatric-neurosurgery/pediatric-diseases-conditions-services/" title="Make an Appointment" class="FancyLink td-n clickable ba-0 FancyLink--blue-light fs-14 fs-16--md ff-gm">
+                                <span class="FancyLink__Text">Look-up a Pediatric Disease or Condition </span>
+                            </a>
                     </Card.Footer>
                 </Card>
             </CardDeck>
