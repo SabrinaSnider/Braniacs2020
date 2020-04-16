@@ -6,12 +6,12 @@ import { CardDeck, Card, Button } from 'react-bootstrap'
 */
 const NewsVideos = (props) => {
     return (
-        <div style={{'backgroundColor': '#EAEAEA', width: '100%', height: '100%', padding: "20px 80px"}}>
+        <div style={{ width: '100%', height: '100%', padding: "20px 80px"}}>
             <div style={{height: '9%', margin: '10px'}}>
-                <h2 style={{fontSize: '2rem', 'float': 'left', margin: '0px'}}>RECENT NEWS &amp; VIDEOS</h2>
-                <Button style={{'float': 'right', margin: '0px'}}>All News &amp; Videos</Button>
+                <h2 style={{fontSize: '2rem', 'float': 'left', margin: '30px 0px 30px 0px'}}>RECENT NEWS &amp; VIDEOS</h2>
+                <Button href="https://neurosurgery.ufl.edu/category/news/" style={{'float': 'right', margin: '30px 0px 30px 0px'}} >All News &amp; Videos</Button>
             </div>
-            <CardDeck style={{textAlign: 'left'}}>
+            <CardDeck style={{textAlign: 'left', 'float': 'left', margin: '0px'}}>
                 <Card>
                     <Card.Img variant="top" src="/CarouselHome/NewsVideos/I1.jpg" />
                     <Card.Body>
@@ -24,7 +24,9 @@ const NewsVideos = (props) => {
                         </Card.Text>
                     </Card.Body>
                     <Card.Footer>
-                        <small className="text-muted">See More</small>
+                    <a href="https://www.clickorlando.com/news/local/2020/02/21/how-childhood-cancer-research-is-advancing/?fbclid=IwAR0wrjF-9q07PJKuVEVxhVOe8HELRgn2ld05Y0CvMfkQa84iwWJ-aLYdOjY" title="Make an Appointment" class="FancyLink td-n clickable ba-0 FancyLink--blue-light fs-14 fs-16--md ff-gm">
+                            <span class="FancyLink__Text">See More</span>
+                        </a>
                     </Card.Footer>
                 </Card>
                 <Card>
@@ -39,7 +41,9 @@ const NewsVideos = (props) => {
                         </Card.Text>
                     </Card.Body>
                     <Card.Footer>
-                    <small className="text-muted">See More</small>
+                        <a href="https://mbi.ufl.edu/2020/03/03/remission2020/" title="Make an Appointment" class="FancyLink td-n clickable ba-0 FancyLink--blue-light fs-14 fs-16--md ff-gm">
+                                <span class="FancyLink__Text">See More</span>
+                            </a>
                     </Card.Footer>
                 </Card>
                 <Card>
@@ -55,7 +59,9 @@ const NewsVideos = (props) => {
                         </Card.Text>
                     </Card.Body>
                     <Card.Footer>
-                        <small className="text-muted">See More</small>
+                        <a href="https://neurosurgery.ufl.edu/2020/02/25/asco-direct/" title="Make an Appointment" class="FancyLink td-n clickable ba-0 FancyLink--blue-light fs-14 fs-16--md ff-gm">
+                                <span class="FancyLink__Text">See More</span>
+                            </a>
                     </Card.Footer>
                 </Card>
             </CardDeck>
