@@ -22,12 +22,13 @@ function HostpitalDirections(props) {
     // If values are passed to the array, useEffect will execute every time those value changes
     useEffect(() => {
         updatePosition(setPosition, destination, setDirections)
-    }, [])
+    }, [destination])
 
     return (
         <div style={{padding: '0px 20px', 'flexGrow': '1'}}>
             <div id="hospital-header">
                 <h2>Directions to Hospital</h2>
+                <Button href='https://www.google.com/maps/dir//UF+Department+of+Neurosurgery,+Southwest+Archer+Road+%231097,+Gainesville,+FL/@29.6396834,-82.3794005,13z/data=!3m1!4b1!4m9!4m8!1m0!1m5!1m1!1s0x88e8a39e42a9d089:0xff5d2d7f10057cd9!2m2!1d-82.344381!2d29.639688!3e0' target="_blank" variant="success" style={{'max-height': '40px'}}>Google Maps</Button>
             </div>
 
             <div id="hospital-subheader">
@@ -37,7 +38,11 @@ function HostpitalDirections(props) {
                         <h3 className="directions-header">Distance: {directions.routes[0].legs[0].distance.text}.</h3>
                     </div>
                 }
-                <Button href='https://www.google.com/maps/dir//UF+Department+of+Neurosurgery,+Southwest+Archer+Road+%231097,+Gainesville,+FL/@29.6396834,-82.3794005,13z/data=!3m1!4b1!4m9!4m8!1m0!1m5!1m1!1s0x88e8a39e42a9d089:0xff5d2d7f10057cd9!2m2!1d-82.344381!2d29.639688!3e0' target="_blank" style={{'max-height': '40px'}}>Open in Google Maps</Button>
+                <Form className="origin-form">
+                    <Form.Label style={{'min-width': '130px', 'margin': 'auto 5px auto 0px', 'fontWeight': 'bold'}}>Starting from: </Form.Label>
+                    <Form.Control placeholder="current location" style={{'fexShrink': '1', 'margin': 'auto 5px'}}/>
+                    <Button variant="primary" type="submit" style={{'maxHeight': '40px', 'margin': 'auto 0px auto 5px'}}> Submit </Button>
+                </Form>
             </div>
 
             <div id="hospital-content">

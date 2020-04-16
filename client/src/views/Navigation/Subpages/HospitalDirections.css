@@ -47,6 +47,13 @@
     margin: auto;
 }
 
+.origin-form {
+    display: flex;
+    flex-direction: row;
+    width: 49%;
+    justify-content: space-between;
+}
+
 @media (max-width: 1000px) {
     #hospital-header {
         flex-direction: column;
