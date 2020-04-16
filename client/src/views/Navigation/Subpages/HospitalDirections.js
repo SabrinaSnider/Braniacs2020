@@ -1,19 +1,21 @@
 import React, { useState, useEffect } from 'react'
 import GMaps from '../../../components/GoogleMaps/GMaps'
 import Directions from '../../../components/GoogleDirections/Directions'
-import { updatePosition } from '../../../components/GoogleDirections/DirectionHandler'
+import { updatePosition, getDirections } from '../../../components/GoogleDirections/DirectionHandler'
 import { Card, Button, Form } from 'react-bootstrap'
 import "./HospitalDirections.css"
-
-let destination = {
-    latitude: 29.639375,
-    longitude: -82.340842
-}
+import PlacesAutocomplete from '../../../components/PlacesAutocomplete/PlacesAutocomplete'
 
 /*
     Hospital directions section on the navigation page. Uses the user's current geolocation
     to display auto-generated directions to the hospital.
 */
+
+const destination = {
+    latitude: 29.639375,
+    longitude: -82.340842
+}
+
 function HostpitalDirections(props) {
     const [directions, setDirections] = useState(null);
     const [position, setPosition] = useState(null);
@@ -21,14 +23,18 @@ function HostpitalDirections(props) {
     // Functions passed to useEffect are executed on every component rendering
     // If values are passed to the array, useEffect will execute every time those value changes
     useEffect(() => {
+        getDirections(position, destination, setDirections)
+    }, [position])
+
+    useEffect(() => {
         updatePosition(setPosition, destination, setDirections)
-    }, [destination])
+    }, [])
 
     return (
         <div style={{padding: '0px 20px', 'flexGrow': '1'}}>
             <div id="hospital-header">
                 <h2>Directions to Hospital</h2>
-                <Button href='https://www.google.com/maps/dir//UF+Department+of+Neurosurgery,+Southwest+Archer+Road+%231097,+Gainesville,+FL/@29.6396834,-82.3794005,13z/data=!3m1!4b1!4m9!4m8!1m0!1m5!1m1!1s0x88e8a39e42a9d089:0xff5d2d7f10057cd9!2m2!1d-82.344381!2d29.639688!3e0' target="_blank" variant="success" style={{'max-height': '40px'}}>Google Maps</Button>
+                <Button href='https://www.google.com/maps/dir//UF+Department+of+Neurosurgery,+Southwest+Archer+Road+%231097,+Gainesville,+FL/@29.6396834,-82.3794005,13z/data=!3m1!4b1!4m9!4m8!1m0!1m5!1m1!1s0x88e8a39e42a9d089:0xff5d2d7f10057cd9!2m2!1d-82.344381!2d29.639688!3e0' target="_blank" style={{'max-height': '40px'}}>Google Maps</Button>
             </div>
 
             <div id="hospital-subheader">
@@ -39,9 +45,11 @@ function HostpitalDirections(props) {
                     </div>
                 }
                 <Form className="origin-form">
-                    <Form.Label style={{'min-width': '130px', 'margin': 'auto 5px auto 0px', 'fontWeight': 'bold'}}>Starting from: </Form.Label>
-                    <Form.Control placeholder="current location" style={{'fexShrink': '1', 'margin': 'auto 5px'}}/>
-                    <Button variant="primary" type="submit" style={{'maxHeight': '40px', 'margin': 'auto 0px auto 5px'}}> Submit </Button>
+                    <h3 style={{'fontSize': '1.2rem'}}>Starting location: </h3>
+                    <PlacesAutocomplete 
+                        position = {position}
+                        setPosition = {setPosition}
+                    />
                 </Form>
             </div>
 

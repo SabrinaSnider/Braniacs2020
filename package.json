@@ -43,6 +43,7 @@
     "popper.js": "^1.14.4",
     "react-big-calendar": "^0.24.3",
     "react-bootstrap": "^1.0.0-beta.17",
+    "react-cool-onclickoutside": "^1.4.1",
     "react-google-maps": "^9.4.5",
     "react-nice-dates": "^2.0.1",
     "react-redux": "^5.0.7",
@@ -51,6 +52,7 @@
     "should": "^13.2.3",
     "supertest": "^4.0.2",
     "twilio": "^3.42.1",
+    "use-places-autocomplete": "^1.1.2",
     "uuid": "^3.3.2",
     "validator": "^13.0.0"
   },
