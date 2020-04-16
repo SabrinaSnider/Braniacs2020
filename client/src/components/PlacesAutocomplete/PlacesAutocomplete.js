@@ -1,6 +1,7 @@
 import React, { useRef } from 'react';
 import usePlacesAutocomplete, { getGeocode, getLatLng } from 'use-places-autocomplete';
 import useOnclickOutside from 'react-cool-onclickoutside';
+import { InputGroup, FormControl, ListGroup } from 'react-bootstrap'
  
 const PlacesAutocomplete = (props) => {
     const {
@@ -37,14 +38,12 @@ const PlacesAutocomplete = (props) => {
         getGeocode({ address: description })
         .then(results => getLatLng(results[0]))
         .then(({ lat, lng }) => {
-            console.log('📍 Coordinates: ');
             props.setPosition({
                 latitude: lat,
                 longitude: lng
             });
-            console.log(props.position, { lat, lng });
         }).catch(error => {
-            console.log('😱 Error: ', error)
+            console.log('Error getting coordinates of location: ', error)
         });
     };
 
@@ -56,25 +55,41 @@ const PlacesAutocomplete = (props) => {
         } = suggestion;
 
         return (
-        <li
-            key={id}
-            onClick={handleSelect(suggestion)}
-        >
-            <strong>{main_text}</strong> <small>{secondary_text}</small>
-        </li>
+            <ListGroup.Item
+                key={id}
+                onClick={handleSelect(suggestion)}
+                action
+            >
+                
+                <strong>{main_text}</strong> <small>{secondary_text}</small>
+            </ListGroup.Item>            
         );
     });
 
     return (
-    <div ref={ref}>
-        <input
-            value={value}
-            onChange={handleInput}
-            disabled={!ready}
-            placeholder="current location"
-        />
+    <div ref={ref} className="location-autocomplete">
+        <InputGroup>
+            <InputGroup.Prepend>
+                <InputGroup.Text id="basic-addon1">Start location</InputGroup.Text>
+            </InputGroup.Prepend>
+            <FormControl
+                placeholder="current location"
+                value={value}
+                onChange={handleInput}
+                disabled={!ready}
+            />
+        </InputGroup>
         {/* We can use the "status" to decide whether we should display the dropdown or not */}
-        {status === 'OK' && <ul>{renderSuggestions()}</ul>}
+        {status === 'OK' && 
+        <div className="dropdown-autocomplete" style={{'position': 'absolute', 'z-index': '99', 'backgroundColor': 'white'}}>
+            {/* <ul style={{'list-style-type': 'none', 'padding': '0px'}}>
+                {renderSuggestions()}
+            </ul> */}
+            <ListGroup>
+                {renderSuggestions()}
+            </ListGroup>
+        </div>
+        }
     </div>
     );
 };

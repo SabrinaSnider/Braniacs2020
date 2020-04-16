@@ -31,7 +31,7 @@ function HostpitalDirections(props) {
     }, [])
 
     return (
-        <div style={{padding: '0px 20px', 'flexGrow': '1'}}>
+        <div id="hospital-container">
             <div id="hospital-header">
                 <h2>Directions to Hospital</h2>
                 <Button href='https://www.google.com/maps/dir//UF+Department+of+Neurosurgery,+Southwest+Archer+Road+%231097,+Gainesville,+FL/@29.6396834,-82.3794005,13z/data=!3m1!4b1!4m9!4m8!1m0!1m5!1m1!1s0x88e8a39e42a9d089:0xff5d2d7f10057cd9!2m2!1d-82.344381!2d29.639688!3e0' target="_blank" style={{'max-height': '40px'}}>Google Maps</Button>
@@ -39,18 +39,15 @@ function HostpitalDirections(props) {
 
             <div id="hospital-subheader">
                 {directions &&
-                    <div className="directions-section">
+                    <div id="directions-section">
                         <h3 className="directions-header">Time Estimate: {directions.routes[0].legs[0].duration.text}.</h3>
                         <h3 className="directions-header">Distance: {directions.routes[0].legs[0].distance.text}.</h3>
                     </div>
                 }
-                <Form className="origin-form">
-                    <h3 style={{'fontSize': '1.2rem'}}>Starting location: </h3>
-                    <PlacesAutocomplete 
-                        position = {position}
-                        setPosition = {setPosition}
-                    />
-                </Form>
+                <PlacesAutocomplete 
+                    position = {position}
+                    setPosition = {setPosition}
+                />
             </div>
 
             <div id="hospital-content">
