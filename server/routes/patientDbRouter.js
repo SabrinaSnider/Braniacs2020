@@ -18,7 +18,7 @@ Router.post('/retrieve', patientDb.fetchUserFromPatientId); //fetch user informa
 Router.post('/register', patientDb.newPatient); //create user
 Router.post('/authenticate', patientDb.authenticate);
 
-Router.put('/update', patientDb.updatePatients); //update account info function?
+Router.put('/update', patientDb.updatePatients); //update account info function
 
 Router.use(verifyToken);
 

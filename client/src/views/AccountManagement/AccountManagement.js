@@ -17,43 +17,51 @@ function AccountManagement(props) {
     const [lastName, setLastName] = useState("")
     const [email, setEmail] = useState("")
     const [dob, setDob] = useState(new Date())
+    const [pn, setPn] = useState("")
 
+    const currentUser = props.currentUser;
+    const currentId = props.currentId;
+
+    useEffect(()=>{
+        GetAccountInfo();
+    }, [])
+
+    //gets the account info based on the patient id
     const GetAccountInfo = async() => {
-        axios.post("/patient/useraccount", {
-            email: props.currentUser.email,
+        axios.post("/patient/retrieve", {
+            patientId: parseInt(currentUser.patientId)
         })
         .then(function (response) {
             console.log("response is", response)
-            if (response.data.name.first) setFirstName(response.data.name.first)
-            if (response.data.name.last) setLastName(response.data.name.last)
-            if (response.data.email) setEmail(response.data.email)
-            if (response.data.dob) setDob(response.data.dob)
+            console.log(response.data.name.first);
+
+            console.log(response.data.phone)
+
+            if(response.data.name.first) setFirstName(response.data.name.first)
+            if(response.data.name.last) setLastName(response.data.name.last)
+            if(response.data.email) setEmail(response.data.email)
+            if(response.data.dob) setDob(response.data.dob)
+            if(response.data.phone) setPn(response.data.phone)
+
         })
         .catch(function (error) {
           console.log(error);
         });
     }
 
-    useEffect(()=>{
-        GetAccountInfo();
-    }, [])
-
     const updateData = (event) => {
-        event.preventDefault(); 
+        event.preventDefault();
+        
         axios.post("/patient/update", {
             name: {
-                first: firstName,
-                last: lastName
-            },
-            dob: dob,
-            email: email
-        }
-        ).then(function (response) {
-            console.log(firstName);
-            console.log(lastName);
-            console.log(dob);
-            console.log(email);
-            console.log(response.data);
+                 first: firstName,
+                 last: lastName
+             },
+             email: email,
+             dob: dob,
+             phone: pn
+        }).then(function (response) {
+            console.log(response);
         })
         .catch(function (error) {
             console.log(error);
@@ -86,6 +94,11 @@ function AccountManagement(props) {
                 <Form.Group className="account-row">
                     <h2 className="account-label">Email</h2>
                     <Form.Control value={email}  onChange={event => setEmail(event.target.value)}/>
+                </Form.Group>
+
+                <Form.Group className="account-row">
+                    <h2 className="account-label">Phone number</h2>
+                    <Form.Control value={pn}  onChange={event => setPn(event.target.value)}/>
                 </Form.Group>
 
                 <Button id="account-save-btn" className="account-row" variant="primary" type="submit" onClick={updateData}>
