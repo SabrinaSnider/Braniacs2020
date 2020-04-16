@@ -39,6 +39,7 @@ class ReminderList extends Component {
 
 const mapStateToProps = (state) => {
     return {
+        reminders: state.reminders.items1
     }
 };
 

@@ -121,7 +121,7 @@ const SignUpBox = (props) => {
 
             else if(user.token) {
                 console.log(user);
-                props.onLoginSuccess(user.token, user.id); 
+                props.onLoginSuccess(user.token, user.id, user.admin); 
                 props.history.push('/Home');
             }
         }
@@ -168,9 +168,6 @@ const SignUpBox = (props) => {
 				<div className="form-group">
                     <label htmlFor="email" className="form-label">Phone Number</label>
 					<input id="phone" type="phone" class="form-control" placeholder="" maxlength="10" onChange={onPhoneChange}></input>
-                    {errors.email !== undefined &&
-                        <label id = "error">{errors.email}</label>
-                    }
                 </div>
 
                 <div className="form-group">
@@ -184,9 +181,6 @@ const SignUpBox = (props) => {
                 <div className="form-group">
                     <label htmlFor="password2" className="form-label">Re-type Password</label>
                     <input id="password2" type="password" class="form-control" placeholder="" onChange={onPassword2Change}></input>
-                    {/*errors.password2 &&
-                        <label id = "error">{errors.password2}</label>
-                    */}
                 </div>
 
                 <div className="form-group">

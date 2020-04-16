@@ -43,7 +43,7 @@ const SignInBox = (props) => {
         }
        
         else if(user.token) {
-            props.onLoginSuccess(user.token, user.id);
+            props.onLoginSuccess(user.token, user.id, user.admin);
             props.history.push('/Home');
         }
     };

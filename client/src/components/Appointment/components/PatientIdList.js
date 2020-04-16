@@ -38,6 +38,7 @@ class PatientIdList extends Component {
 
 const mapStateToProps = (state) => {
 	return {
+		patients: state.patients.items3
 	}
 };
 

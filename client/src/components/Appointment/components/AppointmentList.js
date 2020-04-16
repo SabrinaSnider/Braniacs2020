@@ -15,6 +15,7 @@ class AppointmentList extends Component {
 
         return (
             <li key={appointment.startTime} className="list-group-item">
+                {console.log("Appointment called by startTime")}
                 <strong>Patient ID: </strong>
                 <span>{appointment.patientId}</span>
                 <strong> Patient name: </strong>
@@ -32,7 +33,8 @@ class AppointmentList extends Component {
     render() {
         return (
             <ul className="list-group">
-                {this.props.appointments.map(this.renderAppointment)}
+                {console.log("Appointments from AppointmentList.js", this.props.appointments)}
+                {this.props.appointments.map((element) => {console.log("Appointment mapping called"); return this.renderAppointment(element)})}
             </ul>
         );
     }
@@ -40,7 +42,7 @@ class AppointmentList extends Component {
 
 const mapStateToProps = (state) => {
     return {
-
+        appointments: state.appointments.items
     }
 };
 

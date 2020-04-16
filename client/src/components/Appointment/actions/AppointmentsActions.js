@@ -8,7 +8,8 @@ import {
     ADD_APPOINTMENT,
     DELETE_APPOINTMENT,
     APPOINTMENT_FAIL,
-    SEARCH_APPOINTMENT
+    SEARCH_APPOINTMENT,
+    FILL_APPOINTMENTS
 } from './types';
 const mongoose = require('mongoose');
 
@@ -106,4 +107,34 @@ export const searchAppointment = (patientId) => {
             dispatch({ type: APPOINTMENT_FAIL, payload: 'Appointment not found' });
         }
     };
+};
+
+export const fillAppointments = () => {
+    return async (dispatch) =>{
+        dispatch({type: APPOINTMENT_FAIL, payload: ''});
+
+        try{
+            
+            
+
+            let arr1 = []
+            let sampleAppoint = [];
+            axios.get('/appt/list', {})
+            .then(function (response) {
+                //console.log("Appointment response", response)
+                sampleAppoint.data = (response.data);
+                sampleAppoint.data.forEach(element => {
+                    arr1.push(element);
+                    });
+                console.log("Calling from Appointment Action", arr1)
+                
+            })
+            .then(()=>{
+                dispatch({ type: FILL_APPOINTMENTS, payload: arr1});
+            })
+            
+        } catch(error){
+            dispatch({ type: APPOINTMENT_FAIL, payload: 'Couldn\'t fill appointments' });
+        }
+    }
 };

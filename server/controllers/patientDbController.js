@@ -139,7 +139,7 @@ exports.newPatient = async (req, res) => {
         }).then(()=>{
             if(!alreadyExists){
                 newPatient.save();
-                res.json({success: true, message: "User created with token", token, patientId : newPatient.patientId});
+                res.json({success: true, message: "User created with token", token, patientId : newPatient.patientId, admin : newPatient.admin});
             }
         })
 
@@ -188,6 +188,6 @@ exports.authenticate = async (req, res) => {
     } else {
         const token = await signToken(user);
         console.log(token);
-        res.json({success: true, message: "Token attached", token, patientId : user.patientId});
+        res.json({success: true, message: "Token attached", token, patientId : user.patientId, admin: user.admin});
     }
 }

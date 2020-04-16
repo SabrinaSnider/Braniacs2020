@@ -39,7 +39,7 @@ function AppointmentPage(props) {
             patientId: parseInt(currentId),
         })
         .then(function (response) {
-            console.log("response is", response.data)
+            //console.log("response is", response.data)
             var appointments = response.data.map(formatAppt)
             var events = response.data.map(formatEvent)
 
@@ -58,7 +58,7 @@ function AppointmentPage(props) {
             patientId: parseInt(currentId),
         })
         .then(function (response) {
-            console.log("reminder response is", response.data)
+            //console.log("reminder response is", response.data)
             var reminders1 = response.data.map(formatReminder)
 
             setReminders(reminders1)

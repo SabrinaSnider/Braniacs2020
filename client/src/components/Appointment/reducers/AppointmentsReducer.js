@@ -7,41 +7,30 @@ import {
     ADD_APPOINTMENT,
     DELETE_APPOINTMENT,
     APPOINTMENT_FAIL, 
-    SEARCH_APPOINTMENT
+    SEARCH_APPOINTMENT,
+    FILL_APPOINTMENTS
 } from '../actions/types';
 
-    let sampleAppoint = [];
-    let arr1 = [];
-    let prevState=[];
-
-
-    axios.get('/appt/list', {})
-        .then(function (response) {
-            console.log("Appointment response", response)
-            sampleAppoint.data = (response.data);
-            sampleAppoint.data.forEach(element => {
-                arr1.push(element);
-                });
-            console.log("arr", arr1)
-
-            //currentComponent.setState({
-                //myArray: arr
-            //});
-            //console.log(sampleAppoint.data[1].name);
-        })
-        .catch(function (error) {
-            console.log(error);
-        });
+let sampleAppoint = [];
+let arr1 = [];
+let prevState=[];
 
 // One default appointment item added as example
 const INITIAL_STATE = {
-    items: arr1,
+    items: [],
     error: ''
 };
 
 export default (state = INITIAL_STATE, action) => {
 
     switch (action.type) {
+        case FILL_APPOINTMENTS:
+        
+            return{
+                ...state,
+                items: action.payload,
+                error: ''
+            };
         case ADD_APPOINTMENT:
             // add the appointment to the store
            
@@ -65,12 +54,13 @@ export default (state = INITIAL_STATE, action) => {
             };
         case DELETE_APPOINTMENT:
             // remove the appointment by id from store
-            state.items = _.remove(state.items, (appointment) => {
-                return appointment.patientId !== action.payload;
-            });
+            // state.items = _.remove(state.items, (appointment) => {
+            //     return appointment.patientId !== action.payload;
+            // });
 
             return {
                 ...state,
+                items: state.items.filter( appointment => appointment.patientId !== action.payload ),
                 error: ''
             };
 

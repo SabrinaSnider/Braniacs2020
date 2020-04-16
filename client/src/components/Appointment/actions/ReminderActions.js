@@ -7,7 +7,8 @@ import {
 	CREATE_REMINDER,
 	REMINDER_FAIL,
 	DELETEALL_REMINDER,
-	SEARCH_REMINDER
+	SEARCH_REMINDER,
+	FILL_REMINDERS
 } from './types';
 
 const mongoose = require('mongoose');
@@ -73,7 +74,7 @@ export const createReminder = (patientId, name, phone, reminderMessage) => {
 					reminderMessage,
 					messageId: sid
 			}
-			console.log(reminder);
+			//console.log(reminder);
 
 			/*axios.get('/reminders/fetch', patientId)
 			  .then(function (response) {
@@ -133,3 +134,35 @@ export const searchReminder = (patientId) => {
         }
     };
 };
+
+export const fillReminders = () =>{
+	return async (dispatch) =>{
+        dispatch({type: REMINDER_FAIL, payload: ''});
+
+        try{
+            let arr1 = []
+            let sampleAppoint = [];
+            axios.get('/reminder/list', {})
+			.then(function (response) {
+				//console.log("Reminder response", response)
+				sampleAppoint.data = (response.data);
+				sampleAppoint.data.forEach(element => {
+					arr1.push(element);
+					});
+				//console.log("arr", arr2)
+
+				//currentComponent.setState({
+					//myArray: arr
+				//});
+				//console.log(sampleAppoint.data[1].name);
+			})
+
+            .then(()=>{
+                dispatch({ type: FILL_REMINDERS, payload: arr1});
+            })
+            
+        } catch(error){
+            dispatch({ type: REMINDER_FAIL, payload: 'Couldn\'t fill reminders' });
+        }
+    }
+}

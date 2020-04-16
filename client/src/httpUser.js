@@ -22,6 +22,22 @@ httpUser.setId = function(id){
     return id;
 }
 
+httpUser.setAdmin = function(admin){
+    localStorage.setItem('admin', admin);
+    return admin;
+}
+
+httpUser.getAdmin = function(){
+    let isAdmin = localStorage.getItem('admin');
+    return JSON.parse(isAdmin);
+    
+}
+httpUser.getCurrentAdmin = function(){
+    const admin = this.getAdmin();
+    console.log(admin);
+    return admin;
+}
+
 httpUser.getCurrentId = function(){
     const id = this.getId();
     console.log(id);
@@ -45,10 +61,12 @@ httpUser.logIn = async function(credentials) {
 
         const token = response.data.token;
         const id = response.data.patientId;
+        const admin = response.data.admin;
 
-        const userTokens = {
+        const user = {
             token: "",
-            id: id
+            id: id,
+            admin: admin
         };
 
         console.log(id);
@@ -56,13 +74,14 @@ httpUser.logIn = async function(credentials) {
         if(token) {
             this.defaults.headers.common.token = this.setToken(token);
             this.defaults.headers.common.id = this.setId(id);
-            userTokens.token = jwtDecode(token);
+            this.defaults.headers.common.admin = this.setAdmin(admin);
+            user.token = jwtDecode(token);
 
-            console.log(userTokens);
+            console.log("HttpUser user",user);
 
-            return userTokens;
+            return user;
         } else {
-            userTokens.token = false;
+            user.token = false;
             return false;
         }
     } catch(err) {
@@ -83,18 +102,20 @@ httpUser.signUp = async function(userInfo) {
 
     const token = response.data.token;
     const id = response.data.patientId;
+    const admin = response.data.admin;
     console.log(id);
+    console.log(admin);
 
     const user = {
         token: "",
-        id: id
+        id: id,
+        admin: admin
     };
-
-    console.log(id);
 
     if(token) {
         this.defaults.headers.common.token = this.setToken(token);
         this.defaults.headers.common.id = this.setId(id);
+        this.defaults.headers.common.admin = this.setAdmin(admin);
         user.token = jwtDecode(token);
 
         return user;
@@ -107,6 +128,7 @@ httpUser.signUp = async function(userInfo) {
 httpUser.logOut = function() {
     localStorage.removeItem('token');
     localStorage.removeItem('id');
+    localStorage.removeItem('admin');
     delete this.defaults.headers.common.token;
     delete this.defaults.headers.common.id;
     return true;
@@ -114,4 +136,5 @@ httpUser.logOut = function() {
 
 httpUser.defaults.headers.common.token = httpUser.getToken();
 httpUser.defaults.headers.common.id = httpUser.getId();
+httpUser.defaults.headers.common.admin = httpUser.getAdmin();
 export default httpUser;

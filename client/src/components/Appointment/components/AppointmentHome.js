@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { addAppointment, searchAppointment } from '../actions/AppointmentsActions';
-import { createReminder, deleteAllReminders, searchReminder } from '../actions/ReminderActions';
-import { loginUser } from '../actions/AuthActions';
+import { addAppointment, searchAppointment, fillAppointments } from '../actions/AppointmentsActions';
+import { createReminder, deleteAllReminders, searchReminder, fillReminders } from '../actions/ReminderActions';
+import {fillPatients} from '../actions/PatientActions';
 import Header from './Header';
 import AppointmentList from './AppointmentList';
 import ReminderList from './ReminderList';
@@ -20,15 +20,16 @@ import "popper.js/dist/popper.min.js"
 import 'react-big-calendar/lib/css/react-big-calendar.css'
 
 
-class Home extends Component {
+class AppointmentHome extends Component {
     constructor(props) {
-        loginUser();
+        //loginUser();
         super(props);
-        // minimal authenticaion check
-        // this will move to a more common area
-        if (props.user === null) {
-            this.props.history.push('/AppointmentLogin');
-        }
+        this.props.fillPatients();
+        this.props.fillAppointments();
+        console.log("From AppointmentsHome.js",this.props.appointments);
+        this.props.fillReminders();
+        
+        console.log("Patients from AppointmentsHome.js", this.props.patients)
     }
 
 
@@ -175,7 +176,6 @@ class Home extends Component {
 
     render() {
         let displayTime = this.state.dateTime.format('MMMM Do, YYYY (hh:mm a)');
-
         return (
             <div>
 
@@ -344,8 +344,8 @@ class Home extends Component {
                                         Current appointments
                         </div>
                                     <div className="card-body overflow-auto" style={{ height: '500px' }}>
-
-                                        <AppointmentList appointments={this.props.appointments} />
+                                        
+                                        <AppointmentList />
                                     </div>
                                 </div>
                                 <p></p>
@@ -484,9 +484,6 @@ class Home extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        user: state.auth.user,
-        error: state.auth.error,
-        loading: state.auth.loading,
         appointments: state.appointments.items,
         appointmentError: state.appointments.error,
         reminders: state.reminders.items1,
@@ -501,7 +498,10 @@ const mapDispatchToProps = {
     createReminder,
     deleteAllReminders,
     searchAppointment,
-    searchReminder
+    searchReminder,
+    fillAppointments,
+    fillReminders,
+    fillPatients
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Home);
+export default connect(mapStateToProps, mapDispatchToProps)(AppointmentHome);

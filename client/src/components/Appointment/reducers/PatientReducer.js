@@ -1,39 +1,20 @@
 import moment from 'moment';
 import uuid from 'uuid';
 import _ from 'lodash';
-import axios from 'axios'
+
 
 import {
 	GET_PATIENT,
-	PATIENT_FAIL
+    PATIENT_FAIL,
+    FILL_PATIENTS
 } from '../actions/types';
 
     let samplePatient = [];
 	let arr3 = [];
 	let retPat = [];
-	retPat.push({
-		name: {
-			first: "",
-		}
-	})
+	
 
-    axios.post('/patient/list', {})
-        .then(function (response) {
-            console.log("Patient response", response)
-            samplePatient.data = (response.data);
-            samplePatient.data.forEach(element => {
-                arr3.push(element);
-                });
-            console.log("patients:", arr3)
 
-            //currentComponent.setState({
-                //myArray: arr
-            //});
-            //console.log(sampleAppoint.data[1].name);
-        })
-        .catch(function (error) {
-            console.log(error);
-        });
 
 // One default appointment item added as example
 const INITIAL_STATE = {
@@ -45,17 +26,25 @@ const INITIAL_STATE = {
 export default (state = INITIAL_STATE, action) => {
 
     switch (action.type) {
+        case FILL_PATIENTS:
+        
+            return{
+                ...state,
+                items3: action.items3,
+                patient: action.retPat,
+                error: ''
+            };
 
 		case GET_PATIENT:
-			console.log(action.payload);
-			console.log(state.items3);
+			//console.log(action.payload);
+			//console.log(state.items3);
 			let index = _.findIndex(state.items3, function(o) { return o.patientId == action.payload; });
 			
-			console.log(index);
+			//console.log(index);
 
 			state.patient = state.items3.slice(index);
         			
-			console.log(state.patient[0].patientId);
+			//console.log(state.patient[0].patientId);
 
             return {
 				...state,

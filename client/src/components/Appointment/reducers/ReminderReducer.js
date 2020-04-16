@@ -7,42 +7,30 @@ import {
     CREATE_REMINDER, 
     REMINDER_FAIL,
     DELETEALL_REMINDER, 
-    SEARCH_REMINDER
+    SEARCH_REMINDER,
+    FILL_REMINDERS
 } from '../actions/types';
 
-    let sampleAppoint2 = [];
-    let arr2 = [];
     let prevState = [];
 
 
 
-    axios.get('/reminder/list', {})
-        .then(function (response) {
-            console.log("Reminder response", response)
-            sampleAppoint2.data = (response.data);
-            sampleAppoint2.data.forEach(element => {
-                arr2.push(element);
-                });
-            console.log("arr", arr2)
-
-            //currentComponent.setState({
-                //myArray: arr
-            //});
-            //console.log(sampleAppoint.data[1].name);
-        })
-        .catch(function (error) {
-            console.log(error);
-        });
-
+    
 // One default appointment item added as example
 const INITIAL_STATE = {
-    items1: arr2,
+    items1: [],
     error: ''
 };
 
 export default (state = INITIAL_STATE, action) => {
 
     switch (action.type) {
+        case FILL_REMINDERS:
+            return{
+                ...state,
+                items1: action.payload,
+                error: ''
+            };
 		case CREATE_REMINDER:
 			// add the appointment to the store
 			
@@ -50,7 +38,7 @@ export default (state = INITIAL_STATE, action) => {
 			let items1 = state.items1.slice(0);
 			items1.push(action.payload);
 		
-			console.log(state.items1);
+			//console.log(state.items1);
 
 
 			return {

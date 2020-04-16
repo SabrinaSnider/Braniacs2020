@@ -1,12 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { logoutUser } from '../actions/AuthActions';
 
 class Header extends Component {
-
-    onLogOut = () => {
-        this.props.logoutUser();
-    }
 
     render() {
         return (
@@ -23,11 +18,8 @@ class Header extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        user: state.auth.user,
-        error: state.auth.error
     }
 };
 
 export default connect(mapStateToProps, { 
-    logoutUser
 })(Header);
