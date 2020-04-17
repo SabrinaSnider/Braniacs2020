@@ -8,6 +8,7 @@ import HomeCarousel from '../../components/Carousel/HomeCarousel'
 
 function Home(props) {
     const currentUser = props.currentUser;
+    const isAdmin = props.isAdmin;
     return (
         <div>
             <div id="home-header">
@@ -18,11 +19,12 @@ function Home(props) {
                 <NavBar 
                     home={true}
                     currentUser = {currentUser}
+                      isAdmin = {isAdmin}
+
                 />
                 <div className="App" style={{height: '100%', width: '100%', 'backgroundImage': `url(background.png)`, 'flexGrow' : '1'}}>
                     <HomeCarousel />
                 </div>
-            </div>
         </div>
     );
 }

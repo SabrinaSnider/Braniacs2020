@@ -33,6 +33,8 @@ const SignInBox = (props) => {
             password: password
         }
         const user = await httpUser.logIn(newUser);
+
+        console.log(user);
         if(user.errors !== undefined){
             setErrors({
                 email: user.errors.email,
@@ -40,8 +42,8 @@ const SignInBox = (props) => {
             });
         }
        
-        else if(user) {
-            props.onLoginSuccess(user);
+        else if(user.token) {
+            props.onLoginSuccess(user.token, user.id, user.admin);
             props.history.push('/Home');
         }
     };
