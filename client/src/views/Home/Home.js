@@ -26,6 +26,7 @@ function Home(props) {
                     <HomeCarousel />
                 </div>
         </div>
+        </div>
     );
 }
 
