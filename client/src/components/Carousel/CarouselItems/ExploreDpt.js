@@ -1,13 +1,15 @@
 import React from 'react';
 import { CardDeck, Card, Button } from 'react-bootstrap'
+import './ExploreDpt.css'
 
 /*
     Carousel slide for the "Explore Department" page
 */
 const ExploreDpt = (props) => {
     return (
-        <div style={{'backgroundColor': '#EAEAEA', width: '100%', height: '100%', padding: "20px 80px"}}>
-            <CardDeck style={{textAlign: 'left'}}>
+        <div id="explore-dpt-container">
+            <h2 id="explore-dpt-title">EXPLORE OUR DEPARTMENT</h2>
+            <CardDeck id="explore-dpt-carddeck">
                 <Card>
                     <Card.Img variant="top" src="/CarouselHome/ExploreDpt/I1.jpg" />
                     <Card.Body>
@@ -16,9 +18,11 @@ const ExploreDpt = (props) => {
                             <h3>Resident Education</h3>
                             <p>
                                 We are an ACGME-accredited neurosurgery residency program with 3 residents per year.
-                            </p>
-                            <Button style={{'float':'left', margin: '0px 7px 0px 0px'}}>LEARN MORE</Button>
-                            <Button style={{'float':'left', margin: '0px 0px 0px 7px'}}>APPLY</Button>
+                            </p> 
+                            <div className="explore-dpt-button-container">
+                                <Button href="https://neurosurgery.ufl.edu/residency/about-our-program/" style={{'float':'left', margin: '0px 7px 0px 0px'}}>LEARN MORE</Button>
+                                <Button href="https://neurosurgery.ufl.edu/residency/about-our-program/applicants/" style={{'float':'left', margin: '0px 0px 0px 7px'}}>APPLY</Button>
+                            </div>
                         </Card.Text>
                     </Card.Body>
                 </Card>
@@ -32,8 +36,10 @@ const ExploreDpt = (props) => {
                                 Faculty of the Department of Neurosurgery collaborate with basic scientists to seek new 
                                 cures for neurologic illness through research.
                             </p>
-                            <Button style={{'float':'left', margin: '0px 7px 0px 0px'}}>CLINICAL TRIALS</Button>
-                            <Button style={{'float':'left', margin: '0px 0px 0px 7px'}}>LABORATORIES</Button>
+                            <div className="explore-dpt-button-container">
+                                <Button href="http://com-neurosurgery-a2.sites.medinfo.ufl.edu/research/clinical-trials/" style={{'float':'left', margin: '0px 7px 0px 0px'}}>CLINICAL TRIALS</Button>
+                                <Button href="http://com-neurosurgery-a2.sites.medinfo.ufl.edu/research/laboratories/" style={{'float':'left', margin: '0px 0px 0px 7px'}}>LABORATORIES</Button>
+                            </div>
                         </Card.Text>
                     </Card.Body>
                 </Card>

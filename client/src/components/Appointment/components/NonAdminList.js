@@ -12,7 +12,7 @@ class NonAdminList extends Component {
 
     renderNonAdmin = (nonadmin) => {
         return (
-            <li className="list-group-item">
+            <li key={nonadmin.patientId} className="list-group-item"  >
                 {console.log("Nonadmin called")}
                 <strong>Non-Admin ID: </strong>
                 <span>{nonadmin.patientId}</span>

@@ -15,15 +15,9 @@ import './NavBar.css';
 const NavBar = (props) => {
     return (
         <div style={{width: '100%'}}>
-            {props.home && 
-                <div style={{padding:"20px 40px", display: 'flex', 'alignItems': 'center', "backgroundColor": "#ffffff"}}>
-                    <img src="/UFhealth.png" height="60px" style={{float:'left'}} alt=""></img>
-                    <h1 id="department-title">UF Department of Neurosurgery</h1>
-                </div>
-            }
-            <Navbar id="main-navbar" expand="md" style={{margin:'0', "backgroundColor": "#ffffff", height: '100%'}}>
+            <Navbar id="main-navbar" variant="dark" expand="md" style={{margin:'0', "backgroundColor": "#072b55", height: '100%'}}>
                 {!props.home &&
-                    <img src="/UFhealth.png" style={{float: 'left', height: '8vh', width: 'auto', 'maxHeight': '100%', 'margin': '0px 0px 0px 20px'}} alt=""></img>
+                    <img src="/ufhealth-white.svg" style={{float: 'left', height: '30px',width: 'auto', 'maxHeight': '100%', 'margin': '0px 0px 10px 20px'}} alt=""></img>
                 }
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse className="w-100 dual-collapse2">

@@ -80,15 +80,15 @@ export const addAppointment = (startTime, endTime, patientID, name, reminderBool
     };
 };
 
-export const deleteAppointment = (appointment) => {
+export const deleteAppointment = (appointmentStart) => {
     return async (dispatch) => {
         dispatch({ type: APPOINTMENT_FAIL, payload: '' });
 
         try {
-            // normally some asyn logic goes here to delete the data from the database
-            axios.delete('/appt/remove',  {data: {patientId: appointment.patientId}} );
+            console.log("Deleting appt at this time: " + appointmentStart);
+            axios.delete('/appt/remove',  {data: {startTime: appointmentStart}} );
 
-            dispatch({ type: DELETE_APPOINTMENT, payload: appointment.startTime});
+            dispatch({ type: DELETE_APPOINTMENT, payload: appointmentStart});
         } catch (error) {
             console.log('Failed to delete appointment', error);
             dispatch({ type: APPOINTMENT_FAIL, payload: 'Appointment failed to be deleted - contact technical support' });

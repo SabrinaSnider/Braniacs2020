@@ -13,6 +13,7 @@ import AppointmentPage from './views/AppointmentPage/AppointmentPage'
 import httpUser from './httpUser'
 import ForgotPass from './views/ForgotPassword/ForgotPass';
 import ResetPass from './views/ResetPassword/ResetPass';
+import './App.css'
 
 /*
   Checks for the homepage route first. If not routing to home, sends to DefaultContainer.

@@ -6,7 +6,7 @@ import { deleteAppointment } from '../actions/AppointmentsActions';
 
 class AppointmentList extends Component {
     onDeleteAppointment = (appointmentId) => {
-        this.props.deleteAppointment(appointmentId);
+        this.props.deleteAppointment(appointmentId.startTime);
     }
 
     renderAppointment = (appointment) => {
@@ -15,7 +15,6 @@ class AppointmentList extends Component {
 
         return (
             <li key={appointment.startTime} className="list-group-item">
-                {console.log("Appointment called by startTime")}
                 <strong>Patient ID: </strong>
                 <span>{appointment.patientId}</span>
                 <strong> Patient name: </strong>
