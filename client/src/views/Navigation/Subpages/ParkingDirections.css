@@ -1,3 +1,8 @@
+#parking-container {
+    padding: 0px 20px;
+    flex-grow: 1;
+}
+
 #parking-header {
     display: flex;
     flex-direction: row;
@@ -47,7 +52,26 @@
     margin: auto;
 }
 
+#directions-section {
+    width: 49%;
+}
+
+.location-autocomplete {
+    flex-grow: 1;
+    max-width: 49%;
+    position: relative;
+}
+
+.dropdown-autocomplete {
+    width: 100%;
+}
+
 @media (max-width: 1000px) {
+    #parking-container {
+        padding: 0px;
+        flex-grow: 1;
+    }
+
     #parking-header {
         flex-direction: column;
         text-align: center;
@@ -61,8 +85,14 @@
         margin: 20px 0px;
     }
 
-    #directions-section {
-        margin: 20px;
+    #parking-section {
+        width: 100%;
+        margin: 0px;
+    }
+    
+    .location-autocomplete {
+        max-width: 100%;
+        width: 100%;
     }
 
     #parking-address-form {
