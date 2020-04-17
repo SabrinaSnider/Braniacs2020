@@ -101,8 +101,23 @@ export const searchAppointment = (patientId) => {
         dispatch({ type: APPOINTMENT_FAIL, payload: '' });
 
         try {
-            // normally some asyn logic goes here to delete the data from the database
-            dispatch({ type: SEARCH_APPOINTMENT, payload: patientId});
+            console.log(patientId);
+            let arr1 = []
+            let sampleAppoint = [];
+            axios.get('/appt/list', {})
+            .then(function (response) {
+                //console.log("Appointment response", response)
+                sampleAppoint.data = (response.data);
+                sampleAppoint.data.forEach(element => {
+                    console.log(element);
+                    if(element.patientId === patientId){
+                        arr1.push(element);
+                    }
+                });
+                console.log("Calling from Appointment Action", arr1)
+                
+            })
+            .then(()=>{dispatch({ type: SEARCH_APPOINTMENT, payload: arr1});});
         } catch (error) {
             dispatch({ type: APPOINTMENT_FAIL, payload: 'Appointment not found' });
         }

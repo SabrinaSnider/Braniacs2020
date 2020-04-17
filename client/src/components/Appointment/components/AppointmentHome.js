@@ -71,7 +71,7 @@ class AppointmentHome extends Component {
     }
 
     onSearchAppointmentAux = () => {
-        this.props.searchAppointment("c");
+        this.props.fillAppointments();
         this.setState({ searchApptId: "c" });
 
     }
@@ -81,7 +81,7 @@ class AppointmentHome extends Component {
     }
 
     onSearchReminderAux = () => {
-        this.props.searchReminder("c");
+        this.props.fillReminders();
         this.setState({ searchApptId: "c" });
 
     }
@@ -108,11 +108,13 @@ class AppointmentHome extends Component {
     }
 
     onSearchAppointmentChange = (e) => {
-        this.setState({ searchApptId: e.target.value });
+        let apptId = JSON.parse(e.target.value);
+        this.setState({ searchApptId:  apptId});
     }
 
     onSearchReminderChange = (e) => {
-        this.setState({ searchRemId: e.target.value });
+        let remId = JSON.parse(e.target.value);
+        this.setState({ searchRemId: remId });
     }
 
     onIDChange = (e) => {
@@ -208,7 +210,7 @@ class AppointmentHome extends Component {
 
                                     <div className="row">
                                         <div className="col-sm-7">
-                                            <input className="text-center" type="text" placeholder="Search Patient ID" onChange={this.onSearchReminderChange} />
+                                            <input className="text-center" type="text" placeholder="Search Patient ID" onChange={this.onSearchAppointmentChange} />
                                         </div>
                                         <div className="col-sm-2">
                                         <button onClick={this.onSearchAppointment} type="button " className="btn btn-sm btn-primary " data-dismiss="modal">Search</button>

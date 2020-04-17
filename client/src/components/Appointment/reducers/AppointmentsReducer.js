@@ -11,9 +11,6 @@ import {
     FILL_APPOINTMENTS
 } from '../actions/types';
 
-let sampleAppoint = [];
-let arr1 = [];
-let prevState=[];
 
 // One default appointment item added as example
 const INITIAL_STATE = {
@@ -53,10 +50,6 @@ export default (state = INITIAL_STATE, action) => {
                 error: action.payload
             };
         case DELETE_APPOINTMENT:
-            // remove the appointment by id from store
-            // state.items = _.remove(state.items, (appointment) => {
-            //     return appointment.patientId !== action.payload;
-            // });
 
             return {
                 ...state,
@@ -65,28 +58,10 @@ export default (state = INITIAL_STATE, action) => {
             };
 
         case SEARCH_APPOINTMENT:
-            let newItems = [];
-            let error1 = '';
-        
-            if(action.payload !== "c"){
-                prevState = state.items;
-                let id = parseInt(action.payload);
-                state.items.forEach((o) => {
-                    if (o.patientId === id){
-                        newItems.push(o);
-                    }
-                })
-
-                state.items=newItems;
-            }
-            else {
-                state.items = prevState;
-                prevState =[];
-            }
-
             return {
                 ...state,
-                error: error1
+                items: action.payload,
+                error: ''
             };
     
         default:

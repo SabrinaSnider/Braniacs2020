@@ -124,11 +124,27 @@ export const deleteAllReminders = () => {
 
 export const searchReminder = (patientId) => {
     return async (dispatch) => {
+		
         dispatch({ type: REMINDER_FAIL, payload: '' });
 
         try {
-            // normally some asyn logic goes here to delete the data from the database
-            dispatch({ type: SEARCH_REMINDER, payload: patientId});
+            let arr1 = []
+            let sampleAppoint = [];
+            axios.get('/reminder/list', {})
+				.then(function (response) {
+					//console.log("Reminder response", response)
+					sampleAppoint.data = (response.data);
+					sampleAppoint.data.forEach(element => {
+						if(element.patientId === patientId){
+							arr1.push(element);
+						}
+						});
+
+				})
+
+				.then(()=>{
+					dispatch({ type: SEARCH_REMINDER, payload: arr1});}
+				);
         } catch (error) {
             dispatch({ type: REMINDER_FAIL, payload: 'Reminders not found' });
         }
