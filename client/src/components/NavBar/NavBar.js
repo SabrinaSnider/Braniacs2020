@@ -24,7 +24,6 @@ const NavBar = (props) => {
                 <Navbar.Collapse className="w-100 dual-collapse2">
                     <Nav className="mr-auto">
                         <Nav.Link className = "nav-item main" href='/Home'>Home</Nav.Link>
-                        <Nav.Link className = "nav-item main" href='/Register'>Extra Page</Nav.Link>
                         <Nav.Link className = "nav-item main" href='/Navigation/GeneralInformaiton'>Navigation</Nav.Link>
                         {(props.currentUser && !props.isAdmin) &&
                             <Nav.Link className = "nav-item main" href='/MyAppointments'>Appointments</Nav.Link>
