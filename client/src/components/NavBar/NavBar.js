@@ -8,7 +8,6 @@ import './NavBar.css';
     bootstrap functionality does not work in react apps, a wrapper npm module called
     react-bootstrap is used to give bootstrap functionality (like the menu toggle 
     button in this component).
-
     The home prop toggles certain aspects of the navbar to make the home page have a 
     different navbar.
 */

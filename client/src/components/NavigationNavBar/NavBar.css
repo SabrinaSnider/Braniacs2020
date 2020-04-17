@@ -1,3 +1,14 @@
 .nav-menu-item.active{
   border-right: 2px solid #0021A5;
 }
+
+#navigation-menu {
+  display: inline-block;
+  flex-shrink: 0;
+}
+
+@media (max-width: 767px) {
+  #navigation-menu{
+    padding: 0px 0px 20px 0px;
+  }
+}

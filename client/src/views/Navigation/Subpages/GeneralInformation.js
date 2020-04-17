@@ -7,9 +7,8 @@ import './GeneralInformation.css'
 */
 function GeneralInformation(props) {
     return (
-        <div style={{float: 'right', flexGrow: '1', padding: '0px 40px'}}>
+        <div>
             <h1 id="navigation-info-header">General Information</h1>
-
             <div className="navigation-section starter-section">
                 <h2 className="navigation-section-header">Address</h2>
                 <p>

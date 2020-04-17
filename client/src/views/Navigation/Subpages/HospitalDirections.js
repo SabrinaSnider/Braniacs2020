@@ -40,7 +40,7 @@ function HostpitalDirections(props) {
             <div id="hospital-subheader">
                 {directions &&
                     <div id="directions-section">
-                        <h3 className="directions-header">Estimated Time of Route: {directions.routes[0].legs[0].duration.text}.</h3>
+                        <h3 className="directions-header">Time Estimate: {directions.routes[0].legs[0].duration.text}.</h3>
                         <h3 className="directions-header">Distance: {directions.routes[0].legs[0].distance.text}.</h3>
                     </div>
                 }
@@ -56,14 +56,15 @@ function HostpitalDirections(props) {
                         directions = {directions}
                     />
                 </div>
-                <div style = {{width: '50%', height: `60vh`, float: 'right', margin: '0px 40px 0px 20px'}}>
-                <GMaps // update Google Maps component whenever the directions change
-                    loadingElement = {<div style = {{height: '100%'}}/>}
-                    containerElement = {<div style = {{height: '100%'}}/>}
-                    mapElement = {<div style = {{height: '100%'}}/>}
-                    directions = {directions}
-                />
-                </div>
+
+                <Card id="maps-contianer-hospital">
+                    <GMaps // update Google Maps component whenever the directions change
+                        loadingElement = {<div style = {{height: '100%'}}/>}
+                        containerElement = {<div style = {{height: '100%'}}/>}
+                        mapElement = {<div style = {{height: '100%'}}/>}
+                        directions = {directions}
+                    />
+                </Card>
             </div>
         </div>
     );
