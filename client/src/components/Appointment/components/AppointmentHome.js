@@ -10,7 +10,7 @@ import ReminderList from './ReminderList';
 import PatientIdList from './PatientIdList';
 import AdminList from './AdminList';
 import NonAdminList from './NonAdminList';
-import MyCalendar from './MyCalendar';
+import AdminCalendar from './AdminCalendar';
 import InputMoment from 'input-moment';
 import moment, { duration } from 'moment';
 import axios from 'axios'
@@ -224,7 +224,7 @@ class AppointmentHome extends Component {
                             <div className="card">
 
                                 <div className="card-body">
-                                    <MyCalendar appointments={this.props.appointments} />  </div>
+                                    <AdminCalendar appointments={this.props.appointments} />  </div>
                             </div>
                         </div>
                     </div>
