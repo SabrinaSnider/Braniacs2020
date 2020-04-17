@@ -8,3 +8,9 @@
     width: 90%;
     margin: auto;
 }
+
+@media (max-width: 800px) {
+    #home-container {
+        width: 100%;
+    }
+}

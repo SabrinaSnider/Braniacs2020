@@ -39,6 +39,7 @@
 
     .card {
         margin: 20px auto;
+        width: calc(100% - 30px);
     }
 
     #patient-care-title {
