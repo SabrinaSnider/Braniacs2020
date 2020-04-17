@@ -1,0 +1,118 @@
+#hospital-container {
+    padding: 0px 20px;
+    flex-grow: 1;
+}
+
+#hospital-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 0px 0px 10px 0px;
+}
+
+#hospital-subheader {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 0px 0px 10px 0px;
+}
+
+.directions-header {
+    font-size: 1.2rem;
+}
+
+#hospital-content {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+#directions-container-hospital {
+    width: 49%;
+    height: 65vh;
+    min-height: 400px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+#maps-contianer-hospital {
+    width: 49%;
+    height: 60vh;
+    height: 65vh;
+    min-height: 400px;
+}
+
+#hospital-address-form {
+    width: 49%;
+    display: flex;
+    flex-direction: row;
+}
+
+.form-control.hospital {
+    margin: auto;
+}
+
+#directions-section {
+    width: 49%;
+}
+
+.location-autocomplete {
+    flex-grow: 1;
+    max-width: 49%;
+    position: relative;
+}
+
+.dropdown-autocomplete {
+    width: 100%;
+}
+
+@media (max-width: 1000px) {
+    #hospital-container {
+        padding: 0px;
+        flex-grow: 1;
+    }
+
+    #hospital-header {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    #hospital-subheader {
+        flex-direction: column-reverse;
+    }
+
+    #hospital-address-form {
+        margin: 20px 0px;
+    }
+
+    #directions-section {
+        width: 100%;
+        margin: 0px;
+    }
+    
+    .location-autocomplete {
+        max-width: 100%;
+        width: 100%;
+    }
+
+    #hospital-address-form {
+        width: 100%;
+    }
+
+    #hospital-content {
+        flex-direction: column-reverse;
+    }
+
+    #directions-container-hospital {
+        width: 100%;
+        height: 50vh;
+        overflow: visible;
+        padding-top: 20px;
+    }
+    
+    #maps-contianer-hospital {
+        width: 100%;
+        height: 60vh;
+        height: 50vh;
+    }
+}
