@@ -5,8 +5,6 @@ import ResetPassword from '../../components/ResetPassword/ResetPassword'
 import axios from 'axios'
 
 function ResetPass(props) {
-    console.log('front end');
-
     const { token } = useParams();
     const [validated, setValidated] = useState(false);
 
@@ -19,7 +17,7 @@ function ResetPass(props) {
             token: token
         })
         .then(function (response) {
-            console.log("response is", response)
+            // console.log("response is", response)
             setValidated(response.data.validated);
         })
         .catch(function (error) {

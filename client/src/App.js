@@ -65,9 +65,9 @@ const DefaultContainer = (props) => {
 
   const currentUser = props.currentUser;
   const currentId = props.currentId;
-  console.log(currentId);
+  // console.log(currentId);
   const isAdmin = props.isAdmin;
-  console.log(isAdmin);
+  // console.log(isAdmin);
   return(
   <div style={{display: 'flex', 'flexFlow': 'column', 'minHeight': '100vh', 'backgroundImage': 'url(/background.png)'}}>
     <NavBar currentUser={currentUser} isAdmin={isAdmin} />

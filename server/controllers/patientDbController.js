@@ -227,6 +227,7 @@ USING newPatient:
 Make a post request with your patient json (first name, last name, email, and password) added to the request.
 */
 exports.newPatient = async (req, res) => {
+  console.log("data", req.body)
     //  console.log(req.body);
     //  patient.create({name: {first: req.body.first, last: req.body.last}, email: req.body.email, password: req.body.password}, function(err, pt){
     //      res.status(200).send("Success");
@@ -253,7 +254,7 @@ exports.newPatient = async (req, res) => {
         if (!isValid) {
             return res.status(200).json({errors: errors});
         } 
-
+        
         if(newPatient.password !== req.body.password2){
             return res.status(200).json({errors: {password: "Passwords must match"}});
         }

@@ -97,6 +97,7 @@ const SignUpBox = (props) => {
                 },
                 email: email,
                 password: password,
+                password2: password2,
 				dob: date,
                 phone: phone,
                 patientId: id
@@ -114,6 +115,7 @@ const SignUpBox = (props) => {
                 
                 console.log(errors);
             } else if(password !== password2){
+                console.log("compare pass", password, password2)
                 setErrors({
                     password: "Passwords must match"
                 });

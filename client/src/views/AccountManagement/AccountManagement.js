@@ -18,14 +18,14 @@ function AccountManagement(props) {
     const [email, setEmail] = useState("")
     const [dob, setDob] = useState(new Date())
 
-    console.log(props.currentUser)
+    // console.log(props.currentUser)
 
     const GetAccountInfo = async() => {
         axios.post("/patient/useraccount", {
             email: props.currentUser.email,
         })
         .then(function (response) {
-            console.log("response is", response)
+            // console.log("response is", response)
             if (response.data.name.first) setFirstName(response.data.name.first)
             if (response.data.name.last) setLastName(response.data.name.last)
             if (response.data.email) setEmail(response.data.email)
@@ -51,7 +51,7 @@ function AccountManagement(props) {
             dob: dob,
             email: email
         }).then(function (response) {
-            console.log(response.data);
+            // console.log(response.data);
         })
         .catch(function (error) {
             console.log(error);

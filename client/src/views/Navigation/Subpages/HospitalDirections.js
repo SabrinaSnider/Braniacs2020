@@ -40,7 +40,7 @@ function HostpitalDirections(props) {
             <div id="hospital-subheader">
                 {directions &&
                     <div id="directions-section">
-                        <h3 className="directions-header">Time Estimate: {directions.routes[0].legs[0].duration.text}.</h3>
+                        <h3 className="directions-header">Estimated Time of Route: {directions.routes[0].legs[0].duration.text}.</h3>
                         <h3 className="directions-header">Distance: {directions.routes[0].legs[0].distance.text}.</h3>
                     </div>
                 }

@@ -13,7 +13,7 @@ import './NavBar.css';
     different navbar.
 */
 const NavBar = (props) => {
-    console.log("current user", props.currentUser)
+    // console.log("current user", props.currentUser)
     return (
         <div style={{width: '100%'}}>
             <Navbar id="main-navbar" variant="dark" expand="md" style={{margin:'0', "backgroundColor": "#072b55", height: '100%'}}>
@@ -23,37 +23,35 @@ const NavBar = (props) => {
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse className="w-100 dual-collapse2">
                     <Nav className="mr-auto">
-                        <Nav.Link className = "nav-item" href='/Home'>Home</Nav.Link>
-                        <Nav.Link className = "nav-item" href='/Register'>Extra Page</Nav.Link>
-                        <Nav.Link className = "nav-item" href='/Navigation/GeneralInformaiton'>Navigation</Nav.Link>
-                        {props.currentUser ?
-                        (
-                            <Nav.Link className = "nav-item" href='/MyAppointments'>Appointments</Nav.Link>
-
-                        ):(
-                            <Nav.Link className = "nav-item" href='/SignIn'>Appointments</Nav.Link>
-                        )
+                        <Nav.Link className = "nav-item main" href='/Home'>Home</Nav.Link>
+                        <Nav.Link className = "nav-item main" href='/Register'>Extra Page</Nav.Link>
+                        <Nav.Link className = "nav-item main" href='/Navigation/GeneralInformaiton'>Navigation</Nav.Link>
+                        {(props.currentUser && !props.isAdmin) &&
+                            <Nav.Link className = "nav-item main" href='/MyAppointments'>Appointments</Nav.Link>
+                        }
+                        {(!props.currentUser) &&
+                            <Nav.Link className = "nav-item main" href='/SignIn'>Appointments</Nav.Link>
                         }
                     </Nav>
                 </Navbar.Collapse>
                 <Navbar.Collapse className="w-100 dual-collapse2">
                     <Nav className="ml-auto">
-                        {props.isAdmin && <Nav.Link className = "nav-item" href='/Appointment'>Administrators</Nav.Link>}
+                        {props.isAdmin && <Nav.Link className = "nav-item main" href='/Appointment'>Administrators</Nav.Link>}
                         {props.currentUser ?
                         (
-                            <Nav.Link className = "nav-item" href='/LogOut'>Log Out</Nav.Link>
+                            <Nav.Link className = "nav-item main" href='/LogOut'>Log Out</Nav.Link>
 
                         ):(
-                            <Nav.Link className = "nav-item" href='/SignIn'>Sign In</Nav.Link>
+                            <Nav.Link className = "nav-item main" href='/SignIn'>Sign In</Nav.Link>
                         )
                         }
 
                         {props.currentUser ?
                         (
-                            <Nav.Link className = "nav-item" href='/Account'>Account</Nav.Link>
+                            <Nav.Link className = "nav-item main" href='/Account'>Account</Nav.Link>
 
                         ):(
-                            <Nav.Link className = "nav-item" href='/SignUp'>Sign Up</Nav.Link>
+                            <Nav.Link className = "nav-item main" href='/SignUp'>Sign Up</Nav.Link>
                         )
                         }
 

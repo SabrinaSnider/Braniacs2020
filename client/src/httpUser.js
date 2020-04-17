@@ -34,13 +34,13 @@ httpUser.getAdmin = function(){
 }
 httpUser.getCurrentAdmin = function(){
     const admin = this.getAdmin();
-    console.log(admin);
+    // console.log(admin);
     return admin;
 }
 
 httpUser.getCurrentId = function(){
     const id = this.getId();
-    console.log(id);
+    // console.log(id);
     return JSON.parse(id);
 };
 
@@ -51,7 +51,7 @@ httpUser.getCurrentUser = function() {
 
 httpUser.validateEmail = async function(user) {
     const response = await axios.post( '/patient/forgot', user );
-    console.log("https response", response);
+    // console.log("https response", response);
     if(response.data.errors !== undefined){
         return response.data;
     }
@@ -59,7 +59,7 @@ httpUser.validateEmail = async function(user) {
 
 httpUser.validatePasswords = async function(user) {
     const response = await axios.post( '/patient/reset/' + user.token, user );
-    console.log("https response", response);
+    // console.log("https response", response);
     if(response.data.errors !== undefined){
         return response.data;
     }
@@ -69,12 +69,12 @@ httpUser.validatePasswords = async function(user) {
 httpUser.logIn = async function(credentials) {
     try {
         const response = await axios.post( '/patient/authenticate', credentials );
-        console.log("https response", response);
+        // console.log("https response", response);
         if(response.data.errors !== undefined){
             return response.data;
         }
 
-        console.log(response);
+        // console.log(response);
 
         const token = response.data.token;
         const id = response.data.patientId;
@@ -86,7 +86,7 @@ httpUser.logIn = async function(credentials) {
             admin: admin
         };
 
-        console.log(id);
+        // console.log(id);
 
         if(token) {
             this.defaults.headers.common.token = this.setToken(token);
@@ -94,7 +94,7 @@ httpUser.logIn = async function(credentials) {
             this.defaults.headers.common.admin = this.setAdmin(admin);
             user.token = jwtDecode(token);
 
-            console.log("HttpUser user",user);
+            // console.log("HttpUser user",user);
 
             return user;
         } else {
@@ -102,16 +102,16 @@ httpUser.logIn = async function(credentials) {
             return false;
         }
     } catch(err) {
-        
         console.log(err);
         return false;
     }
 };
 
 httpUser.signUp = async function(userInfo) {
+    // console.log("user info is", userInfo)
     const response = await axios.post('/patient/register', userInfo);
 
-    console.log("https response", response);
+    // console.log("https response", response);
     if(response.data.errors !== undefined){
         return response.data;
     }
@@ -120,8 +120,8 @@ httpUser.signUp = async function(userInfo) {
     const token = response.data.token;
     const id = response.data.patientId;
     const admin = response.data.admin;
-    console.log(id);
-    console.log(admin);
+    // console.log(id);
+    // console.log(admin);
 
     const user = {
         token: "",
