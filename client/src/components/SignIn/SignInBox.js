@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import './SignInBox.css'
 import httpUser from '../../httpUser'
+import { Nav } from 'react-bootstrap'
 
 /*
     Sign in box component
@@ -73,7 +74,7 @@ const SignInBox = (props) => {
                     <button type="submit" id="login-btn" className="btn row">Login</button>
                     <button type="button" id="create-btn" className="btn row" onClick={() => {props.history.push('/SignUp')}}>Create Account</button>
                 </div>
-                <p id="forgot-pwd" className="row">Forgot Password?</p>
+                <Nav.Link id="forgot-pwd" className="row" onClick={() => {props.history.push('/forgot')}}>Forgot Password?</Nav.Link>
             </form>
         </div>
     );

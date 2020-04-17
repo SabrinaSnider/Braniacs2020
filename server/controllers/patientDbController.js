@@ -3,6 +3,11 @@ const config = require('../config/config.js')
 const mongoose = require('mongoose')
 const signToken = require('../authHelperFunctions').signToken
 const ObjectId = require('mongodb').ObjectID;
+const async = require('async')
+const nodemailer = require('nodemailer')
+const crypto = require('crypto')
+const bcrypt = require('bcrypt-nodejs')
+
 
 const validateRegisterInput = require("../validation/register");
 const validateLoginInput = require("../validation/login");
@@ -19,6 +24,129 @@ exports.listPatients = function (req, res) {
     }); 
 
 };
+
+exports.forgot = function(req, res){
+    res.send('forgot');
+}
+
+exports.forgotPassword = function(req, res, next){
+    async.waterfall([
+        function(done) {
+          crypto.randomBytes(20, function(err, buf) {
+            var token = buf.toString('hex');
+            done(err, token);
+          });
+        },
+        function(token, done) {
+          patient.findOne({ email: req.body.email }, function(err, user) {
+            if (!user) {
+              return res.status(200).json({ errors: {email: "No account with that email address exists." }});
+              console.log('No account with that email address exists.')
+              // req.flash('error', 'No account with that email address exists.');
+              return res.redirect('/forgot');
+            }
+    
+            user.resetPasswordToken = token;
+            user.resetPasswordExpires = Date.now() + 3600000; // 1 hour
+    
+            user.save(function(err) {
+              done(err, token, user);
+            });
+          });
+        },
+        function(token, user, done) {
+          var smtpTransport = nodemailer.createTransport({
+            service: 'Gmail', 
+            auth: {
+              user: 'patientpassreset@gmail.com',
+              pass: 'patient0123' //process.env.GMAILPW
+            }
+          });
+          var site = (process.env.NODE_ENV === 'production') ? "https://brainiacs2020.herokuapp.com" : "localhost:3000"
+          var mailOptions = {
+            to: user.email,
+            from: 'patientpassreset@gmail.com',
+            subject: 'Node.js Password Reset',
+            text: 'You are receiving this because you (or someone else) have requested the reset of the password for your account.\n\n' +
+              'Please click on the following link, or paste this into your browser to complete the process:\n\n' +
+              'http://' + site + '/reset/' + token + '\n\n' +
+              'If you did not request this, please ignore this email and your password will remain unchanged.\n'
+          };
+          smtpTransport.sendMail(mailOptions, function(err) {
+            console.log('An e-mail has been sent to ' + user.email + ' with further instructions.')
+            // req.flash('success', 'An e-mail has been sent to ' + user.email + ' with further instructions.');
+            return res.status(200).json({ errors: {email: 'An e-mail has been sent to ' + user.email + ' with further instructions.' }});
+            done(err, 'done');
+          });
+        }
+      ], function(err) {
+        if (err) return next(err);
+        res.redirect('/forgot');
+      });
+};
+
+exports.validateReset = function(req, res){
+  console.log('validate', req.body.token)
+    patient.findOne({ resetPasswordToken: req.body.token, resetPasswordExpires: { $gt: Date.now() } }, function(err, user) {
+        if (!user) {
+          // req.flash('error', 'Password reset token is invalid or has expired.');
+          console.log('Password reset token is invalid or has expired.')
+          return res.redirect('/forgot');
+        }
+        res.send({validated: true});
+      });
+};
+
+exports.reset = function(req, res){
+    if(req.body.password !== req.body.confirm) {
+      return res.status(200).json({ errors: {confirm: 'Passwords do not match.' }});
+      console.log('Passwords do not match.')
+      return res.redirect('back');
+    }
+    async.waterfall([
+        function(done) {
+          patient.findOneAndUpdate(
+            { resetPasswordToken: req.params.token, resetPasswordExpires: { $gt: Date.now() } }, 
+            { password: bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(8)) },
+            function(err, user) {
+              if (!user) { // if no user found, do not update
+                // req.flash('error', 'Password reset token is invalid or has expired.');
+                console.log('Password reset token is invalid or has expired. ')
+                return res.redirect('/forgot');
+              }
+              console.log('should be updated')
+              user.resetPasswordToken = undefined;
+              user.resetPasswordExpires = undefined;
+              done(err, user); 
+            });
+          },
+        function(user, done) { // after update, email user
+          var smtpTransport = nodemailer.createTransport({
+            service: 'Gmail', 
+            auth: {
+              user: 'patientpassreset@gmail.com',
+              pass: 'patient0123' //process.env.GMAILPW
+            }
+          });
+          var mailOptions = {
+            to: user.email,
+            from: 'patientpassreset@gmail.com',
+            subject: 'Your password has been changed',
+            text: 'Hello,\n\n' +
+              'This is a confirmation that the password for your account ' + user.email + ' has just been changed.\n'
+          };
+          smtpTransport.sendMail(mailOptions, function(err) {
+            // req.flash('success', 'Success! Your password has been changed.');
+            return res.status(200).json({ errors: {confirm: 'Success! Your password has been changed.' }});
+            console.log('Success! Your password has been changed.')
+            done(err);
+          });
+        }
+      ], function(err) {
+        res.redirect('/Home');
+      });
+};
+
 
 /*
 USING fetchEmails:
@@ -180,7 +308,6 @@ exports.authenticate = async (req, res) => {
     }
 
     const user = await patient.findOne({email: req.body.email});
-
     if(!user){
         return res.status(200).json({ errors: {email: "Email not found" }});
     } else if(!user.validPassword(req.body.password)) {

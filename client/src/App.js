@@ -11,6 +11,8 @@ import AccountManagement from './views/AccountManagement/AccountManagement'
 import Appointment from "./components/Appointment/Appointment";
 import AppointmentPage from './views/AppointmentPage/AppointmentPage'
 import httpUser from './httpUser'
+import ForgotPass from './views/ForgotPassword/ForgotPass';
+import ResetPass from './views/ResetPassword/ResetPass';
 
 /*
   Checks for the homepage route first. If not routing to home, sends to DefaultContainer.
@@ -59,7 +61,7 @@ const DefaultContainer = (props) => {
   const logOut = async function(){
     props.logOut();
   }
-  
+
   const currentUser = props.currentUser;
   const currentId = props.currentId;
   console.log(currentId);
@@ -73,6 +75,8 @@ const DefaultContainer = (props) => {
       {currentUser && <Route exact path="/Account" render={(props) => <AccountManagement {...props} currentUser={currentUser} />} />}
       {isAdmin && <Route exact path="/Appointment" render={(props) => <Appointment {...props} currentUser={currentUser} currentId={currentId}/>} />}
       <Route exact path="/MyAppointments" render={(props) => <AppointmentPage {...props} currentUser={currentUser} currentId={currentId}/>} />
+      <Route path="/forgot" render={(props) => <ForgotPass {...props} />} />
+      <Route path="/reset/:token" render={(props) => <ResetPass {...props} />} />
       <Route path="/SignIn" render={(props) => <SignIn {...props} onLoginSuccess={onLoginSuccess} />}  /> {/*currentUser={props.currentUser} setCurrentUser={props.setCurrentUser}*/}
       <Route path="/SignUp" render={(props) => <SignUp {...props} onLoginSuccess={onLoginSuccess} />}  /> {/* onLoginSuccess={props.onLoginSuccess()} currentUser={props.currentUser} setCurrentUser={props.setCurrentUser}*/}
       <Route path="/LogOut" render={(props) => <LogOut {...props} logOut={logOut} />} /> {/*currentUser={props.currentUser} setCurrentUser={props.setCurrentUser}*/}
