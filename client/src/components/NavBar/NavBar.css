@@ -14,11 +14,11 @@
     margin: auto 10px;
 }
 
-.navbar-light .navbar-nav .nav-link {
-    color: #bfbfbf;
+.navbar-nav .nav-link {
+    font-weight: bold;
 }
 
-.navbar-light .navbar-nav .nav-link:hover {
+.navbar-nav .nav-link:hover {
     color: white;
 }
 
