@@ -33,12 +33,13 @@ const App = (props) => {
       httpUser.logOut();
       await setCurrentUser(null);
       await setCurrentId(null);
+      await setIsAdmin(false);
   };
 
   return (
     <div style={{display: 'flex', 'flexFlow': 'column', 'minHeight': '100vh'}}>
       <Switch>
-        <Route exact path="/Home" render={() => <Home currentUser={currentUser} />}/>
+        <Route exact path="/Home" render={() => <Home currentUser={currentUser} isAdmin={isAdmin}/>}/>
         <Route render={() => <DefaultContainer onLoginSuccess={onLoginSuccess} logOut={logOut} currentUser={currentUser} currentId={currentId} isAdmin={isAdmin}/>} />  {/*currentUser={currentUser}* setCurrentUser={setCurrentUser()}*/}
       </Switch>
     </div>
@@ -66,7 +67,7 @@ const DefaultContainer = (props) => {
   console.log(isAdmin);
   return(
   <div style={{display: 'flex', 'flexFlow': 'column', 'minHeight': '100vh', 'backgroundImage': 'url(/background.png)'}}>
-    <NavBar currentUser={currentUser} />
+    <NavBar currentUser={currentUser} isAdmin={isAdmin} />
     <Switch>
       <Route exact path="/Navigation/:option" component={NavigationPage} />
       <Route exact path="/Account" render={(props) => <AccountManagement {...props} currentUser={currentUser} />} />
