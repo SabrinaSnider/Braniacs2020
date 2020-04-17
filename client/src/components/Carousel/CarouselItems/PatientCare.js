@@ -11,21 +11,6 @@ const PatientCare = (props) => {
             <h2 id="patient-care-title">PATIENT CARE</h2>
             <CardDeck id="patient-care-carddeck">
                 <Card>
-                    <Card.Img variant="top" src="/CarouselHome/PatientCare/I1.jpg" />
-                    <Card.Body>
-                        <Card.Title>NEW PATIENT APPOINTMENTS</Card.Title>
-                        <Card.Text>
-                            <h3>(352) 273-6990</h3>
-                            <p>Established Patients: (352) 273-9000</p>
-                        </Card.Text>
-                    </Card.Body>
-                    <Card.Footer>
-                        <a href="https://neurosurgery.ufl.edu/patient-care/appointments/" title="Make an Appointment" class="FancyLink td-n clickable ba-0 FancyLink--blue-light fs-14 fs-16--md ff-gm">
-                            <span class="FancyLink__Text">Make an Appointment </span>
-                        </a>
-                    </Card.Footer>
-                </Card>
-                <Card>
                     <Card.Img variant="top" src="/CarouselHome/PatientCare/I2.jpg" />
                     <Card.Body>
                         <Card.Title>Neurosurgery</Card.Title>
