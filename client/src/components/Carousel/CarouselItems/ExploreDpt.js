@@ -6,8 +6,8 @@ import { CardDeck, Card, Button } from 'react-bootstrap'
 */
 const ExploreDpt = (props) => {
     return (
-        <div style={{ width: '100%', height: '100%', padding: "20px 80px"}}>
-            <div style={{height: '9%', margin: '10px'}}>
+        <div style={{ width: '100%', height: '100%', padding: "20px 80px", 'borderTop': '.5px solid #ababab'}}>
+            <div style={{height: '9%'}}>
                 <h2 style={{fontSize: '2rem', 'float': 'left', margin: '30px 0px 30px 0px'}}>EXPLORE OUR DEPARTMENT</h2>
             </div>
             <CardDeck style={{textAlign: 'left', 'float': 'left', margin: '0px'}}>

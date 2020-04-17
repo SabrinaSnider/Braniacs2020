@@ -9,15 +9,20 @@ import HomeCarousel from '../../components/Carousel/HomeCarousel'
 function Home(props) {
     const currentUser = props.currentUser;
     return (
-        <div style={{'min-height': '100vh', display: 'flex', 'flexDirection': 'column', 'justifyContent': 'space-between'}}>
-            <NavBar 
-                home={true}
-                currentUser = {currentUser}
-            />
-            <div className="App" style={{height: '100%', width: '100%', 'backgroundImage': `url(background.png)`, 'flexGrow' : '1'}}>
-                <HomeCarousel />
+        <div>
+            <div id="home-header">
+                <img src="/ufhealth-white.svg" height="40px" style={{float:'left'}} alt=""></img>
+                <h1 id="department-title">UF Department of Neurosurgery</h1>
             </div>
-            
+            <div style={{'min-height': '100vh', display: 'flex', 'flexDirection': 'column', 'justifyContent': 'space-between'}}>
+                <NavBar 
+                    home={true}
+                    currentUser = {currentUser}
+                />
+                <div className="App" style={{height: '100%', width: '100%', 'backgroundImage': `url(background.png)`, 'flexGrow' : '1'}}>
+                    <HomeCarousel />
+                </div>
+            </div>
         </div>
     );
 }

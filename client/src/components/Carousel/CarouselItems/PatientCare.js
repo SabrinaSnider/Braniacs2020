@@ -1,16 +1,15 @@
 import React from 'react';
 import { CardDeck, Card } from 'react-bootstrap'
+import './PatientCare.css'
 
 /*
     Carousel slide for the "Patient Care" page
 */
 const PatientCare = (props) => {
     return (
-        <div style={{ width: '100%', height: '100%', padding: "20px 80px"}}>
-            <div style={{height: '9%', margin: '10px'}}>
-                <h2 style={{fontSize: '2rem', 'float': 'left', margin: '30px 0px 30px 0px'}}>PATIENT CARE</h2>
-            </div>
-            <CardDeck style={{textAlign: 'left', 'float': 'left', margin: '0px'}}>
+        <div id="patient-care-container">
+            <h2 id="patient-care-title">PATIENT CARE</h2>
+            <CardDeck id="patient-care-carddeck">
                 <Card>
                     <Card.Img variant="top" src="/CarouselHome/PatientCare/I1.jpg" />
                     <Card.Body>
