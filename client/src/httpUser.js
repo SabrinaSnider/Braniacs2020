@@ -17,6 +17,23 @@ httpUser.getCurrentUser = function() {
     return (token ? jwtDecode(token) : null)
 };
 
+httpUser.validateEmail = async function(user) {
+    const response = await axios.post( '/patient/forgot', user );
+    console.log("https response", response);
+    if(response.data.errors !== undefined){
+        return response.data;
+    }
+}
+
+httpUser.validatePasswords = async function(user) {
+    const response = await axios.post( '/patient/reset/' + user.token, user );
+    console.log("https response", response);
+    if(response.data.errors !== undefined){
+        return response.data;
+    }
+}
+
+
 httpUser.logIn = async function(credentials) {
     try {
         const response = await axios.post( '/patient/authenticate', credentials );
