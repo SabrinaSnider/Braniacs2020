@@ -34,8 +34,9 @@ function AccountManagement(props) {
         .then(function (response) {
             console.log("response is", response)
             console.log(response.data.name.first);
+            console.log("Current User id", currentUser.patientId);
 
-            console.log(response.data.phone)
+            console.log("Phone from post",response.data.phone)
 
             if(response.data.name.first) setFirstName(response.data.name.first)
             if(response.data.name.last) setLastName(response.data.name.last)
@@ -59,14 +60,15 @@ function AccountManagement(props) {
                 last: lastName
             },
             email: email,
-            phone: pn
+            phone: pn,
+            patientId: currentUser.patientId
         }
         
-        axios.put("/patient/update", {patientId: parseInt(currentUser.patientId)}, formatted)
+        axios.put("/patient/update", formatted)
         .then(function (response) {
 
-            console.log(formatted);
-            console.log(response);
+            console.log("Formatted response",formatted);
+            console.log("Response from put",response);
         })
         .catch(function (error) {
             console.log(error);

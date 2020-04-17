@@ -166,10 +166,26 @@ exports.popPatients = async (req, res) => {
 
 /*make a post request with patient json(first name, last name, email, dob, and password) added to the request to update patient info*/
 exports.updatePatients = async (req, res) =>{
-	patient.updateOne({ "patientId" : req.patientId}, {name: {first: req.body.first, last: req.body.last}, email: req.body.email, password: req.body.password, dob: req.body.dob,  phone: req.body.phone,}, function(err, usr){
+    console.log(req.body);
+    const newValues = {
+        $set: {
+            name: {
+                first: req.body.name.first,
+                last: req.body.name.last
+            },
+            dob: req.body.dob,
+            email: req.body.email,
+            phone: req.body.phone
+        }
+    }
+	patient.updateOne({ "patientId" : req.body.patientId}, newValues, function(err, usr){
 		if (err) res.status(200).send("NaN");
-        else res.status(200).send("Successful update");
-        console.log("hello");
+        else {
+            console.log("hello");
+            console.log(usr.nModified + " document(s) updated");
+            res.status(200).send("Successful update");
+            
+        }
 	})
 }
 
