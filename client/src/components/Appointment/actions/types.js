@@ -15,3 +15,10 @@ export const FILL_REMINDERS = 'fill_reminders';
 export const GET_PATIENT = 'get_patient';
 export const PATIENT_FAIL = 'patient_fail';
 export const FILL_PATIENTS = 'fill_patients';
+
+export const SEARCH_ADMINS = 'search_admins';
+export const SEARCH_NONADMINS = 'search_nonadmins';
+export const USER_FAIL = 'user_fail';
+export const FILL_USERS = 'fill_users';
+export const MAKE_ADMIN = 'make_admin';
+export const UNMAKE_ADMIN = 'unmake_admin';

@@ -191,3 +191,17 @@ exports.authenticate = async (req, res) => {
         res.json({success: true, message: "Token attached", token, patientId : user.patientId, admin: user.admin});
     }
 }
+
+exports.adminify = function(req, res){
+	patient.updateOne({'patientId' : req.body.patientId}, {admin: true}, function(err, usr){
+		if (err) res.status(200).send("NaN");
+		else res.status(200).send("Successful admin status given to user");
+	})
+}
+
+exports.deadminify = function(req, res){
+	patient.updateOne({'patientId' : req.body.patientId}, {admin: false}, function(err, usr){
+		if (err) res.status(200).send("NaN");
+		else res.status(200).send("Successful admin status revoked from user");
+	})
+}

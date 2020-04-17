@@ -3,10 +3,13 @@ import { connect } from 'react-redux';
 import { addAppointment, searchAppointment, fillAppointments } from '../actions/AppointmentsActions';
 import { createReminder, deleteAllReminders, searchReminder, fillReminders } from '../actions/ReminderActions';
 import {fillPatients} from '../actions/PatientActions';
+import {fillUsers, searchAdmins, searchNonadmins} from '../actions/AdminActions';
 import Header from './Header';
 import AppointmentList from './AppointmentList';
 import ReminderList from './ReminderList';
-import PatientIdList from './PatientIdList'
+import PatientIdList from './PatientIdList';
+import AdminList from './AdminList';
+import NonAdminList from './NonAdminList';
 import MyCalendar from './MyCalendar';
 import InputMoment from 'input-moment';
 import moment, { duration } from 'moment';
@@ -26,10 +29,11 @@ class AppointmentHome extends Component {
         super(props);
         this.props.fillPatients();
         this.props.fillAppointments();
-        console.log("From AppointmentsHome.js",this.props.appointments);
+        console.log("From AppointmentsHome.js",this.props.admins);
+        console.log("From AppointmentsHome.js",this.props.nonadmins);
         this.props.fillReminders();
+        this.props.fillUsers();
         
-        console.log("Patients from AppointmentsHome.js", this.props.patients)
     }
 
 
@@ -72,7 +76,6 @@ class AppointmentHome extends Component {
 
     onSearchAppointmentAux = () => {
         this.props.fillAppointments();
-        this.setState({ searchApptId: "c" });
 
     }
 
@@ -82,8 +85,23 @@ class AppointmentHome extends Component {
 
     onSearchReminderAux = () => {
         this.props.fillReminders();
-        this.setState({ searchApptId: "c" });
 
+    }
+
+    onSearchAdmin = () =>{
+        this.props.searchAdmins(this.state.searchAdminId);
+    }
+
+    onSearchAdminAux = () =>{
+        this.props.fillUsers();
+    }
+
+    onSearchNonAdmin = () =>{
+        this.props.searchNonadmins(this.state.searchNonadminId);
+    }
+
+    onSearchNonAdminAux = () =>{
+        this.props.fillUsers();
     }
 
     state = {
@@ -97,6 +115,8 @@ class AppointmentHome extends Component {
         phone: "",
         searchApptId: "c",
         searchRemId: "c",
+        searchAdminId: 0,
+        searchNonadminId: 0
 
     };
 
@@ -115,6 +135,16 @@ class AppointmentHome extends Component {
     onSearchReminderChange = (e) => {
         let remId = JSON.parse(e.target.value);
         this.setState({ searchRemId: remId });
+    }
+
+    onSearchAdminChange = (e) =>{
+        let adminId = JSON.parse(e.target.value);
+        this.setState({searchAdminId: adminId});
+    }
+
+    onSearchNonAdminChange = (e) =>{
+        let nonadminId = JSON.parse(e.target.value);
+        this.setState({searchNonadminId: nonadminId});
     }
 
     onIDChange = (e) => {
@@ -474,8 +504,83 @@ class AppointmentHome extends Component {
                         </div>
                     </div>
 
+                    
+
                 </div>
 
+
+                <div className="row">
+                        <div className="col-sm-6">
+                            <div className="card">
+                                <div className="card-body">
+                                    <h5 className="card-title">Manage Admins </h5>
+                                    <hr></hr>
+
+                                    <div className="row">
+                                        <div className="col-sm-7">
+                                            <input className="text-center" type="text" placeholder="Search Patient ID" onChange={this.onSearchAdminChange} />
+                                        </div>
+                                        <div className="col-sm-2">
+                                        <button onClick={this.onSearchAdmin} type="button " className="btn btn-sm btn-primary " data-dismiss="modal">Search</button>
+                                    </div>
+
+                                    <div className="col-sm-3">
+                                        <button onClick={this.onSearchAdminAux} type="button" className="btn  btn-sm btn-secondary " data-dismiss="modal">Clear Search</button>
+                                    </div>
+                                </div>
+                                <div className="card mt-3 overflow-auto">
+
+                                    <div className="card-header">
+                                        Current admins
+                        </div>
+                                    <div className="card-body overflow-auto" style={{ height: '500px' }}>
+                                        
+                                        <AdminList admins={this.props.admins}/>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className="col-sm-6">
+                        <div className="card">
+                            <div className="card-body">
+                                <h5 className="card-title" style={{ marginRight: "auto" }} >Manage Non-Admins</h5>
+                                <hr></hr>
+
+                                <p></p>
+                                <div className="row">
+                                        <div className="col-sm-7">
+                                        <input className="text-center" type="text" placeholder="Search Patient ID" onChange={this.onSearchNonAdminChange} />
+                                        </div>
+                                        <div className="col-sm-2">
+                                        <button onClick={this.onSearchNonAdmin} type="button " className="btn btn-sm btn-primary " data-dismiss="modal">Search</button>
+                                    </div>
+
+                                    <div className="col-sm-3">
+                                        <button onClick={this.onSearchNonAdminAux} type="button" className="btn btn-sm btn-secondary" data-dismiss="modal">Clear Search</button>
+                                    </div>
+                                </div>
+                                <div className="card mt-3 overflow-auto">
+
+                                    <div className="card-header">
+
+                                        Current non-admins
+                                    </div>
+                                    <div className="card-body overflow-auto" style={{ height: '500px' }}>
+
+                                        <NonAdminList  nonadmins={this.props.nonadmins}/>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    
+
+                </div>
 
             </div>
 
@@ -492,7 +597,10 @@ const mapStateToProps = (state) => {
         reminderError: state.reminders.error1,
         patients: state.patients.items3,
         patient: state.patients.patient,
-        patientError: state.reminders.error1
+        patientError: state.reminders.error1,
+        admins: state.users.admins,
+        nonadmins: state.users.nonadmins,
+        userError: state.users.error
     }
 };
 const mapDispatchToProps = {
@@ -503,7 +611,10 @@ const mapDispatchToProps = {
     searchReminder,
     fillAppointments,
     fillReminders,
-    fillPatients
+    fillPatients,
+    fillUsers, 
+    searchAdmins, 
+    searchNonadmins
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(AppointmentHome);
