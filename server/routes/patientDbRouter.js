@@ -17,7 +17,7 @@ Router.post('/useraccount', patientDb.fetchUserFromEmail); //fetch user informat
 Router.post('/retrieve', patientDb.fetchUserFromPatientId); //fetch user information
 Router.post('/register', patientDb.newPatient); //create user
 Router.post('/authenticate', patientDb.authenticate);
-Router.post('/forgot', patientDb.forgotP);
+Router.post('/forgot', patientDb.forgotPassword);
 Router.post('/reset/validate/', patientDb.validateReset);
 Router.post('/reset/:token', patientDb.reset);
 
