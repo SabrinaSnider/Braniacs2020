@@ -11,6 +11,7 @@ import AccountManagement from './views/AccountManagement/AccountManagement'
 import Appointment from "./components/Appointment/Appointment";
 import AppointmentPage from './views/AppointmentPage/AppointmentPage'
 import httpUser from './httpUser'
+import './App.css'
 
 /*
   Checks for the homepage route first. If not routing to home, sends to DefaultContainer.
