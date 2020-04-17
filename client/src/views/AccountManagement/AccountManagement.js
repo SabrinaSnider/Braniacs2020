@@ -51,16 +51,21 @@ function AccountManagement(props) {
 
     const updateData = (event) => {
         event.preventDefault();
-        
-        axios.post("/patient/update", {
+
+        let formatted = 
+        {
             name: {
-                 first: firstName,
-                 last: lastName
-             },
-             email: email,
-             dob: dob,
-             phone: pn
-        }).then(function (response) {
+                first: firstName,
+                last: lastName
+            },
+            email: email,
+            phone: pn
+        }
+        
+        axios.put("/patient/update", {patientId: parseInt(currentUser.patientId)}, formatted)
+        .then(function (response) {
+
+            console.log(formatted);
             console.log(response);
         })
         .catch(function (error) {
@@ -72,7 +77,7 @@ function AccountManagement(props) {
         <Card id="account-management-page">
             <h1 id="account-management-header" className="account-row">Account Informaton</h1>
 
-            <Form>
+            <Form onSubmit ={updateData}>
                 <Form.Group className="account-row">
                     <h2 className="account-label">First name</h2>
                     <Form.Control value={firstName}  onChange={event => setFirstName(event.target.value)}/>
@@ -101,7 +106,7 @@ function AccountManagement(props) {
                     <Form.Control value={pn}  onChange={event => setPn(event.target.value)}/>
                 </Form.Group>
 
-                <Button id="account-save-btn" className="account-row" variant="primary" type="submit" onClick={updateData}>
+                <Button id="account-save-btn" className="account-row" variant="primary" type="submit">
                     Save
                 </Button>
             </Form>
