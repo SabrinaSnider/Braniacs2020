@@ -1,4 +1,3 @@
-   
 const patient = require('../models/patient.model.js')
 const config = require('../config/config.js')
 const mongoose = require('mongoose')
@@ -9,6 +8,7 @@ const nodemailer = require('nodemailer')
 const crypto = require('crypto')
 const bcrypt = require('bcrypt-nodejs')
 
+
 const validateRegisterInput = require("../validation/register");
 const validateLoginInput = require("../validation/login");
 
@@ -16,7 +16,7 @@ exports.forgot = function(req, res){
     res.send('forgot');
 }
 
-exports.forgotP = function(req, res, next){
+exports.forgotPassword = function(req, res, next){
     async.waterfall([
         function(done) {
           crypto.randomBytes(20, function(err, buf) {
@@ -27,6 +27,7 @@ exports.forgotP = function(req, res, next){
         function(token, done) {
           patient.findOne({ email: req.body.email }, function(err, user) {
             if (!user) {
+              return res.status(200).json({ errors: {email: "No account with that email address exists." }});
               console.log('No account with that email address exists.')
               // req.flash('error', 'No account with that email address exists.');
               return res.redirect('/forgot');
@@ -59,9 +60,9 @@ exports.forgotP = function(req, res, next){
               'If you did not request this, please ignore this email and your password will remain unchanged.\n'
           };
           smtpTransport.sendMail(mailOptions, function(err) {
-            console.log('mail sent');
             console.log('An e-mail has been sent to ' + user.email + ' with further instructions.')
             // req.flash('success', 'An e-mail has been sent to ' + user.email + ' with further instructions.');
+            return res.status(200).json({ errors: {email: 'An e-mail has been sent to ' + user.email + ' with further instructions.' }});
             done(err, 'done');
           });
         }
@@ -85,6 +86,7 @@ exports.validateReset = function(req, res){
 
 exports.reset = function(req, res){
     if(req.body.password !== req.body.confirm) {
+      return res.status(200).json({ errors: {confirm: 'Passwords do not match.' }});
       console.log('Passwords do not match.')
       return res.redirect('back');
     }
@@ -96,8 +98,8 @@ exports.reset = function(req, res){
             function(err, user) {
               if (!user) { // if no user found, do not update
                 // req.flash('error', 'Password reset token is invalid or has expired.');
-                console.log('Password reset token is invalid or has expired.')
-                return res.redirect('/Home');
+                console.log('Password reset token is invalid or has expired. ')
+                return res.redirect('/forgot');
               }
               console.log('should be updated')
               user.resetPasswordToken = undefined;
@@ -122,6 +124,7 @@ exports.reset = function(req, res){
           };
           smtpTransport.sendMail(mailOptions, function(err) {
             // req.flash('success', 'Success! Your password has been changed.');
+            return res.status(200).json({ errors: {confirm: 'Success! Your password has been changed.' }});
             console.log('Success! Your password has been changed.')
             done(err);
           });
