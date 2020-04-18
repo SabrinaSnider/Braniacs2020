@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
 import './AccountManagement.css'
 import { Form, Button, Card } from 'react-bootstrap'
-import DatePickerBasic from '../../components/DatePicker/DatePickerBasic'
 import axios from 'axios';
+import { format } from "date-fns";
 var ObjectId = require('mongodb').ObjectId;
 
 /*
@@ -34,14 +34,12 @@ function AccountManagement(props) {
         .then(function (response) {
             console.log("response is", response)
             console.log(response.data.name.first);
-            console.log("Current User id", currentUser.patientId);
-
-            console.log("Phone from post",response.data.phone)
+            console.log("Original DOB",response.data.dob);
 
             if(response.data.name.first) setFirstName(response.data.name.first)
             if(response.data.name.last) setLastName(response.data.name.last)
             if(response.data.email) setEmail(response.data.email)
-            if(response.data.dob) setDob(response.data.dob)
+            if(response.data.dob) setDob(format(new Date(response.data.dob), "MM/d/yyyy"));
             if(response.data.phone) setPn(response.data.phone)
 
         })
@@ -53,6 +51,7 @@ function AccountManagement(props) {
     const updateData = (event) => {
         event.preventDefault();
 
+        console.log("Changed DOB", dob);
         let formatted = 
         {
             name: {
@@ -61,7 +60,8 @@ function AccountManagement(props) {
             },
             email: email,
             phone: pn,
-            patientId: currentUser.patientId
+            patientId: currentUser.patientId,
+            dob: dob
         }
         
         axios.put("/patient/update", formatted)
@@ -92,10 +92,7 @@ function AccountManagement(props) {
 
                 <Form.Group className="account-row last-row">
                     <h2 className="account-label">Date of Birth</h2>
-                    <DatePickerBasic
-                        date = {dob}
-                        setDate = {setDob}
-                    />
+                    <Form.Control value={dob}  onChange={event => setDob(event.target.value)}/>
                 </Form.Group>
 
                 <Form.Group className="account-row">
