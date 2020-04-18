@@ -141,8 +141,7 @@ export const fillAppointments = () => {
                 sampleAppoint.data.forEach(element => {
                     arr1.push(element);
                     });
-                console.log("Calling from Appointment Action", arr1)
-                
+                console.log("Calling from Appointment Action", arr1)                
             })
             .then(()=>{
                 dispatch({ type: FILL_APPOINTMENTS, payload: arr1});
