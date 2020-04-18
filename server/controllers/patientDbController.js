@@ -258,13 +258,13 @@ exports.newPatient = async (req, res) => {
         
         let alreadyExists;
         patient.find({$or:[{email: newPatient.email}, {patientId: newPatient.patientId}]}).then(user =>{
-          console.log(user);
-            if (user.email === newPatient.email) {
+          console.log(user[0]);
+            if (user[0].email === newPatient.email) {
                 alreadyExists = true;
                 return res.status(200).json({ errors:{email: "Email already exists" }});
-            } else if(user.patientId === newPatient.patientId){
+            } else if(user[0].patientId === newPatient.patientId){
               alreadyExists = true;
-              return res.status(200).json({ errors:{id: "ID already exists" }});
+              return res.status(200).json({ errors:{patientId: "ID already exists" }});
             }else{
                 alreadyExists = false;
             }
