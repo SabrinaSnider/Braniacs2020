@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
 import './AccountManagement.css'
 import { Form, Button, Card } from 'react-bootstrap'
-import DatePickerBasic from '../../components/DatePicker/DatePickerBasic'
 import axios from 'axios';
+import { format } from "date-fns";
 var ObjectId = require('mongodb').ObjectId;
 
 /*
@@ -17,41 +17,51 @@ function AccountManagement(props) {
     const [lastName, setLastName] = useState("")
     const [email, setEmail] = useState("")
     const [dob, setDob] = useState(new Date())
+    const [pn, setPn] = useState("")
+    const currentUser = props.currentUser;
+    const currentId = props.currentId;
 
-    // console.log(props.currentUser)
+    useEffect(()=>{
+        GetAccountInfo();
+    }, [])
 
+    //gets the account info based on the patient id
     const GetAccountInfo = async() => {
-        axios.post("/patient/useraccount", {
-            email: props.currentUser.email,
+        axios.post("/patient/retrieve", {
+            patientId: parseInt(currentUser.patientId)
         })
         .then(function (response) {
-            // console.log("response is", response)
-            if (response.data.name.first) setFirstName(response.data.name.first)
-            if (response.data.name.last) setLastName(response.data.name.last)
-            if (response.data.email) setEmail(response.data.email)
-            if (response.data.dob) setDob(response.data.dob)
+            if(response.data.name.first) setFirstName(response.data.name.first)
+            if(response.data.name.last) setLastName(response.data.name.last)
+            if(response.data.email) setEmail(response.data.email)
+            if(response.data.dob) setDob(format(new Date(response.data.dob), "MM/d/yyyy"));
+            if(response.data.phone) setPn(response.data.phone)
         })
         .catch(function (error) {
           console.log(error);
         });
     }
 
-    useEffect(()=>{
-        GetAccountInfo();
-    }, [])
-
     const updateData = (event) => {
         event.preventDefault();
-        
-        axios.post("/patient/update", {
+
+        console.log("Changed DOB", dob);
+        let formatted = 
+        {
             name: {
                 first: firstName,
                 last: lastName
             },
-            dob: dob,
-            email: email
-        }).then(function (response) {
-            // console.log(response.data);
+            email: email,
+            phone: pn,
+            patientId: currentUser.patientId,
+            dob: dob
+        }
+        
+        axios.put("/patient/update", formatted)
+        .then(function (response) {
+            console.log("Formatted response",formatted);
+            console.log("Response from put",response);
         })
         .catch(function (error) {
             console.log(error);
@@ -62,7 +72,7 @@ function AccountManagement(props) {
         <Card id="account-management-page">
             <h1 id="account-management-header" className="account-row">Account Informaton</h1>
 
-            <Form>
+            <Form onSubmit ={updateData}>
                 <Form.Group className="account-row">
                     <h2 className="account-label">First name</h2>
                     <Form.Control value={firstName}  onChange={event => setFirstName(event.target.value)}/>
@@ -75,10 +85,7 @@ function AccountManagement(props) {
 
                 <Form.Group className="account-row last-row">
                     <h2 className="account-label">Date of Birth</h2>
-                    <DatePickerBasic
-                        date = {dob}
-                        setDate = {setDob}
-                    />
+                    <Form.Control value={dob}  onChange={event => setDob(event.target.value)}/>
                 </Form.Group>
 
                 <Form.Group className="account-row">
@@ -86,7 +93,12 @@ function AccountManagement(props) {
                     <Form.Control value={email}  onChange={event => setEmail(event.target.value)}/>
                 </Form.Group>
 
-                <Button id="account-save-btn" className="account-row" variant="primary" type="submit" onClick={updateData}>
+                <Form.Group className="account-row">
+                    <h2 className="account-label">Phone number</h2>
+                    <Form.Control value={pn}  onChange={event => setPn(event.target.value)}/>
+                </Form.Group>
+
+                <Button id="account-save-btn" className="account-row" variant="primary" type="submit">
                     Save
                 </Button>
             </Form>

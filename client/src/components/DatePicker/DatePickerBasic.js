@@ -6,8 +6,11 @@ import 'react-nice-dates/build/style.css'
 import './DatePickerBasic.css'
 
 const DatePickerBasic = (props) => {
+  const handleChange = (e) =>{
+    props.setDate(e.target.value);
+  }
   return (
-    <DatePicker date={props.date} onDateChange={props.setDate} locale={enGB}>
+    <DatePicker date={props.date} onDateChange={handleChange} locale={enGB}>
       {({ inputProps, focused }) => (
         <Form.Control
           className={'input' + (focused ? ' -focused' : '')}

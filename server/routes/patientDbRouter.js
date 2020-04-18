@@ -21,9 +21,9 @@ Router.post('/forgot', patientDb.forgotPassword);
 Router.post('/reset/validate/', patientDb.validateReset);
 Router.post('/reset/:token', patientDb.reset);
 
-Router.put('/update', patientDb.updatePatients); //update account info function?
 Router.put('/adminify', patientDb.adminify);
 Router.put('/deadminify', patientDb.deadminify);
+Router.put('/update', patientDb.updatePatients); //update account info function
 
 Router.use(verifyToken);
 
