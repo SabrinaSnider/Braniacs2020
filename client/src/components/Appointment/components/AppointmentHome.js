@@ -273,6 +273,7 @@ class AppointmentHome extends Component {
                                                         </div>
                                                         <div className="col-md-6">
                                                             <div className="form-group">
+                                                            <label>Patient ID</label>
                                                                 <PatientIdList patients={this.props.patients} onChange={this.onPatientChange} />
 
                                                             </div>

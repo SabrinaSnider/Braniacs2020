@@ -91,7 +91,7 @@ export const searchNonadmins = (patientId) =>{
                 })
             
         } catch(err){
-            dispatch({ type: USER_FAIL, payload: 'Couldn\'t search admins' });
+            dispatch({ type: USER_FAIL, payload: 'Couldn\'t search nonadmins' });
         }
     }
 };

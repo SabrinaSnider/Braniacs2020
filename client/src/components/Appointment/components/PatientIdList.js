@@ -20,13 +20,10 @@ class PatientIdList extends Component {
 	render() {
 		return (
 			<ul className="list-group">
-			<div className="btn-group dropright">
-				<button type="button" className="btn btn-primary">
-					Select Patient
+			<div className="btn-group">
+			<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    Patient ID
   </button>
-				<button type="button" className="btn btn-primary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-					<span className="sr-only">Toggle Dropright</span>
-				</button>
 				<div className="dropdown-menu">
 					{this.props.patients.map(this.renderPatientIds)}
 				</div>
