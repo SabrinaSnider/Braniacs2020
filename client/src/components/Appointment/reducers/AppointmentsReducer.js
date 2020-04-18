@@ -6,39 +6,28 @@ import axios from 'axios'
 import {
     ADD_APPOINTMENT,
     DELETE_APPOINTMENT,
-    APPOINTMENT_FAIL
+    APPOINTMENT_FAIL, 
+    SEARCH_APPOINTMENT,
+    FILL_APPOINTMENTS
 } from '../actions/types';
 
-    let sampleAppoint = [];
-    let arr = [];
-
-    axios.get('/appt/list', {})
-        .then(function (response) {
-            console.log("Appointment response", response)
-            sampleAppoint.data = (response.data);
-            sampleAppoint.data.forEach(element => {
-                arr.push(element);
-                });
-            console.log("arr", arr)
-
-            //currentComponent.setState({
-                //myArray: arr
-            //});
-            //console.log(sampleAppoint.data[1].name);
-        })
-        .catch(function (error) {
-            console.log(error);
-        });
 
 // One default appointment item added as example
 const INITIAL_STATE = {
-    items: arr,
+    items: [],
     error: ''
 };
 
 export default (state = INITIAL_STATE, action) => {
 
     switch (action.type) {
+        case FILL_APPOINTMENTS:
+        
+            return{
+                ...state,
+                items: action.payload,
+                error: ''
+            };
         case ADD_APPOINTMENT:
             // add the appointment to the store
            
@@ -61,15 +50,20 @@ export default (state = INITIAL_STATE, action) => {
                 error: action.payload
             };
         case DELETE_APPOINTMENT:
-            // remove the appointment by id from store
-            state.items = _.remove(state.items, (appointment) => {
-                return appointment.patientId !== action.payload;
-            });
 
             return {
                 ...state,
+                items: state.items.filter( appointment => appointment.startTime !== action.payload ),
                 error: ''
             };
+
+        case SEARCH_APPOINTMENT:
+            return {
+                ...state,
+                items: action.payload,
+                error: ''
+            };
+    
         default:
             return state;
     }

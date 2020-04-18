@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import './SignInBox.css'
 import httpUser from '../../httpUser'
+import { Nav } from 'react-bootstrap'
 
 /*
     Sign in box component
@@ -33,6 +34,8 @@ const SignInBox = (props) => {
             password: password
         }
         const user = await httpUser.logIn(newUser);
+
+        console.log(user);
         if(user.errors !== undefined){
             setErrors({
                 email: user.errors.email,
@@ -40,8 +43,8 @@ const SignInBox = (props) => {
             });
         }
        
-        else if(user) {
-            props.onLoginSuccess(user);
+        else if(user.token) {
+            props.onLoginSuccess(user.token, user.id, user.admin);
             props.history.push('/Home');
         }
     };
@@ -71,7 +74,7 @@ const SignInBox = (props) => {
                     <button type="submit" id="login-btn" className="btn row">Login</button>
                     <button type="button" id="create-btn" className="btn row" onClick={() => {props.history.push('/SignUp')}}>Create Account</button>
                 </div>
-                <p id="forgot-pwd" className="row">Forgot Password?</p>
+                <Nav.Link id="forgot-pwd" className="row" onClick={() => {props.history.push('/forgot')}}>Forgot Password?</Nav.Link>
             </form>
         </div>
     );
