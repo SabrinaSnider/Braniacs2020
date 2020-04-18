@@ -236,16 +236,16 @@ exports.newPatient = async (req, res) => {
 
         const newPatient = new patient({
 			//patientId: Math.random().toString(36).substr(2,15),
-			patientId: req.body.patientId,
+			      patientId: req.body.patientId,
             name: {
                 first: req.body.name.first,
                 last: req.body.name.last
             },
             email: req.body.email,
             password: req.body.password,
-			dob: req.body.dob,
-			phone: req.body.phone,
-			admin: false //automatically set to false
+            dob: req.body.dob,
+            phone: req.body.phone,
+            admin: false //automatically set to false
         });
 
         const { errors, isValid } = await validateRegisterInput(req.body);
@@ -257,11 +257,15 @@ exports.newPatient = async (req, res) => {
         const token = await signToken(newPatient);
         
         let alreadyExists;
-        patient.findOne({email: newPatient.email}).then(user =>{
-            if (user) {
+        patient.find({$or:[{email: newPatient.email}, {patientId: newPatient.patientId}]}).then(user =>{
+          console.log(user);
+            if (user.email === newPatient.email) {
                 alreadyExists = true;
                 return res.status(200).json({ errors:{email: "Email already exists" }});
-            } else{
+            } else if(user.patientId === newPatient.patientId){
+              alreadyExists = true;
+              return res.status(200).json({ errors:{id: "ID already exists" }});
+            }else{
                 alreadyExists = false;
             }
         }).then(()=>{
