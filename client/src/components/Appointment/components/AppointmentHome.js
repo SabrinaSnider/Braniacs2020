@@ -536,7 +536,7 @@ class AppointmentHome extends Component {
                         </div>
                                     <div className="card-body overflow-auto" style={{ height: '500px' }}>
                                         
-                                        <AdminList admins={this.props.admins}/>
+                                        <AdminList admins={this.props.admins} date={this.props.date}/>
                                     </div>
                                 </div>
 
@@ -601,7 +601,8 @@ const mapStateToProps = (state) => {
         patientError: state.reminders.error1,
         admins: state.users.admins,
         nonadmins: state.users.nonadmins,
-        userError: state.users.error
+        userError: state.users.error, 
+        date: state.date
     }
 };
 const mapDispatchToProps = {
