@@ -28,3 +28,13 @@
 .navigation-subsection {
     margin: 20px 0px;
 }
+
+#general-info-container {
+    padding: 0px 40px;
+}
+
+@media (max-width: 1000px) {
+    #general-info-container {
+        padding: 0px 10px;
+    }
+}
