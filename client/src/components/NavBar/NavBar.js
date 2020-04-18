@@ -25,13 +25,13 @@ const NavBar = (props) => {
                 <Navbar.Collapse className="w-100 dual-collapse2">
                     <Nav className="mr-auto">
                         <Nav.Link className = "nav-item main" href='/Home'>Home</Nav.Link>
-                        <Nav.Link className = "nav-item main" href='/Navigation/GeneralInformaiton'>Contact and Find Us</Nav.Link>
                         {(props.currentUser && !props.isAdmin) &&
                             <Nav.Link className = "nav-item main" href='/MyAppointments'>Appointments</Nav.Link>
                         }
                         {(!props.currentUser) &&
                             <Nav.Link className = "nav-item main" href='/SignIn'>Appointments</Nav.Link>
                         }
+                        <Nav.Link className = "nav-item main" href='/Navigation/GeneralInformaiton'>Contact and Find Us</Nav.Link>
                     </Nav>
                 </Navbar.Collapse>
                 <Navbar.Collapse className="w-100 dual-collapse2">
@@ -40,7 +40,7 @@ const NavBar = (props) => {
 
                         {props.currentUser ?
                         (
-                            <Nav.Link className = "nav-item main" href='/Account'>Account</Nav.Link>
+                            <Nav.Link className = "nav-item main" href='/Account'>Account Information</Nav.Link>
 
                         ):(
                             <Nav.Link className = "nav-item main" href='/SignUp'>Sign Up</Nav.Link>
