@@ -12,8 +12,8 @@ exports.newApiReminder = async (req, res) => {
 	console.log(to);
 	client.messages.create ({
 		body,
-		//from: '+12053465210', //uncomment to implement actual sending. 
-		from: '',
+		from: '+12053465210', //uncomment to implement actual sending. 
+		//from: '',
 		to
 	}, function(err, message) {
 		if (err) {

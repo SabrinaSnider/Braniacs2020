@@ -10,9 +10,9 @@ class PatientIdList extends Component {
 	}
 
 	renderPatientIds = (patient) => {
-		if (patient.patientId > 0){
+		if (patient.patientId > 0) {
 			return (
-				<button onClick={this.onSelectPatient.bind(this, patient)} className="dropdown-item" type="button" key={patient.patientId}>ID: {patient.patientId} ({patient.name.first + " " +patient.name.last}) </button>
+				<button onClick={this.onSelectPatient.bind(this, patient)} className="dropdown-item" type="button" key={patient.patientId}>ID: {patient.patientId} ({patient.name.first + " " + patient.name.last}) </button>
 			);
 		}
 	}
@@ -20,16 +20,16 @@ class PatientIdList extends Component {
 	render() {
 		return (
 			<ul className="list-group">
-			<div className="btn-group">
-			<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    Patient ID
+				<div className="btn-group">
+					<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						Patient ID
   </button>
-				<div className="dropdown-menu">
-					{this.props.patients.map(this.renderPatientIds)}
+					<div className="dropdown-menu">
+						{this.props.patients.map(this.renderPatientIds)}
+					</div>
 				</div>
-			</div>
 			</ul>
-        );
+		);
 	}
 }
 

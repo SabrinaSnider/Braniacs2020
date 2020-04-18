@@ -5,6 +5,8 @@ import moment from 'moment'
 import { Popover, OverlayTrigger, Modal, Button } from 'react-bootstrap'
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 import { deleteAppointment } from '../actions/AppointmentsActions';
+import { updateDate } from '../actions/DateActions';
+
 import 'bootstrap/dist/css/bootstrap.css';
 import 'input-moment/dist/input-moment.css'
 import "jquery/dist/jquery.min.js";
@@ -12,8 +14,6 @@ import "bootstrap/dist/js/bootstrap.min.js";
 
 const localizer = momentLocalizer(moment)
 let sampleAppoint = [];
-let date = new Date();
-
 
 // return the calendar with the given events
 // The event value under components determines how events are rendered on the calendar
@@ -34,7 +34,7 @@ class AdminCalendar extends Component {
 				title: appointment.name,
 				start: start1,
 				end: end1, 
-				allDay: appointment.startTime, 
+				id: appointment.startTime, 
 				tooltip: appointment.patientId
 			}
 			this.myEventsList.push(sampleAppoint);
@@ -47,7 +47,10 @@ class AdminCalendar extends Component {
 		const formatDate = date => {
 			var hour = date.getHours()
 			var minute = date.getMinutes()
-			if (minute.length === 1){
+			if (minute === 1 || minute === 2 ||minute === 3 ||minute === 4 ||minute === 5){
+				minute = minute + "0";
+			}
+			if (minute === 0){
 				minute = minute + "0";
 			}
 			var suffix = "AM"
@@ -78,7 +81,7 @@ class AdminCalendar extends Component {
 		<span> - </span>
 		<strong> Ending Time: </strong>
 		<span>{end}</span>
-		<button onClick={this.onDeleteAppointment.bind(this, event.event.allDay)} className="btn btn-sm btn-warning float-right">Delete</button>
+		<button onClick={this.onDeleteAppointment.bind(this, event.event.id)} className="btn btn-sm btn-warning float-right">Delete</button>
 		</li>
 		</ul>			
 		</Popover>
@@ -93,6 +96,8 @@ class AdminCalendar extends Component {
 		);
 	}
 
+	
+
 
 	render () {		
 		this.myEventsList = [];
@@ -103,14 +108,14 @@ class AdminCalendar extends Component {
 				<Calendar
 					selectable
 					popup
-					date={date}
+					date={this.props.date}
 					localizer={localizer}
 					events={this.myEventsList}
 					startAccessor="start"
 					endAccessor="end"
 					tooltipAccessor="tooltip"
-					allDayAccessor="allDay"
-					onNavigate={date}
+					resourceIdAccessor="id"
+					onNavigate={x => this.props.updateDate(x)}
 					components={{
 						event: this.EventRenderer
 					}}
@@ -120,12 +125,15 @@ class AdminCalendar extends Component {
 			}
 }
 
+
 const mapStateToProps = (state) => {
     return {
-        appointments: state.appointments.items
+		appointments: state.appointments.items,
+		date: state.date
     }
 };
 
 export default connect(mapStateToProps, {
-    deleteAppointment
+	deleteAppointment,
+	updateDate
 })(AdminCalendar);
