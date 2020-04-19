@@ -1,9 +1,6 @@
-
 const config = require('../config/config.js')
-const accountSid = 'AC484b1fa2dd409d9371b4ffb672a4311a';
-const authToken = 'ffa0bdef7f16b3c0f5c6ccdba173d49b';
 const twilio = require('twilio');
-const client = twilio(accountSid, authToken);
+const client = twilio(config.twilioAPI.accountSid, config.twilioAPI.authToken);
 
 exports.newApiReminder = async (req, res) => {
 	let body = req.body.reminderMessage;
@@ -12,7 +9,7 @@ exports.newApiReminder = async (req, res) => {
 	console.log(to);
 	client.messages.create ({
 		body,
-		from: '+12053465210', //uncomment to implement actual sending. 
+		from: config.twilioAPI.from, //uncomment to implement actual sending. 
 		//from: '',
 		to
 	}, function(err, message) {
