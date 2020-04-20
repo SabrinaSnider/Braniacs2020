@@ -260,22 +260,19 @@ exports.newPatient = async (req, res) => {
 
         const token = await signToken(newPatient);
         
-        let alreadyExists;
+
         patient.find({$or:[{email: newPatient.email}, {patientId: newPatient.patientId}]}).then(user =>{
           console.log(user[0]);
-            if (user[0].email === newPatient.email) {
-                alreadyExists = true;
+            if(user.length === 0){
+              newPatient.save();
+              return res.json({success: true, message: "User created with token", token, patientId : newPatient.patientId, admin : newPatient.admin});
+            }
+            else if (user[0].email === newPatient.email) {
                 return res.status(200).json({ errors:{email: "Email already exists" }});
             } else if(user[0].patientId === newPatient.patientId){
-              alreadyExists = true;
               return res.status(200).json({ errors:{patientId: "ID already exists" }});
             }else{
-                alreadyExists = false;
-            }
-        }).then(()=>{
-            if(!alreadyExists){
-                newPatient.save();
-                res.json({success: true, message: "User created with token", token, patientId : newPatient.patientId, admin : newPatient.admin});
+                return res.status(200).send("Error");
             }
         })
 
