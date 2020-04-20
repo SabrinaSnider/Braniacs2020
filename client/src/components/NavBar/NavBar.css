@@ -16,6 +16,7 @@
 
 .navbar-nav .nav-link {
     font-weight: bold;
+    white-space: nowrap;
 }
 
 .main.navbar-nav.nav-link:hover {

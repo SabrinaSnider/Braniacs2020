@@ -206,7 +206,6 @@ exports.fetchUserFromPatientId = function(req, res){
 	patient.findOne({ "patientId" : req.body.patientId}, function(err, usr){
 		if (err) res.status(200).send("NaN");
         else {
-            console.log(usr)
             res.status(200).json({
                 name: {
                     first: usr.name.first,
@@ -237,16 +236,16 @@ exports.newPatient = async (req, res) => {
 
         const newPatient = new patient({
 			//patientId: Math.random().toString(36).substr(2,15),
-			patientId: req.body.patientId,
+			      patientId: req.body.patientId,
             name: {
                 first: req.body.name.first,
                 last: req.body.name.last
             },
             email: req.body.email,
             password: req.body.password,
-			dob: req.body.dob,
-			phone: req.body.phone,
-			admin: false //automatically set to false
+            dob: req.body.dob,
+            phone: req.body.phone,
+            admin: false //automatically set to false
         });
 
         const { errors, isValid } = await validateRegisterInput(req.body);
@@ -262,11 +261,15 @@ exports.newPatient = async (req, res) => {
         const token = await signToken(newPatient);
         
         let alreadyExists;
-        patient.findOne({email: newPatient.email}).then(user =>{
-            if (user) {
+        patient.find({$or:[{email: newPatient.email}, {patientId: newPatient.patientId}]}).then(user =>{
+          console.log(user[0]);
+            if (user[0].email === newPatient.email) {
                 alreadyExists = true;
                 return res.status(200).json({ errors:{email: "Email already exists" }});
-            } else{
+            } else if(user[0].patientId === newPatient.patientId){
+              alreadyExists = true;
+              return res.status(200).json({ errors:{patientId: "ID already exists" }});
+            }else{
                 alreadyExists = false;
             }
         }).then(()=>{
@@ -299,10 +302,27 @@ exports.popPatients = async (req, res) => {
 }
 
 /*make a post request with patient json(first name, last name, email, dob, and password) added to the request to update patient info*/
-exports.updatePatients = function(req, res){
-	patient.updateOne({ 'email' : req.body.email}, {name: {first: req.body.first, last: req.body.last}, email: req.body.email, password: req.body.password, dob: req.body.dob}, function(err, usr){
+exports.updatePatients = async (req, res) =>{
+    console.log(req.body);
+    const newValues = {
+        $set: {
+            name: {
+                first: req.body.name.first,
+                last: req.body.name.last
+            },
+            dob: req.body.dob,
+            email: req.body.email,
+            phone: req.body.phone
+        }
+    }
+	patient.updateOne({ "patientId" : req.body.patientId}, newValues, function(err, usr){
 		if (err) res.status(200).send("NaN");
-		else res.status(200).send("Successful update");
+        else {
+            console.log("hello");
+            console.log(usr.nModified + " document(s) updated");
+            res.status(200).send("Successful update");
+            
+        }
 	})
 }
 

@@ -22,3 +22,6 @@ export const USER_FAIL = 'user_fail';
 export const FILL_USERS = 'fill_users';
 export const MAKE_ADMIN = 'make_admin';
 export const UNMAKE_ADMIN = 'unmake_admin';
+
+export const UPDATE_DATE ='update_date';
+export const DATE_FAIL ='date_fail';

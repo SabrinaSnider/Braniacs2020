@@ -12,7 +12,11 @@ function Home(props) {
     return (
         <div>
             <div id="home-header">
-                <img src="/ufhealth-white.svg" height="40px" style={{float:'left'}} alt=""></img>
+                <div>
+                <a href="/" style={{'textAlign': 'center', 'display': 'block'}}>
+                    <img src="/ufhealth-white.svg" height="40px" alt=""></img>
+                </a>
+                </div>
                 <h1 id="department-title">UF Department of Neurosurgery</h1>
             </div>
             <div style={{'min-height': '100vh', display: 'flex', 'flexDirection': 'column', 'justifyContent': 'space-between'}}>
