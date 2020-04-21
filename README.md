@@ -3,7 +3,7 @@ This project is a web application of which patients can manage appointments and 
 
 
 ## List of Features
-- #### `Navigation Bar` - allows the users to navigate to different parts of the website
+- #### `Navigation Bar` - allow the users to navigate to different parts of the website
 - #### `Home` - this page is what all of the users first see when they visit the website
 - #### `Sign Up` - new users are asked for their first name, last name, email and for a password, additionally their date of birth, phone number, and patient ID
 - #### `Sign In` - users enter their email and password to login, once the user logs in, they are redirected to home, and able to access Log Out and Account Information tabs on the navigation bar
@@ -11,8 +11,8 @@ This project is a web application of which patients can manage appointments and 
 - #### `Forgot Password` - users who have forgotten or want to change their password can enter their email address to receive an email with a link to a page to Change their password
 - #### `Contact and Find Us` - users have options to view General Information, Navigate Me to Parking and Navigate Me to Hospital
     - #### `General Information` - shows the phone number and address for UF Health Neurosurgeory and a brief description of where they are location
-    - #### `Navigate Me to Parking` - show the user auto-generated instructions for how to get to the parking lot
-    - #### `Navigate Me to Hospital` - show the user auto-generated instructions for how to get to the hospital
+    - #### `Navigate Me to Parking` - shows the user auto-generated instructions for how to get to the parking lot
+    - #### `Navigate Me to Hospital` - shows the user auto-generated instructions for how to get to the hospital
 - #### `Patient Appointment` - displays the appointments and reminders for the current patient logged in
 - #### `Admin Content Update` - admins can create and delete appointments, create and delete custom reminders, and manage admin accounts
 
