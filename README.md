@@ -1,4 +1,4 @@
-## _**Overview of the Project**_
+## Overview of the Project
 This project is a web application of which patients can manage appointments and easily navigate through the clinic, and where doctors can send out important notifications and reminders. The users log in to access their account to see alerts and appointments. New Users can easily create an account for the webpage to manage their appointments and clinic access. Also, users will be able to find their way to the clinic with an estimated time for their total commute on both mobile and computer. Admins are able to view, create and delete appointments and send out reminders to notify patients about important information, and also be able to add additional admins.
 
 ## List of Features
