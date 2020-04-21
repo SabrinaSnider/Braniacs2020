@@ -10,7 +10,37 @@ This project is a web application of which patients can manage appointments and 
 - #### `Forgot Password` - users who have forgotten or want to change their password can enter their email address to receive an email with a link to a page to Change their password
 - #### `Contact and Find Us` - users have options to view General Information, Navigate Me to Parking and Navigate Me to Hospital
     - #### `General Information` - shows the phone number and address for UF Health Neurosurgeory and a brief description of where they are location
-    - #### `Navigate Me to Parking and Navigate Me to Hospital` - show the user auto-generated instructions for how to get to the parking lot and hospital, respectively
+    - #### `Navigate Me to Parking` - show the user auto-generated instructions for how to get to the parking lot
+    - #### `Navigate Me to Hospital` - show the user auto-generated instructions for how to get to the hospital
+- #### `Patient Appointment` - displays the appointments and reminders for the current patient logged in
+- #### `Admin Content Update` - admins can create and delete appointments, create and delete custom reminders, and manage admin accounts
+
+
+## List of APIs
+- #### `HTML Geolocation` - gets the user's current location, built into HTML
+- #### `Google Maps` - embeds a map into the webpage and display routes
+- #### `Google Directions` - generates directions given a origin and destination
+- #### `Google Autocomplete` - gives autocomplete suggestions to the location that the user types in
+- #### `Twilio` - takes a phone number and sends a message to the patient
+
+## Environment Variables
+MongoDB: Database URI (line 6)
+
+Twilio: Account SID, User Authentication Token, and “From” phone number. (lines 10-12)
+
+The MongoDB and Twilio environmental variables can be found in the “server/config/config.js” file, and can be easily modified by changing the variables in this file.
+
+## Log-In Credentials
+An administrator account with the following credentials is available for log-in. Once the user logs in using this account, other site users can be designated an admin using the “Manage Administrators” section in the “Administrators” page (linked at the top right hand corner of the screen):
+
+Email: admin@admin.com
+Password: QAX8cV*Ap6qZ5vDS
+Patient ID: 555 (Not needed for login)
+
+If using the MongoDB Atlas program for cloud storage, 
+
+
+ 
     
     
 
