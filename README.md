@@ -15,8 +15,8 @@ This project is a web application of which patients can manage appointments and 
     - #### `Navigate Me to Hospital` - shows the user auto-generated instructions for how to get to the hospital
 - #### `Patient Appointment` - displays the appointments and reminders for the current patient logged in
 - #### `Admin Content Update` - admins can create and delete appointments, create and delete custom reminders, and manage admin accounts
-    - #### `Manage Appointments` - a practitioner can create or delete the appointment of patients by ID
-    - #### `Manage Reminders` - an admin can send a reminder message to a phone number of a specified patient
+    - #### `Manage Appointments` - a practitioner can create or delete the appointment of patients. This can be done for patients with existing online accounts where the practitioner can simply select the patient by their ID or for patients without an account, where the practioner will have to fill out each field of patient data for the appointment
+    - #### `Manage Reminders` - an admin can send a reminder message to a phone number by an existing a specified patient or to a new patient with a new phone number or patient ID. 
     - #### `Manage Admins/Non-Admins` - an admin can give or remove admin privileges by ID
 
 ## List of APIs
