@@ -1,6 +1,7 @@
 ## Overview of the Project
 This project is a web application of which patients can manage appointments and easily navigate through the clinic, and where doctors can send out important notifications and reminders. The users log in to access their account to see alerts and appointments. New Users can easily create an account for the webpage to manage their appointments and clinic access. Also, users will be able to find their way to the clinic with an estimated time for their total commute on both mobile and computer. Admins are able to view, create and delete appointments and send out reminders to notify patients about important information, and also be able to add additional admins.
 
+
 ## List of Features
 - #### `Navigation Bar` - allows the users to navigate to different parts of the website
 - #### `Home` - this page is what all of the users first see when they visit the website
@@ -23,12 +24,14 @@ This project is a web application of which patients can manage appointments and 
 - #### `Google Autocomplete` - gives autocomplete suggestions to the location that the user types in
 - #### `Twilio` - takes a phone number and sends a message to the patient
 
+
 ## Environment Variables
 MongoDB: Database URI (line 6)
 
 Twilio: Account SID, User Authentication Token, and “From” phone number. (lines 10-12)
 
 The MongoDB and Twilio environmental variables can be found in the “server/config/config.js” file, and can be easily modified by changing the variables in this file.
+
 
 ## Log-In Credentials
 An administrator account with the following credentials is available for log-in. Once the user logs in using this account, other site users can be designated an admin using the “Manage Administrators” section in the “Administrators” page (linked at the top right hand corner of the screen):
@@ -39,7 +42,35 @@ Password: QAX8cV*Ap6qZ5vDS
 
 Patient ID: 555 (Not needed for login)
 
-If using the MongoDB Atlas program for cloud storage, 
+
+## Available Scripts
+
+Please note that any time the server is run in these scripts `nodemon` is used in place of `node` for easier development. If you are interested in how this works follow the nodemon In the project directory, you can run:
+
+### `npm run-script dev`
+
+Runs both the client app and the server app in development mode.<br>
+Open [http://localhost:3000](http://localhost:3000) to view the client in the browser.
+
+### `npm run-script client`
+
+Runs just the client app in development mode.<br>
+Open [http://localhost:3000](http://localhost:3000) to view the client in the browser.
+
+
+### `npm run-script server`
+
+Runs just the server in development mode.<br>
+
+
+### `npm run build`
+
+Builds the app for production to the `build` folder.<br>
+It correctly bundles React in production mode and optimizes the build for the best performance.
+
+If deploying to heroku this does not need to be run since it is handled by the heroku-postbuild script<br>
+
+See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
 
  
