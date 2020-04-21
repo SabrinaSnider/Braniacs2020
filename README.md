@@ -34,7 +34,9 @@ The MongoDB and Twilio environmental variables can be found in the “server/con
 An administrator account with the following credentials is available for log-in. Once the user logs in using this account, other site users can be designated an admin using the “Manage Administrators” section in the “Administrators” page (linked at the top right hand corner of the screen):
 
 Email: admin@admin.com
+
 Password: QAX8cV*Ap6qZ5vDS
+
 Patient ID: 555 (Not needed for login)
 
 If using the MongoDB Atlas program for cloud storage, 
